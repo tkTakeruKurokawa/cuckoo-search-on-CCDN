@@ -1,0 +1,25 @@
+############## Variable ###############
+
+totalNodes 100
+totalCycles 10
+
+############## Network ###############
+
+#ノードの数、サイクル数等の設定
+#random.seed 1234567890
+network.size totalNodes
+simulation.cycles totalCycles
+#control.shf Shuffle
+#shuffleを有効にするとサイクルごとに隣接ノードが変化する
+
+############## Protocol ###############
+
+#order.protocol
+
+############## Initialize ###############
+
+#order.init
+
+############## Control ###############
+
+#order.control
