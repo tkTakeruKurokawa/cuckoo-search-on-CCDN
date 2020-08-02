@@ -1,7 +1,7 @@
 ############## Variable ###############
 
 totalNodes 100
-totalCycles 10
+totalCycles 1
 
 ############## Network ###############
 
@@ -14,12 +14,22 @@ simulation.cycles totalCycles
 
 ############## Protocol ###############
 
+protocol.link Link
+protocol.link.transmissionCapacity 100
+
 #order.protocol
 
 ############## Initialize ###############
 
-#order.init
+init.sd SharedData
+init.sd.link link
+
+init.wl WireLink
+init.wl.protocol link
+
+order.init sd wl
 
 ############## Control ###############
 
+control.test Test
 #order.control
