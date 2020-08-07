@@ -15,7 +15,6 @@ public class Link implements Protocol, Linkable {
 	protected Node[] neighbors;
 	protected int len;
 	private ArrayList<HashMap<Integer, Integer>> transmissionCapacityList;
-	private HashMap<Integer, Integer> transmissionCapacity;
 
 	public Link(String prefix) {
 		neighbors = new Node[Network.size()];
@@ -36,9 +35,6 @@ public class Link implements Protocol, Linkable {
 		link.transmissionCapacityList = new ArrayList<HashMap<Integer, Integer>>();
 
 		for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
-			// for (int i = 0; i < neighbors.length; i++) {
-			// link.transmissionCapacity.put(i, link.maxTransmissionCapacity);
-			// }
 			link.transmissionCapacityList.add(new HashMap<Integer, Integer>());
 		}
 		return link;
@@ -67,7 +63,6 @@ public class Link implements Protocol, Linkable {
 		neighbors[len] = n;
 		len++;
 		initializeCapacity(n);
-		System.out.println(n.getIndex());
 
 		return true;
 	}
@@ -75,7 +70,7 @@ public class Link implements Protocol, Linkable {
 	private void initializeCapacity(Node node) {
 		for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
 			HashMap<Integer, Integer> tmp = transmissionCapacityList.get(algorithmId);
-			tmp.put(node.getIndex(), SharedData.getRandomInt(1000));
+			tmp.put(node.getIndex(), maxTransmissionCapacity);
 			transmissionCapacityList.set(algorithmId, tmp);
 		}
 	}

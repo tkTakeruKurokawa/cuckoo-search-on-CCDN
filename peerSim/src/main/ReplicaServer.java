@@ -60,16 +60,23 @@ public class ReplicaServer implements Node {
 	 */
 	private long ID;
 
+	private static final String PAR_TOTAL_CYCLE = "totalCycles";
+	private static int totalCycles;
 	private static final String PAR_TOTAL_ALGORITHM = "totalAlgorithms";
 	private static int totalAlgorithms;
 	private static final String PAR_MAX_STORAGE_CAPACITY = "maxStorageCapacity";
 	private static int maxStorageCapacity;
-	private static final String PAR_MAX_Processing_CAPACITY = "maxProcessingCapacity";
+	private static final String PAR_MAX_PROCESSING_CAPACITY = "maxProcessingCapacity";
 	private static int maxProcessingCapacity;
+	private static final String PAR_REPAIR_DURATION = "repairDuration";
+	private static int repairDuration;
 
 	private int storageCapacity[];
 	private int processingCapacity[];
-	private double failureRate;
+	private int position;
+
+	private boolean serverState;
+	private int progressCycle;
 
 	// ================ constructor and initialization =================
 	// =================================================================
@@ -83,9 +90,12 @@ public class ReplicaServer implements Node {
 	public ReplicaServer(String prefix) {
 
 		String[] names = Configuration.getNames(PAR_PROT);
+		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLE);
 		totalAlgorithms = Configuration.getInt(prefix + "." + PAR_TOTAL_ALGORITHM);
 		maxStorageCapacity = Configuration.getInt(prefix + "." + PAR_MAX_STORAGE_CAPACITY);
-		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_Processing_CAPACITY);
+		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_PROCESSING_CAPACITY);
+		repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
+
 		CommonState.setNode(this);
 		ID = nextID();
 		protocol = new Protocol[names.length];
@@ -94,6 +104,7 @@ public class ReplicaServer implements Node {
 			Protocol p = (Protocol) Configuration.getInstance(names[i]);
 			protocol[i] = p;
 		}
+
 	}
 
 	// -----------------------------------------------------------------
@@ -116,11 +127,15 @@ public class ReplicaServer implements Node {
 			result.processingCapacity[i] = maxProcessingCapacity;
 		}
 
-		result.failureRate = SharedData.getRandomInt(100);
+		result.position = SharedData.getRandomInt(totalCycles);
 		for (int i = 0; i < protocol.length; ++i) {
 			CommonState.setPid(i);
 			result.protocol[i] = (Protocol) protocol[i].clone();
 		}
+
+		result.serverState = true;
+		result.progressCycle = 0;
+
 		return result;
 	}
 
@@ -224,12 +239,40 @@ public class ReplicaServer implements Node {
 		return processingCapacity[algorithmId];
 	}
 
-	public void setFailureRate(double value) {
-		failureRate = value;
+	public void setFailureRate(int startPosition) {
+		position = startPosition;
 	}
 
 	public double getFailureRate() {
-		return failureRate;
+		return Parameters.getFailureRate(index, position);
+	}
+
+	public void proceedFailureRate() {
+		position++;
+		if (position == totalCycles) {
+			position = 0;
+		}
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setServerState(boolean state) {
+		serverState = state;
+	}
+
+	public boolean getServerState() {
+		return serverState;
+	}
+
+	public void proceedProgressCycle() {
+		progressCycle++;
+		if (progressCycle == repairDuration) {
+			progressCycle = 0;
+			setServerState(true);
+			setFailureRate(0);
+		}
 	}
 
 	// ------------------------------------------------------------------

@@ -8,7 +8,7 @@ public class SharedData implements Control {
 	private static final String PAR_LNK = "link";
 	private static int pid_lnk;
 
-	private static Random random = new Random();
+	private static Random random = new Random(1L);
 
 	public SharedData(String prefix) {
 		pid_lnk = Configuration.getPid(prefix + "." + PAR_LNK);
@@ -24,6 +24,10 @@ public class SharedData implements Control {
 
 	public static int getRandomInt(int upperLimit) {
 		return random.nextInt(upperLimit);
+	}
+
+	public static double getRandomDouble() {
+		return random.nextDouble();
 	}
 
 	public boolean execute() {

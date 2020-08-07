@@ -1,21 +1,26 @@
 ############## Variable ###############
 
 totalNodes 100
-totalCycles 1
+totalCycles 500
 totalAlgorithms 2
+originId 57
 
 ############## Network ###############
 
 #ノードの数、サイクル数等の設定
 #random.seed 1234567890
+
 network.size totalNodes
 
 network.node ReplicaServer
+network.node.totalCycles totalCycles
 network.node.totalAlgorithms totalAlgorithms
 network.node.maxStorageCapacity 100
 network.node.maxProcessingCapacity 100
+network.node.repairDuration 50
 
 simulation.cycles totalCycles
+
 #control.shf Shuffle
 #shuffleを有効にするとサイクルごとに隣接ノードが変化する
 
@@ -32,12 +37,23 @@ protocol.link.maxTransmissionCapacity 100
 init.sd SharedData
 init.sd.link link
 
+init.p Parameters
+init.p.originId originId
+init.p.totalCycles totalCycles
+init.p.weibullShape 1.0
+init.p.weibullScale 500.0
+init.p.normalAverage 5.0
+init.p.normalVariance 3.0
+init.p.normalMin 1
+init.p.normalMax 9
+
 init.wl WireLink
 init.wl.protocol link
 
-order.init sd wl
+order.init sd p wl
 
 ############## Control ###############
 
 control.test Test
+#control.test FailureTest
 #order.control
