@@ -1,18 +1,25 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import peersim.config.*;
 import peersim.core.*;
 
 public class Link implements Protocol, Linkable {
-	private static final String PAR_TRANSMISSION_CAPACITY = "transmissionCapacity";
-	private final int transmissionCapacity;
+	private static final String PAR_TOTAL_ALGORITHM = "totalAlgorithms";
+	private static int totalAlgorithms;
+	private static final String PAR_MAX_TRANSMISSION_CAPACITY = "maxTransmissionCapacity";
+	private final int maxTransmissionCapacity;
 
 	protected Node[] neighbors;
 	protected int len;
+	private ArrayList<HashMap<Integer, Integer>> transmissionCapacityList;
 
 	public Link(String prefix) {
-		neighbors = new Node[100];
-		transmissionCapacity = Configuration.getInt(prefix + "." + PAR_TRANSMISSION_CAPACITY);
+		neighbors = new Node[Network.size()];
+		totalAlgorithms = Configuration.getInt(prefix + "." + PAR_TOTAL_ALGORITHM);
+		maxTransmissionCapacity = Configuration.getInt(prefix + "." + PAR_MAX_TRANSMISSION_CAPACITY);
 		len = 0;
 	}
 
@@ -25,6 +32,11 @@ public class Link implements Protocol, Linkable {
 		link.neighbors = new Node[neighbors.length];
 		System.arraycopy(neighbors, 0, link.neighbors, 0, len);
 		link.len = len;
+		link.transmissionCapacityList = new ArrayList<HashMap<Integer, Integer>>();
+
+		for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
+			link.transmissionCapacityList.add(new HashMap<Integer, Integer>());
+		}
 		return link;
 	}
 
@@ -50,8 +62,17 @@ public class Link implements Protocol, Linkable {
 		}
 		neighbors[len] = n;
 		len++;
-		// System.out.println(len);
+		initializeCapacity(n);
+
 		return true;
+	}
+
+	private void initializeCapacity(Node node) {
+		for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
+			HashMap<Integer, Integer> tmp = transmissionCapacityList.get(algorithmId);
+			tmp.put(node.getIndex(), maxTransmissionCapacity);
+			transmissionCapacityList.set(algorithmId, tmp);
+		}
 	}
 
 	public boolean removeNeighbor(int i) {
@@ -76,6 +97,14 @@ public class Link implements Protocol, Linkable {
 		Node[] temp = new Node[len];
 		System.arraycopy(neighbors, 0, temp, 0, len);
 		neighbors = temp;
+	}
+
+	public void setTransmissionCapacity(int algorithmId, int neighborId, int value) {
+		transmissionCapacityList.get(algorithmId).replace(neighborId, value);
+	}
+
+	public int getTransmissionCapacity(int algorithmId, int neighborId) {
+		return transmissionCapacityList.get(algorithmId).get(neighborId);
 	}
 
 	public String toString() {
