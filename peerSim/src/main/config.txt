@@ -1,8 +1,10 @@
 ############## Variable ###############
 
 totalNodes 100
+totalContents 100
 totalCycles 500
 totalAlgorithms 2
+users 10
 originId 57
 
 ############## Network ###############
@@ -15,7 +17,7 @@ network.size totalNodes
 network.node ReplicaServer
 network.node.totalCycles totalCycles
 network.node.totalAlgorithms totalAlgorithms
-network.node.maxStorageCapacity 100
+network.node.maxStorageCapacity 1000
 network.node.maxProcessingCapacity 100
 network.node.repairDuration 50
 
@@ -38,14 +40,25 @@ init.sd SharedData
 init.sd.link link
 
 init.p Parameters
-init.p.originId originId
 init.p.totalCycles totalCycles
 init.p.weibullShape 1.0
 init.p.weibullScale 500.0
+init.p.totalNodes totalNodes
+init.p.originId originId
 init.p.normalAverage 5.0
 init.p.normalVariance 3.0
 init.p.normalMin 1
 init.p.normalMax 9
+init.p.totalContents totalContents
+init.p.users users
+init.p.zipfShape 1.3
+init.p.paretoShape 0.5
+init.p.paretoMin 1
+init.p.paretoMax 100
+init.p.poissonAverage 10
+
+init.c Contents
+init.c.totalContents totalContents
 
 init.wl WireLink
 init.wl.protocol link
@@ -55,5 +68,8 @@ order.init sd p wl
 ############## Control ###############
 
 control.test Test
+control.test.totalContents totalContents 
+
 #control.test FailureTest
+
 #order.control

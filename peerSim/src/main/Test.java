@@ -1,62 +1,30 @@
 package main;
 
-import java.util.ArrayList;
-import java.io.*;
-
+import peersim.cdsim.CDState;
+import peersim.config.Configuration;
 import peersim.core.Control;
-import peersim.core.Network;
 
 public class Test implements Control {
-    ArrayList<Integer> failures = new ArrayList<Integer>();
-    int cycle = 0;
+    private static final String PAR_TOTAL_CONTENTS = "totalContents";
+    private static int totalContents;
 
     public Test(String prefix) {
-        for (int i = 0; i < Network.size(); i++) {
-            failures.add(i, 0);
-        }
+        totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
     }
 
     public boolean execute() {
 
-        System.out.println();
+        for (int i = 0; i < totalContents; i++) {
+            Contents content = Contents.getContent(i);
+            // System.out.println(i + ": size=" + content.getSize(i) + ", total=" +
+            // Parameters.getTotalRequest(i));
 
-        ArrayList<Integer> failureNodes = new ArrayList<Integer>();
-        int failureCount = 0;
-        for (int i = 0; i < Network.size(); i++) {
-            ReplicaServer node = SharedData.getNode(i);
+            int cycle = CDState.getCycle();
+            if (content.getRequest(cycle) > 0) {
 
-            if (!node.getServerState()) {
-                node.proceedProgressCycle();
-                continue;
-            }
-            double failureRate = node.getFailureRate();
-
-            double rand = SharedData.getRandomDouble();
-            if (rand < failureRate) {
-                node.setServerState(false);
-                failures.set(i, failures.get(i) + 1);
-                failureNodes.add(i);
-                failureCount++;
-            }
-
-            node.proceedFailureRate();
-        }
-
-        for (Integer nodeId : failureNodes) {
-            System.out.printf("%d, ", nodeId);
-        }
-        System.out.println();
-        System.out.println(failureCount);
-        System.out.println();
-
-        if (cycle == 499) {
-            for (int i = 0; i < failures.size(); i++) {
-                System.out.println(i + ": " + failures.get(i));
-                // plot.println(i + "\t" + failures.get(i));
+                System.out.println(i + ", " + "request=" + content.getRequest(cycle));
             }
         }
-
-        cycle++;
 
         return false;
     }
