@@ -17,7 +17,7 @@ public class Test implements Control {
     public boolean execute() {
         System.out.println("==================================================================");
 
-        CuckooSearch.runSearch(SharedData.getContent(99));
+        CuckooSearch.runSearch(SharedData.getContent(0));
 
         System.out.println("==================================================================");
 

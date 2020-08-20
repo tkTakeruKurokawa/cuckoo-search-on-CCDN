@@ -2,7 +2,6 @@ package main;
 
 import peersim.config.Configuration;
 import peersim.core.Control;
-import peersim.core.Network;
 import java.lang.Math;
 import org.apache.commons.math3.special.Erf;
 

@@ -7,23 +7,13 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Queue;
 
-import peersim.config.Configuration;
-import peersim.core.Control;
-
-public class Flooding implements Control {
-    private static final String PAR_ORIGIN_ID = "originId";
-    private static int originId;
-
+public class Flooding {
     private static ArrayList<Integer> addedNodes;
     private static Queue<Integer> queue;
     private static HashMap<Integer, Integer> hop;
 
     private static int count;
     private static int total;
-
-    public Flooding(String prefix) {
-        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
-    }
 
     public static double getAverageHop(ArrayList<Integer> nodes) {
         initialize(nodes);
@@ -112,10 +102,5 @@ public class Flooding implements Control {
     public static String getData() {
         return "Count: " + String.valueOf(count) + "\nTotal Hops: " + String.valueOf(total) + "\nAverage Hops: "
                 + String.valueOf((double) total / (double) count) + "\n";
-    }
-
-    @Override
-    public boolean execute() {
-        return false;
     }
 }

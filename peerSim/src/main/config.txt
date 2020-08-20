@@ -73,15 +73,9 @@ init.n.fractalDimension 1.5
 
 init.of ObjectiveFunction
 init.of.originId originId
-init.of.totalNodes totalNodes
-init.of.users users
-#init.of.accessRateCoefficient 1.0
 init.of.failureRateCoefficient 100.0
 
-init.f Flooding
-init.f.originId originId
-
-order.init wl p sd cs n of f
+order.init wl p sd cs n of
 
 ############## Control ###############
 

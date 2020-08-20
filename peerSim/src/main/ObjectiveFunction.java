@@ -8,13 +8,6 @@ import peersim.core.Control;
 public class ObjectiveFunction implements Control {
     private static final String PAR_ORIGIN_ID = "originId";
     private static int originId;
-    private static final String PAR_TOTAL_NODES = "totalNodes";
-    private static int totalNodes;
-    private static final String PAR_USERS = "users";
-    private static int users;
-    // private static final String PAR_ACCESS_RATE_COEFFICIENT =
-    // "accessRateCoefficient";
-    // private static double accessRateCoefficient;
     private static final String PAR_FAILURE_RATE_COEFFICIENT = "failureRateCoefficient";
     private static double failureRateCoefficient;
 
@@ -24,10 +17,6 @@ public class ObjectiveFunction implements Control {
 
     public ObjectiveFunction(String prefix) {
         originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
-        totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
-        users = Configuration.getInt(prefix + "." + PAR_USERS);
-        // accessRateCoefficient = Configuration.getDouble(prefix + "." +
-        // PAR_ACCESS_RATE_COEFFICIENT);
         failureRateCoefficient = Configuration.getDouble(prefix + "." + PAR_FAILURE_RATE_COEFFICIENT);
     }
 
@@ -56,7 +45,6 @@ public class ObjectiveFunction implements Control {
             Content content) {
         // double totalRequests = content.getPopularity() * ((double) totalNodes) *
         // ((double) users);
-        double totalRequests = content.getPopularity() * ((double) availableNodes);
         return Flooding.getAverageHop(placementNodeIndices) * content.getPopularity();
         // return Flooding.getAverageHop(placementNodeIndices) / (1.0 -
         // content.getPopularity());
