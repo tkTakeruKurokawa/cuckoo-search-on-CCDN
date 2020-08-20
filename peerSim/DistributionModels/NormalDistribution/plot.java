@@ -1,5 +1,6 @@
 import java.io.*;
 import java.lang.Math;
+import org.apache.commons.math3.special.Erf;
 
 public class plot {
     public static void main(String[] args) {
@@ -7,23 +8,55 @@ public class plot {
         try {
             PrintWriter plot = new PrintWriter(new BufferedWriter(new FileWriter("./plot.tsv", false)));
 
-            double mu = 5.0;
-            double sigma = 3;
+            double mu = 10;
+            double sigma = 10;
             int total = 0;
 
-            for (int i = 1; i < 10; i++) {
+            double[] cdf = new double[21];
+            for (int i = 1; i <= 21; i++) {
                 double x = (double) i;
-                double result = (1 / (Math.sqrt(2.0 * Math.PI * sigma)))
-                        * Math.exp(-1 * (Math.pow(x - mu, 2.0) / (2.0 * sigma)));
-                int value = (int) Math.round(result * 100.0);
-                total += value;
-                System.out.printf("%d, ", value);
-                plot.println(i + "\t" + value);
+                // double result = (1 / (Math.sqrt(2.0 * Math.PI * sigma)))
+                // * Math.exp(-1 * (Math.pow(x - mu, 2.0) / (2.0 * sigma)));
+                cdf[i - 1] = (1.0 / 2.0) * (1.0 + Erf.erf((x - mu) / Math.sqrt(2.0 * sigma)));
+                System.out.println(i + ", " + cdf[i - 1]);
             }
-            System.out.println("   " + total);
+            System.out.println("===============================");
+
+            int[] count = new int[21];
+            int num = 100;
+            int index = 0;
+            while (index < num) {
+                double rand = Math.random();
+                boolean flag = false;
+
+                for (int i = 0; i < cdf.length; i++) {
+                    if (rand < cdf[i]) {
+                        count[i]++;
+                        break;
+                    } else {
+                        if (i == cdf.length - 1) {
+                            flag = true;
+                            System.out.println(i + ", " + rand);
+                        }
+                    }
+                }
+
+                if (flag) {
+                    continue;
+                }
+
+                index++;
+            }
+
+            for (int i = 0; i < count.length; i++) {
+                System.out.println((i + 1) / 10.0 + ", " + count[i]);
+                plot.println((i + 1) / 10.0 + "\t" + count[i]);
+            }
+            // System.out.println(" " + total);
             plot.close();
 
         } catch (Exception e) {
+            System.out.println(e);
         }
 
     }

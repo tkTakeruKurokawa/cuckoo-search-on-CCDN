@@ -3,8 +3,8 @@ package main;
 import peersim.config.Configuration;
 import peersim.core.Control;
 import peersim.core.Network;
-
 import java.lang.Math;
+import org.apache.commons.math3.special.Erf;
 
 public class Parameters implements Control {
     private static final String PAR_TOTAL_CYCLE = "totalCycles";
@@ -42,8 +42,8 @@ public class Parameters implements Control {
 
     private static double[] failureRate;
     private static double[] magnification;
-    private static double[] size;
     private static double[] popularity;
+    private static int[] size;
     private static int[] totalRequest;
 
     public Parameters(String prefix) {
@@ -67,8 +67,8 @@ public class Parameters implements Control {
 
     public static void initializeDistributionModels() {
         failureRate = new double[totalCycles];
-        magnification = new double[Network.size()];
-        size = new double[totalContents];
+        magnification = new double[totalNodes];
+        size = new int[totalContents];
         popularity = new double[totalContents];
         totalRequest = new int[totalContents];
 
@@ -87,7 +87,7 @@ public class Parameters implements Control {
         return totalRequest[contentId];
     }
 
-    public static double getSize(int contentId) {
+    public static int getSize(int contentId) {
         return size[contentId];
     }
 
@@ -210,21 +210,38 @@ public class Parameters implements Control {
         }
     }
 
-    private static int setMagnification(double pdf, int index, int value) {
-        int nodeCount = (int) Math.round(pdf * ((double) totalNodes));
+    private static void setMagnification(double[] cdf) {
+        int nodeId = 0;
+        while (nodeId < totalNodes) {
+            double rand = SharedData.getRandomDouble();
+            boolean flag = false;
 
-        int count = 0;
-        while (count < nodeCount) {
-            if (index == originId) {
-                index++;
+            if (nodeId == originId) {
+                nodeId++;
                 continue;
             }
-            magnification[index] = (double) value;
-            index++;
-            count++;
+
+            for (int cdfId = 0; cdfId < cdf.length; cdfId++) {
+                if (rand < cdf[cdfId]) {
+                    magnification[nodeId] = ((double) (cdfId + 1)) / 10.0;
+                    break;
+                } else {
+                    if (cdfId == cdf.length - 1) {
+                        flag = true;
+                    }
+                }
+            }
+
+            if (flag) {
+                continue;
+            }
+
+            nodeId++;
         }
 
-        return index;
+        // for (int i = 0; i < magnification.length; i++) {
+        // System.out.println(i + ", " + magnification[i]);
+        // }
     }
 
     private static void normalDistribution() {
@@ -233,14 +250,13 @@ public class Parameters implements Control {
         int min = normalMin;
         int max = normalMax;
 
-        int index = 0;
-        for (int value = min; value <= max; value++) {
-            double x = (double) value;
-            double pdf = (1 / (Math.sqrt(2.0 * Math.PI * sigma)))
-                    * Math.exp(-1 * (Math.pow(x - mu, 2.0) / (2.0 * sigma)));
-
-            index = setMagnification(pdf, index, value);
+        double[] cdf = new double[max];
+        for (int id = min; id <= max; id++) {
+            double x = (double) id;
+            cdf[id - 1] = (1.0 / 2.0) * (1.0 + Erf.erf((x - mu) / Math.sqrt(2.0 * sigma)));
         }
+
+        setMagnification(cdf);
     }
 
     private static void weibullDistribution() {

@@ -1,8 +1,10 @@
 package main;
 
-import peersim.cdsim.CDState;
+import java.util.ArrayList;
+
 import peersim.config.Configuration;
 import peersim.core.Control;
+import peersim.core.Network;
 
 public class Test implements Control {
     private static final String PAR_TOTAL_CONTENTS = "totalContents";
@@ -13,18 +15,11 @@ public class Test implements Control {
     }
 
     public boolean execute() {
+        System.out.println("==================================================================");
 
-        for (int i = 0; i < totalContents; i++) {
-            Contents content = Contents.getContent(i);
-            // System.out.println(i + ": size=" + content.getSize(i) + ", total=" +
-            // Parameters.getTotalRequest(i));
+        CuckooSearch.runSearch(SharedData.getContent(99));
 
-            int cycle = CDState.getCycle();
-            if (content.getRequest(cycle) > 0) {
-
-                System.out.println(i + ", " + "request=" + content.getRequest(cycle));
-            }
-        }
+        System.out.println("==================================================================");
 
         return false;
     }
