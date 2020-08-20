@@ -1,6 +1,6 @@
-set xrange [0:10]
+set xrange [0.1:2.1]
 set xlabel 'Magnification'
-set yrange [0.0:]
+set yrange [0.0:15]
 
 set ylabel 'Number of Node'
 

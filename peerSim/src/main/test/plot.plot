@@ -1,6 +1,6 @@
 set xlabel 'Cycle'
 set ylabel 'Number of Faiure Node'
-set yrange [0:10]
+set yrange [0:]
 
 set style fill solid
 plot "plot.tsv"  with boxes notitle lw 1 lc rgb "blue"

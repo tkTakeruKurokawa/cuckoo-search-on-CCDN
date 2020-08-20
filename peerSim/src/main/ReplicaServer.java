@@ -119,20 +119,18 @@ public class ReplicaServer implements Node {
 		result.protocol = new Protocol[protocol.length];
 		CommonState.setNode(result);
 		result.ID = nextID();
-		result.storageCapacity = new int[totalAlgorithms];
-		result.processingCapacity = new int[totalAlgorithms];
-
-		for (int i = 0; i < totalAlgorithms; i++) {
-			result.storageCapacity[i] = maxStorageCapacity;
-			result.processingCapacity[i] = maxProcessingCapacity;
-		}
-
-		result.position = SharedData.getRandomInt(totalCycles);
 		for (int i = 0; i < protocol.length; ++i) {
 			CommonState.setPid(i);
 			result.protocol[i] = (Protocol) protocol[i].clone();
 		}
 
+		result.storageCapacity = new int[totalAlgorithms];
+		result.processingCapacity = new int[totalAlgorithms];
+		for (int i = 0; i < totalAlgorithms; i++) {
+			result.storageCapacity[i] = maxStorageCapacity;
+			result.processingCapacity[i] = maxProcessingCapacity;
+		}
+		result.position = SharedData.getRandomInt(totalCycles);
 		result.serverState = true;
 		result.progressCycle = 0;
 
@@ -258,6 +256,9 @@ public class ReplicaServer implements Node {
 		return position;
 	}
 
+	/*
+	 * true => 生存, false => 故障中
+	 */
 	public void setServerState(boolean state) {
 		serverState = state;
 	}
