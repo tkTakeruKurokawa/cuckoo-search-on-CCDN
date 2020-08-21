@@ -6,6 +6,7 @@ totalCycles 500
 totalAlgorithms 2
 users 10
 originId 57
+repairDuration 50
 
 ############## Network ###############
 
@@ -19,9 +20,9 @@ network.node.totalCycles totalCycles
 network.node.totalAlgorithms totalAlgorithms
 network.node.maxStorageCapacity 1000
 network.node.maxProcessingCapacity 100
-network.node.repairDuration 50
+network.node.repairDuration repairDuration
 
-simulation.cycles totalCycles
+simulation.cycles 500
 
 #control.shf Shuffle
 #shuffleを有効にするとサイクルごとに隣接ノードが変化する
@@ -56,6 +57,7 @@ init.p.paretoShape 0.5
 init.p.paretoMin 1
 init.p.paretoMax 100
 init.p.poissonAverage 10
+init.p.repairDuration repairDuration
 
 init.sd SharedData
 init.sd.link link
@@ -72,8 +74,10 @@ init.n.originId originId
 init.n.fractalDimension 1.5
 
 init.of ObjectiveFunction
+init.of.totalNodes totalNodes
+init.of.users users
 init.of.originId originId
-init.of.failureRateCoefficient 100.0
+init.of.availabilityCoefficient 100.0
 
 order.init wl p sd cs n of
 

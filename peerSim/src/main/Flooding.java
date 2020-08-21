@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Queue;
 
 public class Flooding {
-    private static ArrayList<Integer> addedNodes;
+    private static ArrayList<Integer> availableNodes;
     private static Queue<Integer> queue;
     private static HashMap<Integer, Integer> hop;
 
@@ -30,9 +30,9 @@ public class Flooding {
 
                 if (!neighbor.getServerState()) {
                     continue;
-                } else if (!addedNodes.contains(neighborId)) {
+                } else if (!availableNodes.contains(neighborId)) {
                     // System.out.printf("%d, ", neighborId);
-                    addedNodes.add(neighborId);
+                    availableNodes.add(neighborId);
                     queue.add(neighborId);
                     hop.put(neighborId, hop.get(nodeId) + 1);
                 }
@@ -40,7 +40,7 @@ public class Flooding {
             // System.out.println();
         }
 
-        // System.out.println("Total Nodes: " + addedNodes.size());
+        // System.out.println("Total Nodes: " + availableNodes.size());
         return calculateAverage();
     }
 
@@ -60,28 +60,28 @@ public class Flooding {
 
                 if (!neighbor.getServerState()) {
                     continue;
-                } else if (!addedNodes.contains(neighborId)) {
+                } else if (!availableNodes.contains(neighborId)) {
                     // System.out.printf("%d, ", neighborId);
-                    addedNodes.add(neighborId);
+                    availableNodes.add(neighborId);
                     queue.add(neighborId);
                 }
             }
             // System.out.println();
         }
 
-        // System.out.println("Reachable Nodes: " + addedNodes.size());
-        addedNodes.remove(0);
-        return addedNodes;
+        // System.out.println("Reachable Nodes: " + availableNodes.size());
+        availableNodes.remove(0);
+        return availableNodes;
     }
 
     private static void initialize(ArrayList<Integer> nodes) {
-        addedNodes = new ArrayList<Integer>();
+        availableNodes = new ArrayList<Integer>();
         queue = new ArrayDeque<Integer>();
         hop = new HashMap<Integer, Integer>();
 
         for (int i = 0; i < nodes.size(); i++) {
             int nodeId = nodes.get(i);
-            addedNodes.add(nodeId);
+            availableNodes.add(nodeId);
             queue.add(nodeId);
             hop.put(nodeId, 0);
         }
@@ -95,8 +95,8 @@ public class Flooding {
             count++;
         }
 
-        // return ((double) total / (double) count);
-        return (double) total;
+        return ((double) total / (double) count);
+        // return (double) total;
     }
 
     public static String getData() {

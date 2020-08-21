@@ -130,7 +130,8 @@ public class ReplicaServer implements Node {
 			result.storageCapacity[i] = maxStorageCapacity;
 			result.processingCapacity[i] = maxProcessingCapacity;
 		}
-		result.position = SharedData.getRandomInt(totalCycles);
+		// result.position = SharedData.getRandomInt(totalCycles);
+		result.position = 0;
 		result.serverState = true;
 		result.progressCycle = 0;
 
@@ -274,6 +275,10 @@ public class ReplicaServer implements Node {
 			setServerState(true);
 			setFailureRate(0);
 		}
+	}
+
+	public double getAvailability() {
+		return Parameters.getAvailability(index);
 	}
 
 	// ------------------------------------------------------------------

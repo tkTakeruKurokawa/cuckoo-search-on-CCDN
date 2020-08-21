@@ -38,11 +38,14 @@ public class Parameters implements Control {
     private static int paretoMax;
     private static final String PAR_POISSON_Average = "poissonAverage";
     private static int poissonAverage;
+    private static final String PAR_REPAIR_DURATION = "repairDuration";
+    private static int repairDuration;
 
     private static double[] failureRate;
     private static double[] magnification;
-    private static double[] popularity;
+    private static double[] availability;
     private static int[] size;
+    private static double[] popularity;
     private static int[] totalRequest;
 
     public Parameters(String prefix) {
@@ -62,11 +65,13 @@ public class Parameters implements Control {
         paretoMin = Configuration.getInt(prefix + "." + PAR_PARETO_MIN);
         paretoMax = Configuration.getInt(prefix + "." + PAR_PARETO_MAX);
         poissonAverage = Configuration.getInt(prefix + "." + PAR_POISSON_Average);
+        repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
     }
 
     public static void initializeDistributionModels() {
         failureRate = new double[totalCycles];
         magnification = new double[totalNodes];
+        availability = new double[totalNodes];
         size = new int[totalContents];
         popularity = new double[totalContents];
         totalRequest = new int[totalContents];
@@ -96,6 +101,10 @@ public class Parameters implements Control {
 
     public static double getFailureRate(int nodeId, int position) {
         return failureRate[position] * magnification[nodeId];
+    }
+
+    public static double getAvailability(int nodeId) {
+        return availability[nodeId];
     }
 
     private static double factorial(int src) {
@@ -209,6 +218,25 @@ public class Parameters implements Control {
         }
     }
 
+    private static void setAvailability() {
+        for (int nodeId = 0; nodeId < totalNodes; nodeId++) {
+            if (nodeId == originId) {
+                availability[nodeId] = 1.0;
+                continue;
+            }
+
+            double total = 0.0;
+
+            for (int cycle = 0; cycle < totalCycles; cycle++) {
+                total += failureRate[cycle] * magnification[nodeId];
+            }
+
+            double mtbf = 1.0 / (total / (double) totalCycles);
+            double mttr = (double) repairDuration;
+            availability[nodeId] = mtbf / (mtbf + mttr);
+        }
+    }
+
     private static void setMagnification(double[] cdf) {
         int nodeId = 0;
         while (nodeId < totalNodes) {
@@ -237,10 +265,6 @@ public class Parameters implements Control {
 
             nodeId++;
         }
-
-        // for (int i = 0; i < magnification.length; i++) {
-        // System.out.println(i + ", " + magnification[i]);
-        // }
     }
 
     private static void normalDistribution() {
@@ -256,6 +280,7 @@ public class Parameters implements Control {
         }
 
         setMagnification(cdf);
+        setAvailability();
     }
 
     private static void weibullDistribution() {
