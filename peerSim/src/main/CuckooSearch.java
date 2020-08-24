@@ -47,7 +47,7 @@ public class CuckooSearch implements Control {
         sort();
     }
 
-    public static void runSearch(Content content) {
+    public static ArrayList<Integer> runSearch(Content content) {
         initializeNestSet(content);
 
         // for (int i = 0; i < nestSet.size(); i++) {
@@ -59,15 +59,17 @@ public class CuckooSearch implements Control {
             abandon();
         }
 
-        for (int i = 0; i < nestSet.size(); i++) {
-            System.out.println(nestSet.get(i).getEvaluation());
-        }
-        System.out.println();
+        // for (int i = 0; i < nestSet.size(); i++) {
+        // System.out.println(nestSet.get(i).getEvaluation());
+        // }
+        // System.out.println();
 
-        Nest bestNest = nestSet.get(0);
-        System.out.println(bestNest.getData());
-        System.out.println(Flooding.getData());
-        System.out.println(ObjectiveFunction.getData());
+        // Nest bestNest = nestSet.get(0);
+        // System.out.println(bestNest.getData());
+        // System.out.println(Flooding.getData());
+        // System.out.println(ObjectiveFunction.getData());
+
+        return nestSet.get(0).getEgg().getPlacementNodes();
     }
 
     private static void smartCuckoo() {

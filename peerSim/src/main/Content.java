@@ -5,11 +5,13 @@ import peersim.core.Control;
 
 public class Content implements Control {
     private int index;
+    private int uploadCycle;
     private int[] requests;
 
     public Content(int index) {
         this.index = index;
-        this.requests = Parameters.getRequests(index);
+        this.uploadCycle = Parameters.getUploadCycle();
+        this.requests = Parameters.getRequests(index, uploadCycle);
     }
 
     public int getContentId() {
@@ -20,8 +22,12 @@ public class Content implements Control {
         return Parameters.getSize(index);
     }
 
+    public int uploadCycle() {
+        return uploadCycle;
+    }
+
     public int getRequest() {
-        return this.requests[CDState.getCycle()];
+        return requests[CDState.getCycle()];
     }
 
     public double getPopularity() {

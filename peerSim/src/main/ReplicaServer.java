@@ -18,6 +18,9 @@
 
 package main;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import peersim.config.*;
 import peersim.core.Cleanable;
 import peersim.core.CommonState;
@@ -71,6 +74,7 @@ public class ReplicaServer implements Node {
 	private static final String PAR_REPAIR_DURATION = "repairDuration";
 	private static int repairDuration;
 
+	private HashMap<Integer, ArrayList<Integer>> havingContents;
 	private int storageCapacity[];
 	private int processingCapacity[];
 	private int position;
@@ -124,13 +128,16 @@ public class ReplicaServer implements Node {
 			result.protocol[i] = (Protocol) protocol[i].clone();
 		}
 
+		result.havingContents = new HashMap<>();
 		result.storageCapacity = new int[totalAlgorithms];
 		result.processingCapacity = new int[totalAlgorithms];
 		for (int i = 0; i < totalAlgorithms; i++) {
 			result.storageCapacity[i] = maxStorageCapacity;
 			result.processingCapacity[i] = maxProcessingCapacity;
+			result.havingContents.put(i, new ArrayList<Integer>());
 		}
-		result.position = SharedData.getRandomInt(totalCycles);
+		// result.position = SharedData.getRandomInt(totalCycles);
+		result.position = 0;
 		result.serverState = true;
 		result.progressCycle = 0;
 
@@ -276,6 +283,31 @@ public class ReplicaServer implements Node {
 		}
 	}
 
+	public double getAvailability() {
+		return Parameters.getAvailability(index);
+	}
+
+	public boolean setContent(int algorithmId, Content content) {
+		int storageRemaining = getStorageCapacity(algorithmId) - content.getSize();
+
+		if (contains(algorithmId, content.getContentId())) {
+			System.out.println("Node " + index + " Having Content " + content.getContentId());
+			System.out.println(havingContents.get(index));
+			return false;
+		} else if (storageRemaining < 0) {
+			System.out.println("Node " + index + " Storage Full");
+			System.out.println("  Storage: " + storageRemaining + ", Content Size: " + content.getSize());
+			return false;
+		}
+
+		havingContents.get(algorithmId).add(content.getContentId());
+		return true;
+	}
+
+	public boolean contains(int algorithmId, int contentId) {
+		return havingContents.get(algorithmId).contains(contentId);
+	}
+
 	// ------------------------------------------------------------------
 
 	public String toString() {
@@ -285,6 +317,10 @@ public class ReplicaServer implements Node {
 			buffer.append("protocol[" + i + "]=" + protocol[i] + "\n");
 		}
 		return buffer.toString();
+	}
+
+	public String showStorage(int algorithmId) {
+		return havingContents.get(algorithmId).toString();
 	}
 
 	// ------------------------------------------------------------------

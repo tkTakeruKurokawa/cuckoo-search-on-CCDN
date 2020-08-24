@@ -33,7 +33,7 @@ public class FailureTest implements Control {
 
     public boolean execute() {
 
-        System.out.println("====================================================");
+        System.out.println("--------------------------------------------------");
 
         ArrayList<Integer> failureNodes = new ArrayList<Integer>();
         int failureCount = 0;
@@ -115,7 +115,7 @@ public class FailureTest implements Control {
 
         plot.println(cycle + "\t" + failureCount);
 
-        System.out.println("====================================================");
+        System.out.println("--------------------------------------------------");
 
         if (cycle == 499) {
             // for (int i = 0; i < failures.size(); i++) {

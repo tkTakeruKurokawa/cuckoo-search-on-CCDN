@@ -6,32 +6,33 @@ import peersim.config.Configuration;
 import peersim.core.Control;
 
 public class ObjectiveFunction implements Control {
-    private static final String PAR_ORIGIN_ID = "originId";
-    private static int originId;
-    private static final String PAR_FAILURE_RATE_COEFFICIENT = "failureRateCoefficient";
-    private static double failureRateCoefficient;
+    private static final String PAR_TOTAL_NODES = "totalNodes";
+    private static int totalNodes;
+    private static final String PAR_USERS = "users";
+    private static int users;
+    private static final String PAR_FAILURE_RATE_COEFFICIENT = "availabilityCoefficient";
+    private static double availabilityCoefficient;
 
     private static double accessRate;
     private static double cost;
-    private static double failureRate;
+    private static double availability;
 
     public ObjectiveFunction(String prefix) {
-        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
-        failureRateCoefficient = Configuration.getDouble(prefix + "." + PAR_FAILURE_RATE_COEFFICIENT);
+        totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
+        users = Configuration.getInt(prefix + "." + PAR_USERS);
+        availabilityCoefficient = Configuration.getDouble(prefix + "." + PAR_FAILURE_RATE_COEFFICIENT);
     }
 
     public static double getEvaluation(ArrayList<Integer> placementNodes, int availableNodes, Content content) {
-        placementNodes.add(originId);
-
         accessRate = calculateAccessRate(placementNodes, availableNodes, content);
         // cost = Math.log(calculateCost(placementNodes.size(), content));
         cost = calculateCost(placementNodes.size(), content);
-        failureRate = calculateFailureRate(placementNodes);
-        double total = accessRate + cost + failureRate;
+        availability = calculateAvailability(placementNodes);
+        double total = accessRate + cost + availability;
 
         // System.out.println("Number of Replica: " + placementNodes.size() + ",
         // Access:" + accessRate + ", Cost: " + cost
-        // + ", Failure: " + failureRate);
+        // + ", Failure: " + availability);
         // System.out.println("Total = " + total);
         // System.out.println();
         return total;
@@ -43,13 +44,12 @@ public class ObjectiveFunction implements Control {
     // 合計： [0.0, 1.004552153381106547]
     private static double calculateAccessRate(ArrayList<Integer> placementNodeIndices, int availableNodes,
             Content content) {
-        // double totalRequests = content.getPopularity() * ((double) totalNodes) *
-        // ((double) users);
-        return Flooding.getAverageHop(placementNodeIndices) * content.getPopularity();
+        double totalRequests = content.getPopularity() * (double) totalNodes * (double) users;
+        return Flooding.getAverageHop(placementNodeIndices) * totalRequests * ((double) content.getSize());
+
         // return Flooding.getAverageHop(placementNodeIndices) / (1.0 -
-        // content.getPopularity());
-        // return accessRateCoefficient * Flooding.getAverageHop(placementNodeIndices) *
-        // totalRequests;
+        // content.getPopularity())
+        // * ((double) content.getSize());
     }
 
     // 合計コンテンツ数： [1, 100] ＊オリジンサーバのコンテンツも含めるため1以上
@@ -60,20 +60,22 @@ public class ObjectiveFunction implements Control {
     }
 
     // 故障確率: [0.001095430219427455, 0.005380420859253009]
-    private static double calculateFailureRate(ArrayList<Integer> placementNodes) {
+    private static double calculateAvailability(ArrayList<Integer> placementNodes) {
         double totalFailureRate = 0.0;
         double totalReplicas = (double) placementNodes.size();
 
         for (Integer nodeId : placementNodes) {
-            totalFailureRate += SharedData.getNode(nodeId).getFailureRate();
+            totalFailureRate += SharedData.getNode(nodeId).getAvailability();
         }
 
-        return failureRateCoefficient * (totalFailureRate / totalReplicas);
+        // return availabilityCoefficient * totalFailureRate;
+        return availabilityCoefficient * (1.0 - (totalFailureRate / totalReplicas));
     }
 
     public static String getData() {
         return ("Access : " + String.valueOf(accessRate) + "\nCost : " + String.valueOf(cost) + "\nFailure : "
-                + String.valueOf(failureRate) + "\nTotal : " + String.valueOf(accessRate + cost + failureRate));
+                + String.valueOf(availability) + "\nTotal : " + String.valueOf(accessRate + cost + availability)
+                + "\n\n");
     }
 
     @Override

@@ -6,11 +6,9 @@ totalCycles 500
 totalAlgorithms 2
 users 10
 originId 57
+repairDuration 50
 
 ############## Network ###############
-
-#ノードの数、サイクル数等の設定
-#random.seed 1234567890
 
 network.size totalNodes
 
@@ -19,12 +17,9 @@ network.node.totalCycles totalCycles
 network.node.totalAlgorithms totalAlgorithms
 network.node.maxStorageCapacity 1000
 network.node.maxProcessingCapacity 100
-network.node.repairDuration 50
+network.node.repairDuration repairDuration
 
-simulation.cycles totalCycles
-
-#control.shf Shuffle
-#shuffleを有効にするとサイクルごとに隣接ノードが変化する
+simulation.cycles 500
 
 ############## Protocol ###############
 
@@ -56,6 +51,7 @@ init.p.paretoShape 0.5
 init.p.paretoMin 1
 init.p.paretoMax 100
 init.p.poissonAverage 10
+init.p.repairDuration repairDuration
 
 init.sd SharedData
 init.sd.link link
@@ -71,19 +67,30 @@ init.n Nest
 init.n.originId originId
 init.n.fractalDimension 1.5
 
-init.of ObjectiveFunction
-init.of.originId originId
-init.of.failureRateCoefficient 100.0
+init.e Egg
+init.e.originId originId
 
-order.init wl p sd cs n of
+init.of ObjectiveFunction
+init.of.totalNodes totalNodes
+init.of.users users
+init.of.availabilityCoefficient 100.0
+
+order.init wl p sd cs n e of
 
 ############## Control ###############
 
-control.test Test
-control.test.totalContents totalContents 
+control.ul Upload
+control.ul.totalContents totalContents
 
-#control.ft FailureTest
+control.rp Replicate
+
+control.rq Request
+control.rq.totalContents totalContents
+control.rq.totalAlgorithms totalAlgorithms
 
 control.nm NetworkManager
 
-order.control test 
+#control.ft FailureTest
+
+order.control ul rp rq nm 
+#order.control ul rp rq ft 
