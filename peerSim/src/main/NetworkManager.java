@@ -23,6 +23,7 @@ public class NetworkManager implements Control {
             double rand = SharedData.getRandomDouble();
             if (rand < failureRate) {
                 node.setServerState(false);
+                node.resetContents();
             }
 
             node.proceedFailureRate();

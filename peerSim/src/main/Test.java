@@ -20,16 +20,6 @@ public class Test implements Control {
 
     public boolean execute() {
 
-        for (int i = 0; i < totalContents; i++) {
-            System.out.println("==================================================================");
-
-            Content content = SharedData.getContent(i);
-            System.out.println("Content: " + content.getContentId() + ", Popularity: " + content.getPopularity()
-                    + ", Size: " + content.getSize());
-            CuckooSearch.runSearch(content);
-            System.out.println("==================================================================");
-        }
-
         return false;
     }
 }

@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
@@ -17,6 +18,8 @@ public class CuckooSearch implements Control {
     private static double improvementRate;
     private static final String PAR_ABANDON_RATE = "abandonRate";
     private static double abandonRate;
+    private static final String PAR_ORIGIN_ID = "originId";
+    private static int originId;
 
     private static ArrayList<Nest> nestSet;
     private static ArrayList<Integer> availableNodes;
@@ -26,9 +29,10 @@ public class CuckooSearch implements Control {
         totalNests = Configuration.getInt(prefix + "." + PAR_TOTAL_NESTS);
         improvementRate = Configuration.getDouble(prefix + "." + PAR_IMPROVEMENT_RATE);
         abandonRate = Configuration.getDouble(prefix + "." + PAR_ABANDON_RATE);
+        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
     }
 
-    private static void initializeNestSet(Content content) {
+    private static boolean initializeNestSet(Content content) {
         ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
         availableNodes = new ArrayList<Integer>();
 
@@ -39,16 +43,24 @@ public class CuckooSearch implements Control {
             }
         }
 
+        if (availableNodes.size() == 0) {
+            return false;
+        }
+
         nestSet = new ArrayList<Nest>();
         for (int i = 0; i < totalNests; i++) {
             nestSet.add(new Nest(availableNodes, content));
         }
 
         sort();
+
+        return true;
     }
 
-    public static void runSearch(Content content) {
-        initializeNestSet(content);
+    public static ArrayList<Integer> runSearch(Content content) {
+        if (!initializeNestSet(content)) {
+            return new ArrayList<Integer>(Arrays.asList(originId));
+        }
 
         // for (int i = 0; i < nestSet.size(); i++) {
         // System.out.println("\t" + nestSet.get(i).getEvaluation());
@@ -62,12 +74,15 @@ public class CuckooSearch implements Control {
         // for (int i = 0; i < nestSet.size(); i++) {
         // System.out.println(nestSet.get(i).getEvaluation());
         // }
-        System.out.println();
 
-        Nest bestNest = nestSet.get(0);
-        System.out.println(bestNest.getData());
-        System.out.println(Flooding.getData());
-        System.out.println(ObjectiveFunction.getData());
+        // System.out.println();
+
+        // Nest bestNest = nestSet.get(0);
+        // System.out.println(bestNest.getData());
+        // System.out.println(Flooding.getData());
+        // System.out.println(ObjectiveFunction.getData());
+
+        return nestSet.get(0).getEgg().getPlacementNodes();
     }
 
     private static void smartCuckoo() {

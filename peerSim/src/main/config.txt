@@ -7,31 +7,29 @@ totalAlgorithms 2
 users 10
 originId 57
 repairDuration 50
+maxStorageCapacity 100
+maxProcessingCapacity 100
+maxTransmissionCapacity 100
 
 ############## Network ###############
-
-#ノードの数、サイクル数等の設定
-#random.seed 1234567890
 
 network.size totalNodes
 
 network.node ReplicaServer
 network.node.totalCycles totalCycles
 network.node.totalAlgorithms totalAlgorithms
-network.node.maxStorageCapacity 1000
-network.node.maxProcessingCapacity 100
+network.node.maxStorageCapacity maxStorageCapacity
+network.node.maxProcessingCapacity maxProcessingCapacity
 network.node.repairDuration repairDuration
+network.node.originId originId
 
 simulation.cycles 500
-
-#control.shf Shuffle
-#shuffleを有効にするとサイクルごとに隣接ノードが変化する
 
 ############## Protocol ###############
 
 protocol.link Link
 protocol.link.totalAlgorithms totalAlgorithms
-protocol.link.maxTransmissionCapacity 100
+protocol.link.maxTransmissionCapacity maxTransmissionCapacity
 
 #order.protocol
 
@@ -68,26 +66,44 @@ init.cs.maxGeneration 500
 init.cs.totalNests 30
 init.cs.improvementRate 0.6
 init.cs.abandonRate 0.4
+init.cs.originId originId
 
 init.n Nest
 init.n.originId originId
 init.n.fractalDimension 1.5
 
+init.e Egg
+init.e.originId originId
+
 init.of ObjectiveFunction
 init.of.totalNodes totalNodes
 init.of.users users
-init.of.originId originId
 init.of.availabilityCoefficient 100.0
 
-order.init wl p sd cs n of
+init.f Flooding
+init.f.originId originId
+
+order.init wl p sd cs n e of f
 
 ############## Control ###############
 
-control.test Test
-control.test.totalContents totalContents 
+control.ul Upload
+control.ul.totalContents totalContents
 
-#control.ft FailureTest
+control.rp Replicate
+
+control.rq Request
+control.rq.totalContents totalContents
+control.rq.totalAlgorithms totalAlgorithms
+control.rq.originId originId
+
+control.sp ShowParameters
+control.sp.totalAlgorithms totalAlgorithms
 
 control.nm NetworkManager
 
-order.control test 
+#control.ft FailureTest
+
+#order.control ul rp rq nm
+order.control ul rp rq sp nm 
+#order.control ul rp rq ft 

@@ -6,8 +6,6 @@ import peersim.config.Configuration;
 import peersim.core.Control;
 
 public class ObjectiveFunction implements Control {
-    private static final String PAR_ORIGIN_ID = "originId";
-    private static int originId;
     private static final String PAR_TOTAL_NODES = "totalNodes";
     private static int totalNodes;
     private static final String PAR_USERS = "users";
@@ -20,15 +18,12 @@ public class ObjectiveFunction implements Control {
     private static double availability;
 
     public ObjectiveFunction(String prefix) {
-        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
         totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
         users = Configuration.getInt(prefix + "." + PAR_USERS);
         availabilityCoefficient = Configuration.getDouble(prefix + "." + PAR_FAILURE_RATE_COEFFICIENT);
     }
 
     public static double getEvaluation(ArrayList<Integer> placementNodes, int availableNodes, Content content) {
-        placementNodes.add(originId);
-
         accessRate = calculateAccessRate(placementNodes, availableNodes, content);
         // cost = Math.log(calculateCost(placementNodes.size(), content));
         cost = calculateCost(placementNodes.size(), content);

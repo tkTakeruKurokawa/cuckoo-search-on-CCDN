@@ -103,6 +103,10 @@ public class Link implements Protocol, Linkable {
 		transmissionCapacityList.get(algorithmId).replace(neighborId, value);
 	}
 
+	public void resetTransmissionCapacity(int algorithmId, int neighborId) {
+		transmissionCapacityList.get(algorithmId).replace(neighborId, maxTransmissionCapacity);
+	}
+
 	public int getTransmissionCapacity(int algorithmId, int neighborId) {
 		return transmissionCapacityList.get(algorithmId).get(neighborId);
 	}

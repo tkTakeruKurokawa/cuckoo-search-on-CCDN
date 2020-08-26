@@ -14,6 +14,7 @@ public class SharedData implements Control {
 
 	private static Random random = new Random(1L);
 	private static ArrayList<Content> contentSet;
+	private static ArrayList<Content> replicatedContents;
 
 	public SharedData(String prefix) {
 		pid_lnk = Configuration.getPid(prefix + "." + PAR_LNK);
@@ -43,6 +44,14 @@ public class SharedData implements Control {
 
 	public static Content getContent(int contentId) {
 		return contentSet.get(contentId);
+	}
+
+	public static ArrayList<Content> getReplicatedContents() {
+		return replicatedContents;
+	}
+
+	public static void setReplicatedContents(ArrayList<Content> contents) {
+		replicatedContents = contents;
 	}
 
 	public static int getRandomInt(int upperLimit) {

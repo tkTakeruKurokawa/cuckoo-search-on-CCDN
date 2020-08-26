@@ -82,13 +82,12 @@ public class Parameters implements Control {
         paretoDistribution();
     }
 
-    public static int[] getRequests(int contentId) {
-        int startCycle = SharedData.getRandomInt(totalCycles - poissonAverage * 2);
-        return poissonDistribution(contentId, startCycle);
+    public static int[] getRequests(int contentId, int uploadCycle) {
+        return poissonDistribution(contentId, uploadCycle);
     }
 
-    public static int getTotalRequest(int contentId) {
-        return totalRequest[contentId];
+    public static int getUploadCycle() {
+        return SharedData.getRandomInt(totalCycles - poissonAverage * 2);
     }
 
     public static int getSize(int contentId) {
@@ -119,7 +118,7 @@ public class Parameters implements Control {
         return ((double) value);
     }
 
-    private static int[] setRequest(double[] cdf, int total, int startCycle, int duration) {
+    private static int[] setRequest(double[] cdf, int total, int uploadCycle, int duration) {
         int[] requests = new int[totalCycles];
         int count = 0;
         while (count < total) {
@@ -132,7 +131,7 @@ public class Parameters implements Control {
                         flag = true;
                         break;
                     }
-                    requests[startCycle + cycle]++;
+                    requests[uploadCycle + cycle]++;
                     break;
                 } else {
                     if (cycle == duration * 2) {
@@ -151,7 +150,7 @@ public class Parameters implements Control {
         return requests;
     }
 
-    private static int[] poissonDistribution(int contentId, int startCycle) {
+    private static int[] poissonDistribution(int contentId, int uploadCycle) {
         int duration = poissonAverage;
         double lambda = (double) duration;
 
@@ -166,7 +165,7 @@ public class Parameters implements Control {
             cdf[cycle] = p * Math.exp(-1.0 * lambda);
         }
 
-        return setRequest(cdf, totalRequest[contentId], startCycle, duration);
+        return setRequest(cdf, totalRequest[contentId], uploadCycle, duration);
     }
 
     private static void setSize(double[] cdf, int sizeCount) {
