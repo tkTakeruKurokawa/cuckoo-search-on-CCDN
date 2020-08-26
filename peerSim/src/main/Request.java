@@ -12,22 +12,53 @@ public class Request implements Control {
     private static int totalContents;
     private static final String PAR_TOTAL_ALGORITHMS = "totalAlgorithms";
     private static int totalAlgorithms;
+    private static final String PAR_ORIGIN_ID = "originId";
+    private static int originId;
 
     private static ArrayList<Integer> contentIndices;
-    private static ArrayList<Result> algorithmResults;
+    private static ArrayList<CostOfNetwork> networkCosts;
+    private static ArrayList<CostOfOperation> operationCosts;
 
     public Request(String prefix) {
         totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
         totalAlgorithms = Configuration.getInt(prefix + "." + PAR_TOTAL_ALGORITHMS);
+        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
 
         contentIndices = new ArrayList<>();
         for (int i = 0; i < totalContents; i++) {
             contentIndices.add(i);
         }
 
-        algorithmResults = new ArrayList<>();
+        networkCosts = new ArrayList<>();
+        operationCosts = new ArrayList<>();
         for (int i = 0; i < totalAlgorithms; i++) {
-            algorithmResults.add(new Result());
+            networkCosts.add(new CostOfNetwork());
+            operationCosts.add(new CostOfOperation());
+        }
+    }
+
+    private void resetProcessingCapacity() {
+        for (int i = 0; i < Network.size(); i++) {
+            ReplicaServer node = SharedData.getNode(i);
+            Link link = SharedData.getLink(node);
+
+            for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
+                node.resetProcessingCapacity(algorithmId);
+
+                for (int index = 0; index < link.degree(); index++) {
+                    ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                    link.resetTransmissionCapacity(algorithmId, neighbor.getIndex());
+                }
+            }
+        }
+    }
+
+    private void resetCycleCost() {
+        for (CostOfNetwork cost : networkCosts) {
+            cost.resetCycleCost();
+        }
+        for (CostOfOperation cost : operationCosts) {
+            cost.resetCycleCost();
         }
     }
 
@@ -40,79 +71,122 @@ public class Request implements Control {
         return content;
     }
 
-    private void resetCycleResult() {
-        for (Result result : algorithmResults) {
-            result.resetCycleResult();
+    private void resetContentCost(int totalRequests) {
+        for (CostOfNetwork cost : networkCosts) {
+            cost.resetContentCost();
+            cost.setContentRequests(totalRequests);
         }
-    }
 
-    private void resetContentResult(int totalRequests) {
-        for (Result result : algorithmResults) {
-            result.resetContentResult();
-            result.setContentRequests(totalRequests);
+        for (CostOfOperation cost : operationCosts) {
+            cost.resetContentCost();
         }
     }
 
     private void search(Content content) {
         int totalRequests = content.getRequest();
         for (int requestCount = 0; requestCount < totalRequests; requestCount++) {
-            int nodeId = SharedData.getRandomInt(Network.size());
+            int nodeId;
+            do {
+                nodeId = SharedData.getRandomInt(Network.size());
+            } while (nodeId == originId);
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
                 System.out.println("==================================================================");
                 System.out.println(algorithmId + ": ");
-                Result result = algorithmResults.get(algorithmId);
+                CostOfNetwork networkCost = networkCosts.get(algorithmId);
+                CostOfOperation operationCost = operationCosts.get(algorithmId);
 
                 int hop = Flooding.getHops(nodeId, algorithmId, content);
                 if (hop == -1) {
-                    result.setContentFails(result.getContentFails() + 1);
-                    System.out.println("******************   Content " + content.getContentId()
-                            + " request Failed   ******************");
-                    System.out.println(Flooding.getPath());
+                    networkCost.setContentFails(networkCost.getContentFails() + 1);
+                    // System.out.println("****************** Content " + content.getContentId()
+                    // + " request Failed ******************");
+                    // System.out.println(Flooding.getAllPath());
                 } else {
-                    result.setContentHops(result.getContentHops() + hop);
+                    networkCost.setContentHops(networkCost.getContentHops() + hop);
+                    operationCost.setContentProcessing(
+                            operationCost.getContentProcessing() + (content.getSize() * (hop + 1)));
+                    operationCost
+                            .setContentTransmission(operationCost.getContentTransmission() + (content.getSize() * hop));
+                    // System.out.println(Flooding.getAllPath());
                     System.out.println(Flooding.getPath());
-
                 }
             }
         }
     }
 
-    private void showContentResult(int contentId) {
+    private void showContentCost(Content content) {
         for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
-            Result result = algorithmResults.get(algorithmId);
+            CostOfNetwork networkCost = networkCosts.get(algorithmId);
+            CostOfOperation operationCost = operationCosts.get(algorithmId);
 
-            result.calculateCycleResult();
+            networkCost.calculateCycleCost();
+            operationCost.calculateCycleCost();
 
-            if (result.getContentHops() > 0) {
-                System.out.println("Content " + contentId + ": " + result.getContentRequests() + " requests, "
-                        + result.getContentHops() + " hops");
+            if (networkCost.getContentHops() > 0) {
+
+                System.out.println("Content " + content.getContentId() + ": " + networkCost.getContentRequests()
+                        + " requests, " + networkCost.getContentHops() + " hops, size: " + content.getSize());
             }
         }
     }
 
-    private void showCycleResult() {
+    private void calculateStorageCost(int algorithmId, ArrayList<CostOfOperation> operationCosts) {
+        int cumulativeStorage = 0;
+        for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
+            ReplicaServer node = SharedData.getNode(nodeId);
+            if (!node.getServerState()) {
+                continue;
+            }
+            ArrayList<Integer> contents = node.getContents(algorithmId);
+
+            for (Integer contentId : contents) {
+                Content content = SharedData.getContent(contentId);
+                cumulativeStorage += content.getSize();
+            }
+        }
+
+        operationCosts.get(algorithmId).setCycleStorage(cumulativeStorage);
+    }
+
+    private void showCycleCost() {
         for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
-            Result result = algorithmResults.get(algorithmId);
-            result.calculateSimulationResult();
+            CostOfNetwork networkCost = networkCosts.get(algorithmId);
+            CostOfOperation operationCost = operationCosts.get(algorithmId);
+
+            calculateStorageCost(algorithmId, operationCosts);
+
+            networkCost.calculateSimulationCost();
+            operationCost.calculateSimulationCost();
 
             System.out.println("==================================================================");
-            System.out.println("This Cycle " + result.getCycleRequests() + " requests");
-            System.out.println("This Cycle " + result.getCycleHops() + " hops");
-            System.out.println("This Cycle " + result.getCycleFails() + " fails");
+            System.out.println("This Cycle " + networkCost.getCycleRequests() + " requests");
+            System.out.println("This Cycle " + networkCost.getCycleHops() + " hops");
+            System.out.println("This Cycle " + networkCost.getCycleFails() + " fails");
+            System.out.println("This Cycle " + operationCost.getCycleStorage() + " storage used");
+            System.out.println("This Cycle " + operationCost.getCycleProcessing() + " processing used");
+            System.out.println("This Cycle " + operationCost.getCycleTransmission() + " transmission used");
             System.out.println("==================================================================");
-
-            System.out.println();
-            System.out.println();
         }
     }
 
-    private void showSimulationResult(String name, Result result) {
-        System.out.println(name + ": ");
-        System.out.println("All Requests: " + result.getSimulationRequests());
-        System.out.println("All Hops: " + result.getSimulationHops());
-        System.out.println("All Fails: " + result.getSimulationFails());
-        System.out.println();
+    private void showSimulationCost() {
+        for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
+            CostOfNetwork networkCost = networkCosts.get(algorithmId);
+            CostOfOperation operationCost = operationCosts.get(algorithmId);
+
+            networkCost.calculateSimulationCost();
+            operationCost.calculateSimulationCost();
+
+            System.out.println("==================================================================");
+            System.out.println("All Requests: " + networkCost.getSimulationRequests());
+            System.out.println("All Hops: " + networkCost.getSimulationHops());
+            System.out.println("All Fails: " + networkCost.getSimulationFails());
+            System.out.println("All Storage Used: " + operationCost.getSimulationStorage());
+            System.out.println("All Processing Used: " + operationCost.getSimulationProcessing());
+            System.out.println("All Transmission Used: " + operationCost.getSimulationTransmission());
+            System.out.println("==================================================================");
+        }
     }
 
     @Override
@@ -121,26 +195,26 @@ public class Request implements Control {
         System.out.println();
         System.out.println();
 
-        resetCycleResult();
+        resetProcessingCapacity();
+
+        resetCycleCost();
         ArrayList<Integer> randomContentIndices = new ArrayList<>(contentIndices);
         for (int contentCount = 0; contentCount < totalContents; contentCount++) {
             Content content = getRandomContent(randomContentIndices);
 
-            resetContentResult(content.getRequest());
+            resetContentCost(content.getRequest());
 
             search(content);
 
-            showContentResult(content.getContentId());
+            showContentCost(content);
         }
 
-        showCycleResult();
+        showCycleCost();
+        System.out.println();
+        System.out.println();
 
-        if (CDState.getCycle() == 499)
-
-        {
-            showSimulationResult("Cuckoo", algorithmResults.get(0));
-            showSimulationResult("Only Origin", algorithmResults.get(1));
-
+        if (CDState.getCycle() == 499) {
+            showSimulationCost();
         }
 
         return false;

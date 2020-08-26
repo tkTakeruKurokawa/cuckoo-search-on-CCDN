@@ -73,11 +73,13 @@ public class ReplicaServer implements Node {
 	private static int maxProcessingCapacity;
 	private static final String PAR_REPAIR_DURATION = "repairDuration";
 	private static int repairDuration;
+	private static final String PAR_ORIGIN_ID = "originId";
+	private static int originId;
 
 	private HashMap<Integer, ArrayList<Integer>> havingContents;
 	private int storageCapacity[];
 	private int processingCapacity[];
-	private int position;
+	private int failurePosition;
 
 	private boolean serverState;
 	private int progressCycle;
@@ -92,13 +94,13 @@ public class ReplicaServer implements Node {
 	 * {@value peersim.core.Node#PAR_PROT}) from the configuration.
 	 */
 	public ReplicaServer(String prefix) {
-
 		String[] names = Configuration.getNames(PAR_PROT);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLE);
 		totalAlgorithms = Configuration.getInt(prefix + "." + PAR_TOTAL_ALGORITHM);
 		maxStorageCapacity = Configuration.getInt(prefix + "." + PAR_MAX_STORAGE_CAPACITY);
 		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_PROCESSING_CAPACITY);
 		repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
+		originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
 
 		CommonState.setNode(this);
 		ID = nextID();
@@ -136,8 +138,8 @@ public class ReplicaServer implements Node {
 			result.processingCapacity[i] = maxProcessingCapacity;
 			result.havingContents.put(i, new ArrayList<Integer>());
 		}
-		// result.position = SharedData.getRandomInt(totalCycles);
-		result.position = 0;
+		result.failurePosition = SharedData.getRandomInt(totalCycles);
+		// result.failurePosition = 0;
 		result.serverState = true;
 		result.progressCycle = 0;
 
@@ -229,6 +231,10 @@ public class ReplicaServer implements Node {
 	// ------------------------------------------------------------------
 
 	public void setStorageCapacity(int algorithmId, int value) {
+		if (index == originId) {
+			return;
+		}
+
 		storageCapacity[algorithmId] = value;
 	}
 
@@ -237,7 +243,15 @@ public class ReplicaServer implements Node {
 	}
 
 	public void setProcessingCapacity(int algorithmId, int value) {
+		if (index == originId) {
+			return;
+		}
+
 		processingCapacity[algorithmId] = value;
+	}
+
+	public void resetProcessingCapacity(int algorithmId) {
+		processingCapacity[algorithmId] = maxProcessingCapacity;
 	}
 
 	public int getProcessingCapacity(int algorithmId) {
@@ -245,22 +259,22 @@ public class ReplicaServer implements Node {
 	}
 
 	public void setFailureRate(int startPosition) {
-		position = startPosition;
+		failurePosition = startPosition;
 	}
 
 	public double getFailureRate() {
-		return Parameters.getFailureRate(index, position);
+		return Parameters.getFailureRate(index, failurePosition);
 	}
 
 	public void proceedFailureRate() {
-		position++;
-		if (position == totalCycles) {
-			position = 0;
+		failurePosition++;
+		if (failurePosition == totalCycles) {
+			failurePosition = 0;
 		}
 	}
 
 	public int getPosition() {
-		return position;
+		return failurePosition;
 	}
 
 	/*
@@ -283,6 +297,14 @@ public class ReplicaServer implements Node {
 		}
 	}
 
+	public void resetContents() {
+		havingContents = new HashMap<>();
+		for (int i = 0; i < totalAlgorithms; i++) {
+			storageCapacity[i] = maxStorageCapacity;
+			havingContents.put(i, new ArrayList<Integer>());
+		}
+	}
+
 	public double getAvailability() {
 		return Parameters.getAvailability(index);
 	}
@@ -300,8 +322,13 @@ public class ReplicaServer implements Node {
 			return false;
 		}
 
+		setStorageCapacity(algorithmId, storageRemaining);
 		havingContents.get(algorithmId).add(content.getContentId());
 		return true;
+	}
+
+	public ArrayList<Integer> getContents(int algorithmId) {
+		return havingContents.get(algorithmId);
 	}
 
 	public boolean contains(int algorithmId, int contentId) {
@@ -319,8 +346,17 @@ public class ReplicaServer implements Node {
 		return buffer.toString();
 	}
 
-	public String showStorage(int algorithmId) {
+	public String showContents(int algorithmId) {
 		return havingContents.get(algorithmId).toString();
+	}
+
+	public String showContentSize(int algorithmId) {
+		ArrayList<Integer> tmp = new ArrayList<>();
+		for (Integer contentId : havingContents.get(algorithmId)) {
+			tmp.add(SharedData.getContent(contentId).getSize());
+		}
+
+		return tmp.toString();
 	}
 
 	// ------------------------------------------------------------------
