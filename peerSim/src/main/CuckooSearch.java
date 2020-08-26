@@ -74,6 +74,7 @@ public class CuckooSearch implements Control {
         // for (int i = 0; i < nestSet.size(); i++) {
         // System.out.println(nestSet.get(i).getEvaluation());
         // }
+
         // System.out.println();
 
         // Nest bestNest = nestSet.get(0);

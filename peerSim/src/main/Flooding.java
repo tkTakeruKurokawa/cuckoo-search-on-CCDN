@@ -15,6 +15,7 @@ public class Flooding implements Control {
     private static int originId;
 
     private static ArrayList<Integer> addedNodes;
+
     private static Queue<Integer> queue;
     private static HashMap<Integer, Integer> hop;
     private static HashMap<Integer, Integer> connection;
@@ -44,9 +45,9 @@ public class Flooding implements Control {
 
                 if (!neighbor.getServerState()) {
                     continue;
-                } else if (!addedNodes.contains(neighborId)) {
+                } else if (!availableNodes.contains(neighborId)) {
                     // System.out.printf("%d, ", neighborId);
-                    addedNodes.add(neighborId);
+                    availableNodes.add(neighborId);
                     queue.add(neighborId);
                     hop.put(neighborId, hop.get(nodeId) + 1);
                 }
@@ -54,7 +55,7 @@ public class Flooding implements Control {
             // System.out.println();
         }
 
-        // System.out.println("Total Nodes: " + addedNodes.size());
+        // System.out.println("Total Nodes: " + availableNodes.size());
         return calculateAverage();
     }
 
@@ -74,18 +75,18 @@ public class Flooding implements Control {
 
                 if (!neighbor.getServerState()) {
                     continue;
-                } else if (!addedNodes.contains(neighborId)) {
+                } else if (!availableNodes.contains(neighborId)) {
                     // System.out.printf("%d, ", neighborId);
-                    addedNodes.add(neighborId);
+                    availableNodes.add(neighborId);
                     queue.add(neighborId);
                 }
             }
             // System.out.println();
         }
 
-        // System.out.println("Reachable Nodes: " + addedNodes.size());
-        addedNodes.remove(0);
-        return addedNodes;
+        // System.out.println("Reachable Nodes: " + availableNodes.size());
+        availableNodes.remove(0);
+        return availableNodes;
     }
 
     public static int getHops(int nodeId, int algorithmId, Content content) {
@@ -132,13 +133,13 @@ public class Flooding implements Control {
     }
 
     private static void initialize(ArrayList<Integer> nodes) {
-        addedNodes = new ArrayList<Integer>();
+        availableNodes = new ArrayList<Integer>();
         queue = new ArrayDeque<Integer>();
         hop = new HashMap<Integer, Integer>();
 
         for (int i = 0; i < nodes.size(); i++) {
             int nodeId = nodes.get(i);
-            addedNodes.add(nodeId);
+            availableNodes.add(nodeId);
             queue.add(nodeId);
             hop.put(nodeId, 0);
         }
@@ -169,6 +170,7 @@ public class Flooding implements Control {
 
         return ((double) total / (double) count);
         // return (double) total;
+
     }
 
     private static boolean checkAvailability(int nodeId, int neighborId, int algorithmId, int contentSize) {
@@ -229,6 +231,7 @@ public class Flooding implements Control {
         int oldNodeId = oldNode.getIndex();
         transmissionCapacity = NewToOld.getTransmissionCapacity(algorithmId, oldNodeId);
         NewToOld.setTransmissionCapacity(algorithmId, oldNodeId, transmissionCapacity - contentSize);
+
     }
 
     public static String getData() {

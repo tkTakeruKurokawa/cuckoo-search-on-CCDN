@@ -138,6 +138,7 @@ public class ReplicaServer implements Node {
 			result.processingCapacity[i] = maxProcessingCapacity;
 			result.havingContents.put(i, new ArrayList<Integer>());
 		}
+
 		result.failurePosition = SharedData.getRandomInt(totalCycles);
 		// result.failurePosition = 0;
 		result.serverState = true;
