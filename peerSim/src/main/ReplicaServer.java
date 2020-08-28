@@ -65,8 +65,6 @@ public class ReplicaServer implements Node {
 
 	private static final String PAR_TOTAL_CYCLE = "totalCycles";
 	private static int totalCycles;
-	private static final String PAR_TOTAL_ALGORITHM = "totalAlgorithms";
-	private static int totalAlgorithms;
 	private static final String PAR_MAX_STORAGE_CAPACITY = "maxStorageCapacity";
 	private static int maxStorageCapacity;
 	private static final String PAR_MAX_PROCESSING_CAPACITY = "maxProcessingCapacity";
@@ -75,6 +73,8 @@ public class ReplicaServer implements Node {
 	private static int repairDuration;
 	private static final String PAR_ORIGIN_ID = "originId";
 	private static int originId;
+
+	private static int totalAlgorithms;
 
 	private HashMap<Integer, ArrayList<Integer>> havingContents;
 	private int storageCapacity[];
@@ -96,11 +96,13 @@ public class ReplicaServer implements Node {
 	public ReplicaServer(String prefix) {
 		String[] names = Configuration.getNames(PAR_PROT);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLE);
-		totalAlgorithms = Configuration.getInt(prefix + "." + PAR_TOTAL_ALGORITHM);
 		maxStorageCapacity = Configuration.getInt(prefix + "." + PAR_MAX_STORAGE_CAPACITY);
 		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_PROCESSING_CAPACITY);
 		repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
 		originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
+
+		new SharedData();
+		totalAlgorithms = SharedData.getTotalAlgorithms();
 
 		CommonState.setNode(this);
 		ID = nextID();

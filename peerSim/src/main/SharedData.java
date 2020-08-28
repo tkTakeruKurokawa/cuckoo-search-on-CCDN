@@ -9,33 +9,33 @@ import peersim.config.*;
 public class SharedData implements Control {
 	private static final String PAR_LNK = "link";
 	private static int pid_lnk;
+	private static final String PAR_ORIGIN_ID = "originId";
+	private static int originId;
+	private static final String PAR_TOTAL_CYCLES = "totalCycles";
+	private static int totalCycles;
 	private static final String PAR_TOTAL_CONTENTS = "totalContents";
 	private static int totalContents;
 
 	private static Random random = new Random(1L);
 	private static ArrayList<Content> contentSet;
 	private static ArrayList<Content> replicatedContents;
+	private static ArrayList<String> algorithmNames;
 
 	public SharedData(String prefix) {
 		pid_lnk = Configuration.getPid(prefix + "." + PAR_LNK);
+		originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
+		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLES);
 		totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
+	}
+
+	public SharedData() {
+		algorithmNames = new ArrayList<String>();
+		algorithmNames.add("Cuckoo_Search");
+		algorithmNames.add("Origin_Only");
 	}
 
 	public static ReplicaServer getNode(int nodeIndex) {
 		return (ReplicaServer) Network.get(nodeIndex);
-	}
-
-	public static ArrayList<ReplicaServer> getAliveNodes() {
-		ArrayList<ReplicaServer> aliveNodes = new ArrayList<ReplicaServer>();
-
-		for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
-			ReplicaServer node = getNode(nodeId);
-			if (node.getServerState()) {
-				aliveNodes.add(node);
-			}
-		}
-
-		return aliveNodes;
 	}
 
 	public static Link getLink(Node node) {
@@ -54,6 +54,26 @@ public class SharedData implements Control {
 		replicatedContents = contents;
 	}
 
+	public static int getOriginId() {
+		return originId;
+	}
+
+	public static int getTotalCycles() {
+		return totalCycles;
+	}
+
+	public static int getTotalContents() {
+		return totalContents;
+	}
+
+	public static int getTotalAlgorithms() {
+		return algorithmNames.size();
+	}
+
+	public static String getAlgorithmName(int algorithmId) {
+		return algorithmNames.get(algorithmId);
+	}
+
 	public static int getRandomInt(int upperLimit) {
 		return random.nextInt(upperLimit);
 	}
@@ -63,6 +83,7 @@ public class SharedData implements Control {
 	}
 
 	public boolean execute() {
+
 		contentSet = new ArrayList<Content>();
 		for (int index = 0; index < totalContents; index++) {
 			contentSet.add(index, new Content(index));

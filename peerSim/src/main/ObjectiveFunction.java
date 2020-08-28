@@ -4,21 +4,22 @@ import java.util.ArrayList;
 
 import peersim.config.Configuration;
 import peersim.core.Control;
+import peersim.core.Network;
 
 public class ObjectiveFunction implements Control {
-    private static final String PAR_TOTAL_NODES = "totalNodes";
-    private static int totalNodes;
     private static final String PAR_USERS = "users";
     private static int users;
     private static final String PAR_FAILURE_RATE_COEFFICIENT = "availabilityCoefficient";
     private static double availabilityCoefficient;
+
+    private static int totalNodes;
 
     private static double accessRate;
     private static double cost;
     private static double availability;
 
     public ObjectiveFunction(String prefix) {
-        totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
+        totalNodes = Network.size() - 1;
         users = Configuration.getInt(prefix + "." + PAR_USERS);
         availabilityCoefficient = Configuration.getDouble(prefix + "." + PAR_FAILURE_RATE_COEFFICIENT);
     }

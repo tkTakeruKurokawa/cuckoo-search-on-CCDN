@@ -2,20 +2,16 @@ package main;
 
 import peersim.config.Configuration;
 import peersim.core.Control;
+import peersim.core.Network;
+
 import java.lang.Math;
 import org.apache.commons.math3.special.Erf;
 
 public class Parameters implements Control {
-    private static final String PAR_TOTAL_CYCLE = "totalCycles";
-    private static int totalCycles;
     private static final String PAR_WEIBULL_SHAPE = "weibullShape";
     private static double weibullShape;
     private static final String PAR_WEIBULL_SCALE = "weibullScale";
     private static double weibullScale;
-    private static final String PAR_TOTAL_NODES = "totalNodes";
-    private static int totalNodes;
-    private static final String PAR_ORIGIN_ID = "originId";
-    private static int originId;
     private static final String PAR_NORMAL_AVERAGE = "normalAverage";
     private static double normalAverage;
     private static final String PAR_NORMAL_VARIANCE = "normalVariance";
@@ -24,8 +20,6 @@ public class Parameters implements Control {
     private static int normalMin;
     private static final String PAR_NORMAL_MAX = "normalMax";
     private static int normalMax;
-    private static final String PAR_TOTAL_CONTENTS = "totalContents";
-    private static int totalContents;
     private static final String PAR_USERS = "users";
     private static int users;
     private static final String PAR_ZIPF_SHAPE = "zipfShape";
@@ -41,6 +35,11 @@ public class Parameters implements Control {
     private static final String PAR_REPAIR_DURATION = "repairDuration";
     private static int repairDuration;
 
+    private static int originId;
+    private static int totalCycles;
+    private static int totalContents;
+    private static int totalNodes;
+
     private static double[] failureRate;
     private static double[] magnification;
     private static double[] availability;
@@ -49,16 +48,12 @@ public class Parameters implements Control {
     private static int[] totalRequest;
 
     public Parameters(String prefix) {
-        totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLE);
         weibullShape = Configuration.getDouble(prefix + "." + PAR_WEIBULL_SHAPE);
         weibullScale = Configuration.getDouble(prefix + "." + PAR_WEIBULL_SCALE);
-        totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
-        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
         normalAverage = Configuration.getDouble(prefix + "." + PAR_NORMAL_AVERAGE);
         normalVariance = Configuration.getDouble(prefix + "." + PAR_NORMAL_VARIANCE);
         normalMin = Configuration.getInt(prefix + "." + PAR_NORMAL_MIN);
         normalMax = Configuration.getInt(prefix + "." + PAR_NORMAL_MAX);
-        totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
         users = Configuration.getInt(prefix + "." + PAR_USERS);
         zipfShape = Configuration.getDouble(prefix + "." + PAR_ZIPF_SHAPE);
         paretoShape = Configuration.getDouble(prefix + "." + PAR_PARETO_SHAPE);
@@ -66,9 +61,16 @@ public class Parameters implements Control {
         paretoMax = Configuration.getInt(prefix + "." + PAR_PARETO_MAX);
         poissonAverage = Configuration.getInt(prefix + "." + PAR_POISSON_Average);
         repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
+
+        originId = SharedData.getOriginId();
+        totalCycles = SharedData.getTotalCycles();
+        totalContents = SharedData.getTotalContents();
+        totalNodes = Network.size();
+
+        initializeDistributionModels();
     }
 
-    public static void initializeDistributionModels() {
+    private static void initializeDistributionModels() {
         failureRate = new double[totalCycles];
         magnification = new double[totalNodes];
         availability = new double[totalNodes];
@@ -87,7 +89,7 @@ public class Parameters implements Control {
     }
 
     public static int getUploadCycle() {
-        return SharedData.getRandomInt(totalCycles - poissonAverage * 2);
+        return SharedData.getRandomInt(totalCycles - (poissonAverage * 2));
     }
 
     public static int getSize(int contentId) {
@@ -294,9 +296,6 @@ public class Parameters implements Control {
 
     @Override
     public boolean execute() {
-
-        initializeDistributionModels();
-
         return false;
     }
 

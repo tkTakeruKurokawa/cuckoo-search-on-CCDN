@@ -1,22 +1,45 @@
 package main;
 
 import java.util.ArrayList;
+import peersim.cdsim.CDState;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class CostOfNetwork {
+    private int totalCycles;
     private ArrayList<Cost> costs;
     private Cost requests;
     private Cost hops;
     private Cost fails;
+    private PrintWriter writer;
 
-    public CostOfNetwork() {
-        requests = new Cost();
-        hops = new Cost();
-        fails = new Cost();
+    public CostOfNetwork(String name, int totalCycles) {
+        this.totalCycles = totalCycles;
+
+        requests = new Cost("Number_of_Requests" + "[" + name + "]");
+        hops = new Cost("Number_of_Hops" + "[" + name + "]");
+        fails = new Cost("Number_of_Fails" + "[" + name + "]");
 
         costs = new ArrayList<>();
         costs.add(requests);
         costs.add(hops);
         costs.add(fails);
+
+        try {
+            File dir = new File("result/eps");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            writer = new PrintWriter(
+                    new BufferedWriter(new FileWriter("./result/Average_Hops" + "[" + name + "].tsv", false)));
+        } catch (Exception e) {
+            System.out.println(e);
+            System.exit(0);
+        }
     }
 
     public void calculateSimulationCost() {
@@ -24,7 +47,10 @@ public class CostOfNetwork {
             int totalPerCycle = cost.getPerCycle();
             int totalPerSimulation = cost.getPerSimulation();
             cost.setPerSimulation(totalPerCycle + totalPerSimulation);
+
+            writeCycleCost(cost);
         }
+        writeAverageHops(hops);
     }
 
     public void calculateCycleCost() {
@@ -95,4 +121,22 @@ public class CostOfNetwork {
         return fails.getPerContent();
     }
 
+    private void writeCycleCost(Cost cost) {
+        String description = CDState.getCycle() + "\t" + cost.getPerCycle();
+        cost.addedDescription(description);
+
+        if (CDState.getCycle() == totalCycles - 1) {
+            cost.closeFile();
+        }
+    }
+
+    private void writeAverageHops(Cost hops) {
+        int cycle = CDState.getCycle() + 1;
+        double average = ((double) getSimulationHops()) / ((double) cycle);
+        writer.println((cycle - 1) + "\t" + average);
+
+        if (cycle == totalCycles) {
+            writer.close();
+        }
+    }
 }

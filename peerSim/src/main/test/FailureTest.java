@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Queue;
 import java.io.*;
-import java.lang.reflect.Array;
 
 import main.Link;
 import main.ReplicaServer;
 import main.SharedData;
 import peersim.core.Control;
 import peersim.core.Network;
-import peersim.core.Node;
 
 public class FailureTest implements Control {
     ArrayList<Integer> failures = new ArrayList<Integer>();
@@ -26,7 +24,7 @@ public class FailureTest implements Control {
         }
 
         try {
-            plot = new PrintWriter(new BufferedWriter(new FileWriter("./src/main/test/plot.tsv", false)));
+            plot = new PrintWriter(new BufferedWriter(new FileWriter("./result/Failed Servers", false)));
         } catch (Exception e) {
         }
     }

@@ -7,10 +7,10 @@ import peersim.config.*;
 import peersim.core.*;
 
 public class Link implements Protocol, Linkable {
-	private static final String PAR_TOTAL_ALGORITHM = "totalAlgorithms";
-	private static int totalAlgorithms;
 	private static final String PAR_MAX_TRANSMISSION_CAPACITY = "maxTransmissionCapacity";
 	private final int maxTransmissionCapacity;
+
+	private static int totalAlgorithms;
 
 	protected Node[] neighbors;
 	protected int len;
@@ -18,8 +18,10 @@ public class Link implements Protocol, Linkable {
 
 	public Link(String prefix) {
 		neighbors = new Node[Network.size()];
-		totalAlgorithms = Configuration.getInt(prefix + "." + PAR_TOTAL_ALGORITHM);
 		maxTransmissionCapacity = Configuration.getInt(prefix + "." + PAR_MAX_TRANSMISSION_CAPACITY);
+
+		totalAlgorithms = SharedData.getTotalAlgorithms();
+
 		len = 0;
 	}
 

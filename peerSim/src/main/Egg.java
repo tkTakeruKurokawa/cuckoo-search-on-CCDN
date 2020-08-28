@@ -1,18 +1,16 @@
 package main;
 
 import java.util.ArrayList;
-import peersim.config.Configuration;
 import peersim.core.Control;
 
 public class Egg implements Control {
-    private static final String PAR_ORIGIN_ID = "originId";
     private static int originId;
 
     private ArrayList<Integer> placementLocations = new ArrayList<Integer>();
     private ArrayList<Integer> nodeIndices = new ArrayList<Integer>();
 
     public Egg(String prefix) {
-        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
+        originId = SharedData.getOriginId();
     }
 
     public Egg(ArrayList<Integer> availableNodes) {
@@ -53,7 +51,9 @@ public class Egg implements Control {
             }
         }
 
-        placementNodes.add(originId);
+        if (!placementNodes.contains(originId)) {
+            placementNodes.add(originId);
+        }
 
         return placementNodes;
     }

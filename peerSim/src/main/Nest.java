@@ -6,8 +6,6 @@ import peersim.config.Configuration;
 import peersim.core.Control;
 
 public class Nest implements Control {
-    private static final String PAR_ORIGIN_ID = "originId";
-    private static int originId;
     private static final String PAR_FRACTAL_DIMENSION = "fractalDimension";
     private static double fractalDimension;
 
@@ -20,7 +18,6 @@ public class Nest implements Control {
     private static int availableNodeSize;
 
     public Nest(String prefix) {
-        originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
         fractalDimension = Configuration.getDouble(prefix + "." + PAR_FRACTAL_DIMENSION);
     }
 
@@ -130,17 +127,18 @@ public class Nest implements Control {
         for (Integer integer : dataList) {
             data += String.valueOf(integer);
         }
-        data += "\n\nPlacement Nodes: \n";
+        data += "\nPlacement Nodes: \n";
         dataList = egg.getPlacementNodes();
-        dataList.add(originId);
         for (Integer integer : dataList) {
             data += String.valueOf(integer) + ", ";
         }
-        data += "\n\nNumber of Replicas: \n";
+        data += "\nNumber of Replicas: \n";
         data += String.valueOf(dataList.size());
-        data += "\n\nEvaluation: \n";
+        data += "\nNumber of Available Nodes: \n";
+        data += String.valueOf(availableNodeSize);
+        data += "\nEvaluation: \n";
         data += String.valueOf(evaluation);
-        data += "\n\n";
+        data += "\n";
 
         ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), availableNodeSize, content);
 
