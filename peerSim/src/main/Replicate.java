@@ -25,10 +25,15 @@ public class Replicate implements Control {
 
         ArrayList<Content> replicatedContents = SharedData.getReplicatedContents();
         for (Content content : replicatedContents) {
-            ArrayList<Integer> placementNodes = CuckooSearch.runSearch(content);
+            ArrayList<Integer> placementNodes = new ArrayList<>();
+            placementNodes = CuckooSearch.runSearch(0, content);
             setReplica(placementNodes, content, 0);
-            placementNodes = new ArrayList<>(Arrays.asList(57));
+            placementNodes = RandomAlgorithm.runSearch(1, content);
             setReplica(placementNodes, content, 1);
+            placementNodes = GreedyAlgorithm.runSearch(2, content);
+            setReplica(placementNodes, content, 2);
+            placementNodes = new ArrayList<>(Arrays.asList(57));
+            setReplica(placementNodes, content, 3);
         }
 
         return false;

@@ -3,11 +3,9 @@ package main;
 import java.util.ArrayList;
 
 import peersim.cdsim.CDState;
-import peersim.config.Configuration;
 import peersim.core.Control;
 import peersim.core.Network;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -46,11 +44,6 @@ public class Request implements Control {
         }
 
         try {
-            File dir = new File("result/eps");
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
             writer = new PrintWriter(new BufferedWriter(new FileWriter("./result/Simulation_Result.tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
@@ -203,24 +196,39 @@ public class Request implements Control {
             CostOfNetwork networkCost = networkCosts.get(algorithmId);
             CostOfOperation operationCost = operationCosts.get(algorithmId);
 
+            int totalCost = operationCost.getSimulationStorage() + operationCost.getSimulationProcessing()
+                    + operationCost.getSimulationTransmission();
+            double cycle = (double) CDState.getCycle();
+
+            int request = networkCost.getSimulationRequests();
+            int hop = networkCost.getSimulationHops();
+            int fail = networkCost.getSimulationFails();
+            int storage = operationCost.getSimulationStorage();
+            int processing = operationCost.getSimulationProcessing();
+            int transmission = operationCost.getSimulationTransmission();
+
             System.out.println("==================================================================");
             System.out.println(SharedData.getAlgorithmName(algorithmId));
-            System.out.println("All Requests: " + networkCost.getSimulationRequests());
-            System.out.println("All Hops: " + networkCost.getSimulationHops());
-            System.out.println("All Fails: " + networkCost.getSimulationFails());
-            System.out.println("All Storage Used: " + operationCost.getSimulationStorage());
-            System.out.println("All Processing Used: " + operationCost.getSimulationProcessing());
-            System.out.println("All Transmission Used: " + operationCost.getSimulationTransmission());
+            System.out.println("All Requests: " + request + ", Average: " + (((double) request) / cycle));
+            System.out.println("All Hops: " + hop + ", Average: " + (((double) hop) / cycle));
+            System.out.println("All Fails: " + fail + ", Average: " + (((double) fail) / cycle));
+            System.out.println("All Storage Used: " + storage + ", Average: " + (((double) storage) / cycle));
+            System.out.println("All Processing Used: " + processing + ", Average: " + (((double) processing) / cycle));
+            System.out.println(
+                    "All Transmission Used: " + transmission + ", Average: " + (((double) transmission) / cycle));
+            System.out.println("Total Cost: " + totalCost + ", Average: " + ((double) totalCost / cycle));
             System.out.println("==================================================================");
 
             writer.println("==================================================================");
             writer.println(SharedData.getAlgorithmName(algorithmId));
-            writer.println("All Requests: " + networkCost.getSimulationRequests());
-            writer.println("All Hops: " + networkCost.getSimulationHops());
-            writer.println("All Fails: " + networkCost.getSimulationFails());
-            writer.println("All Storage Used: " + operationCost.getSimulationStorage());
-            writer.println("All Processing Used: " + operationCost.getSimulationProcessing());
-            writer.println("All Transmission Used: " + operationCost.getSimulationTransmission());
+            writer.println("All Requests: " + request + ", Average: " + (((double) request) / cycle));
+            writer.println("All Hops: " + hop + ", Average: " + (((double) hop) / cycle));
+            writer.println("All Fails: " + fail + ", Average: " + (((double) fail) / cycle));
+            writer.println("All Storage Used: " + storage + ", Average: " + (((double) storage) / cycle));
+            writer.println("All Processing Used: " + processing + ", Average: " + (((double) processing) / cycle));
+            writer.println(
+                    "All Transmission Used: " + transmission + ", Average: " + (((double) transmission) / cycle));
+            writer.println("Total Cost: " + totalCost + ", Average: " + ((double) totalCost / cycle));
             writer.println("==================================================================");
             writer.println("\n\n");
         }

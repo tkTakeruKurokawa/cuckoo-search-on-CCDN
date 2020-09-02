@@ -2,7 +2,6 @@ package main;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Queue;
@@ -16,6 +15,9 @@ public class Flooding implements Control {
     private static Queue<Integer> queue;
     private static HashMap<Integer, Integer> hop;
     private static HashMap<Integer, Integer> connection;
+    private static HashMap<Integer, ArrayList<Integer>> coverNodes;
+
+    private static double availability;
 
     private static int searchedNodes;
     private static int totalHops;
@@ -27,38 +29,8 @@ public class Flooding implements Control {
         originId = SharedData.getOriginId();
     }
 
-    public static double getAverageHop(ArrayList<Integer> nodes) {
-        initialize(nodes);
-
-        while (Objects.nonNull(queue.peek())) {
-            ReplicaServer node = SharedData.getNode(queue.poll());
-            int nodeId = node.getIndex();
-            Link link = SharedData.getLink(node);
-            // System.out.printf("%d(%d) : ", nodeId, hop.get(nodeId));
-
-            for (int index = 0; index < link.degree(); index++) {
-                ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
-                int neighborId = neighbor.getIndex();
-
-                if (!neighbor.getServerState()) {
-                    continue;
-                } else if (!addedNodes.contains(neighborId)) {
-                    // System.out.printf("%d, ", neighborId);
-                    addedNodes.add(neighborId);
-                    queue.add(neighborId);
-                    hop.put(neighborId, hop.get(nodeId) + 1);
-                }
-            }
-            // System.out.println();
-        }
-
-        // System.out.println("Total Nodes: " + addedNodes.size());
-        return calculateAverage();
-    }
-
     public static ArrayList<Integer> getReachableNodes() {
-        ArrayList<Integer> nodes = new ArrayList<Integer>(Arrays.asList(originId));
-        initialize(nodes);
+        initialize();
 
         while (Objects.nonNull(queue.peek())) {
             ReplicaServer node = SharedData.getNode(queue.poll());
@@ -86,39 +58,75 @@ public class Flooding implements Control {
         return addedNodes;
     }
 
-    public static int getHops(int nodeId, int algorithmId, Content content) {
-        initialize(nodeId, algorithmId, content);
+    public static double getAverageHops(ArrayList<Integer> nodes) {
+        initialize(nodes);
 
         while (Objects.nonNull(queue.peek())) {
             ReplicaServer node = SharedData.getNode(queue.poll());
-            int nodeIndex = node.getIndex();
+            int nodeId = node.getIndex();
+            Link link = SharedData.getLink(node);
+            // System.out.printf("%d(%d) : ", nodeId, hop.get(nodeId));
+
+            for (int index = 0; index < link.degree(); index++) {
+                ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                int neighborId = neighbor.getIndex();
+
+                if (!neighbor.getServerState()) {
+                    continue;
+                } else if (!addedNodes.contains(neighborId)) {
+                    // System.out.printf("%d, ", neighborId);
+                    addedNodes.add(neighborId);
+                    queue.add(neighborId);
+                    hop.put(neighborId, hop.get(nodeId) + 1);
+                    connection.put(neighborId, nodeId);
+                    setCoverNodes(neighborId);
+                }
+            }
+            // System.out.println();
+        }
+
+        // System.out.println("Total Nodes: " + addedNodes.size());
+        calculateAvailability(nodes.size());
+        return calculateAverage();
+    }
+
+    public static double getAvailability() {
+        return availability;
+    }
+
+    public static int getHops(int nodeIndex, int algorithmId, Content content) {
+        initialize(nodeIndex, algorithmId, content);
+
+        while (Objects.nonNull(queue.peek())) {
+            ReplicaServer node = SharedData.getNode(queue.poll());
+            int nodeId = node.getIndex();
 
             if (node.contains(algorithmId, content.getContentId())) {
                 // System.out.println("Node " + node.getIndex() + " Having Content " +
                 // content.getContentId());
                 // System.out.println("Having Content ID: " + node.showStorage(algorithmId));
-                updateCapacity(nodeIndex, algorithmId, content.getSize());
-                return hop.get(nodeIndex);
+                updateCapacity(nodeId, algorithmId, content.getSize());
+                return hop.get(nodeId);
             }
 
             Link link = SharedData.getLink(node);
-            allPath += "hop: " + hop.get(nodeIndex) + ", Node " + nodeIndex + " → ";
-            // System.out.printf("%d(%d) : ", nodeIndex, hop.get(nodeIndex));
+            allPath += "hop: " + hop.get(nodeId) + ", Node " + nodeId + " → ";
+            // System.out.printf("%d(%d) : ", nodeId, hop.get(nodeId));
 
             for (int index = 0; index < link.degree(); index++) {
                 ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
                 int neighborId = neighbor.getIndex();
 
                 // 隣接ノードが故障中，隣接ノードの処理能力が0未満，隣接ノードとのリンクの処理能力が0未満の場合，その隣接ノードは利用できない
-                if (!checkNeighbor(nodeIndex, neighborId, algorithmId, content.getSize())) {
+                if (!checkNeighbor(nodeId, neighborId, algorithmId, content.getSize())) {
                     continue;
                 } else if (!addedNodes.contains(neighborId)) {
                     allPath += "" + neighborId + ", ";
                     // System.out.printf("%d, ", neighborId);
                     addedNodes.add(neighborId);
                     queue.add(neighborId);
-                    hop.put(neighborId, hop.get(nodeIndex) + 1);
-                    connection.put(neighborId, nodeIndex);
+                    hop.put(neighborId, hop.get(nodeId) + 1);
+                    connection.put(neighborId, nodeId);
                 }
             }
             allPath += "\n";
@@ -129,10 +137,22 @@ public class Flooding implements Control {
         return -1;
     }
 
+    private static void initialize() {
+        addedNodes = new ArrayList<Integer>();
+        queue = new ArrayDeque<Integer>();
+        hop = new HashMap<Integer, Integer>();
+
+        addedNodes.add(originId);
+        queue.add(originId);
+        hop.put(originId, 0);
+    }
+
     private static void initialize(ArrayList<Integer> nodes) {
         addedNodes = new ArrayList<Integer>();
         queue = new ArrayDeque<Integer>();
         hop = new HashMap<Integer, Integer>();
+        connection = new HashMap<Integer, Integer>();
+        coverNodes = new HashMap<Integer, ArrayList<Integer>>();
 
         for (int i = 0; i < nodes.size(); i++) {
             int nodeId = nodes.get(i);
@@ -140,6 +160,7 @@ public class Flooding implements Control {
                 addedNodes.add(nodeId);
                 queue.add(nodeId);
                 hop.put(nodeId, 0);
+                coverNodes.put(nodeId, new ArrayList<Integer>());
             }
         }
     }
@@ -161,6 +182,43 @@ public class Flooding implements Control {
         // System.out.println("Start Node ID: " + nodeId);
     }
 
+    private static void setCoverNodes(Integer neighborId) {
+        int parentId = neighborId;
+        while (Objects.nonNull(connection.get(parentId))) {
+            parentId = connection.get(parentId);
+        }
+
+        ArrayList<Integer> coveringNodes = coverNodes.get(parentId);
+        coveringNodes.add(neighborId);
+        coverNodes.replace(parentId, coveringNodes);
+    }
+
+    private static void calculateAvailability(int totalReplicas) {
+        double totalAvailability = 0;
+        for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode : coverNodes.entrySet()) {
+            ReplicaServer replicaNode = SharedData.getNode(coverNode.getKey());
+
+            double totalCoveredAvailability = 0;
+            totalCoveredAvailability += replicaNode.getAvailability();
+            for (Integer coveredNodeId : coverNode.getValue()) {
+                ReplicaServer node = SharedData.getNode(coveredNodeId);
+
+                double totalPathAvailability = 1.0;
+                totalPathAvailability *= node.getAvailability();
+
+                Integer parentId = coveredNodeId;
+                while (Objects.nonNull(connection.get(parentId))) {
+                    parentId = connection.get(parentId);
+                    totalPathAvailability *= SharedData.getNode(parentId).getAvailability();
+                }
+                totalCoveredAvailability += totalPathAvailability;
+            }
+            totalAvailability += totalCoveredAvailability / ((double) (coverNode.getValue().size() + 1));
+        }
+
+        availability = totalAvailability / ((double) totalReplicas);
+    }
+
     private static double calculateAverage() {
         totalHops = 0;
         searchedNodes = 0;
@@ -171,7 +229,6 @@ public class Flooding implements Control {
 
         return ((double) totalHops / (double) searchedNodes);
         // return (double) totalHops;
-
     }
 
     private static boolean checkNode(int nodeId, int algorithmId, int contentSize) {

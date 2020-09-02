@@ -76,11 +76,14 @@ public class ShowParameters implements Control {
             Link link = SharedData.getLink(node);
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
-                System.out.println(
-                        SharedData.getAlgorithmName(algorithmId) + ": " + "ID: " + node.getIndex() + ", Status: "
-                                + node.getServerState() + ", Processing: " + node.getProcessingCapacity(algorithmId)
-                                + ", Storage: " + node.getStorageCapacity(algorithmId) + ", Contents: "
-                                + node.showContents(algorithmId) + ", Size: " + node.showContentSize(algorithmId));
+                // System.out.println(
+                // SharedData.getAlgorithmName(algorithmId) + ": " + "ID: " + node.getIndex() +
+                // ", Status: "
+                // + node.getServerState() + ", Processing: " +
+                // node.getProcessingCapacity(algorithmId)
+                // + ", Storage: " + node.getStorageCapacity(algorithmId) + ", Contents: "
+                // + node.showContents(algorithmId) + ", Size: " +
+                // node.showContentSize(algorithmId));
                 if (node.getStorageCapacity(algorithmId) == 0) {
                     algorithms.get(algorithmId).storage++;
                 }
@@ -90,8 +93,10 @@ public class ShowParameters implements Control {
 
                 for (int index = 0; index < link.degree(); index++) {
                     ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
-                    System.out.println("    " + algorithmId + ": (" + node.getIndex() + ", " + neighbor.getIndex()
-                            + "), Transmission: " + link.getTransmissionCapacity(algorithmId, neighbor.getIndex()));
+                    // System.out.println(" " + algorithmId + ": (" + node.getIndex() + ", " +
+                    // neighbor.getIndex()
+                    // + "), Transmission: " + link.getTransmissionCapacity(algorithmId,
+                    // neighbor.getIndex()));
                     if (link.getTransmissionCapacity(algorithmId, neighbor.getIndex()) == 0) {
                         algorithms.get(algorithmId).transmission++;
                     }

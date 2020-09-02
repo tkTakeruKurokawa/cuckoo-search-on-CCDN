@@ -1,14 +1,16 @@
 ############## Variable ###############
 
 totalNodes 100
-totalContents 500
+totalContents 100
 totalCycles 500
-users 100
+users 1000
 originId 57
 repairDuration 50
 maxStorageCapacity 100
 maxProcessingCapacity 100
 maxTransmissionCapacity 100
+totalTrials 500
+failureMagnification 0.1
 
 ############## Network ###############
 
@@ -48,6 +50,7 @@ init.p.normalAverage 20
 init.p.normalVariance 20
 init.p.normalMin 10
 init.p.normalMax 30
+init.p.magnificationCoefficient failureMagnification;
 init.p.users users
 init.p.zipfShape 1.3
 init.p.paretoShape 0.5
@@ -57,7 +60,7 @@ init.p.poissonAverage 10
 init.p.repairDuration repairDuration
 
 init.cs CuckooSearch
-init.cs.maxGeneration 500
+init.cs.maxGeneration totalTrials
 init.cs.totalNests 30
 init.cs.improvementRate 0.6
 init.cs.abandonRate 0.4
@@ -67,13 +70,16 @@ init.n.fractalDimension 1.5
 
 init.e Egg
 
+init.r RandomAlgorithm
+init.r.totalTrials 1
+
 init.of ObjectiveFunction
 init.of.users users
-init.of.availabilityCoefficient 100.0
+init.of.availabilityCoefficient 1.0
 
 init.f Flooding
 
-order.init wl sd p cs n e of f
+order.init wl sd p cs n e r of f
 
 ############## Control ###############
 
@@ -83,12 +89,12 @@ control.rp Replicate
 
 control.rq Request
 
-control.sp ShowParameters
+#control.sp ShowParameters
 
 control.nm NetworkManager
 
 #control.ft FailureTest
 
-order.control ul rp rq sp nm
-#order.control ul rp rq  nm 
+#order.control ul rp rq sp nm
+order.control ul rp rq  nm 
 #order.control ul rp rq ft 

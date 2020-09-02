@@ -20,6 +20,8 @@ public class Parameters implements Control {
     private static int normalMin;
     private static final String PAR_NORMAL_MAX = "normalMax";
     private static int normalMax;
+    private static final String PAR_MAGNIFICATION_COEFFICIENT = "magnificationCoefficient";
+    private static double magnificationCoefficient;
     private static final String PAR_USERS = "users";
     private static int users;
     private static final String PAR_ZIPF_SHAPE = "zipfShape";
@@ -54,6 +56,7 @@ public class Parameters implements Control {
         normalVariance = Configuration.getDouble(prefix + "." + PAR_NORMAL_VARIANCE);
         normalMin = Configuration.getInt(prefix + "." + PAR_NORMAL_MIN);
         normalMax = Configuration.getInt(prefix + "." + PAR_NORMAL_MAX);
+        magnificationCoefficient = Configuration.getDouble(prefix + "." + PAR_MAGNIFICATION_COEFFICIENT);
         users = Configuration.getInt(prefix + "." + PAR_USERS);
         zipfShape = Configuration.getDouble(prefix + "." + PAR_ZIPF_SHAPE);
         paretoShape = Configuration.getDouble(prefix + "." + PAR_PARETO_SHAPE);
@@ -251,7 +254,7 @@ public class Parameters implements Control {
 
             for (int cdfId = 0; cdfId < cdf.length; cdfId++) {
                 if (rand < cdf[cdfId]) {
-                    magnification[nodeId] = ((double) (cdfId + 1)) / 10.0;
+                    magnification[nodeId] = ((double) (cdfId + 1)) * magnificationCoefficient;
                     break;
                 } else {
                     if (cdfId == cdf.length - 1) {

@@ -29,6 +29,7 @@ public class NetworkManager implements Control {
 
             if (!node.getServerState()) {
                 node.proceedProgressCycle();
+                failureCount++;
                 continue;
             }
 
@@ -37,7 +38,6 @@ public class NetworkManager implements Control {
             if (rand < failureRate) {
                 node.setServerState(false);
                 node.resetContents();
-                failureCount++;
             }
 
             node.proceedFailureRate();

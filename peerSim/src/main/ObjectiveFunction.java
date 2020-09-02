@@ -24,12 +24,15 @@ public class ObjectiveFunction implements Control {
         availabilityCoefficient = Configuration.getDouble(prefix + "." + PAR_FAILURE_RATE_COEFFICIENT);
     }
 
-    public static double getEvaluation(ArrayList<Integer> placementNodes, int availableNodes, Content content) {
-        accessRate = calculateAccessRate(placementNodes, availableNodes, content);
+    public static double getEvaluation(ArrayList<Integer> placementNodes, Content content) {
+        accessRate = calculateAccessRate(placementNodes, content);
         // cost = Math.log(calculateCost(placementNodes.size(), content));
         cost = calculateCost(placementNodes.size(), content);
         availability = calculateAvailability(placementNodes);
-        double total = accessRate + cost + availability;
+        double total = accessRate + cost;
+        // double total = accessRate + cost - availability;
+        // double total = (accessRate / availability) + cost;
+        // double total = (accessRate + cost) / availability;
 
         // System.out.println("Number of Replica: " + placementNodes.size() + ",
         // Access:" + accessRate + ", Cost: " + cost
@@ -43,10 +46,9 @@ public class ObjectiveFunction implements Control {
     // 平均ホップ数: [0.0, 3.11]
     // 人気度： [0.0008113572102320679, 0.3230071232736677]
     // 合計： [0.0, 1.004552153381106547]
-    private static double calculateAccessRate(ArrayList<Integer> placementNodeIndices, int availableNodes,
-            Content content) {
+    private static double calculateAccessRate(ArrayList<Integer> placementNodeIndices, Content content) {
         double totalRequests = content.getPopularity() * (double) totalNodes * (double) users;
-        return Flooding.getAverageHop(placementNodeIndices) * totalRequests * ((double) content.getSize());
+        return Flooding.getAverageHops(placementNodeIndices) * totalRequests * ((double) content.getSize());
 
         // return Flooding.getAverageHop(placementNodeIndices) / (1.0 -
         // content.getPopularity())
@@ -62,21 +64,20 @@ public class ObjectiveFunction implements Control {
 
     // 故障確率: [0.001095430219427455, 0.005380420859253009]
     private static double calculateAvailability(ArrayList<Integer> placementNodes) {
-        double totalFailureRate = 0.0;
-        double totalReplicas = (double) placementNodes.size();
+        // double totalAvailability = 0.0;
+        // double totalReplicas = (double) placementNodes.size();
 
-        for (Integer nodeId : placementNodes) {
-            totalFailureRate += SharedData.getNode(nodeId).getAvailability();
-        }
+        // for (Integer nodeId : placementNodes) {
+        // totalAvailability += SharedData.getNode(nodeId).getAvailability();
+        // }
 
-        // return availabilityCoefficient * totalFailureRate;
-        return availabilityCoefficient * (1.0 - (totalFailureRate / totalReplicas));
+        return availabilityCoefficient * Flooding.getAvailability();
+        // return availabilityCoefficient * (1.0 - (totalAvailability / totalReplicas));
     }
 
     public static String getData() {
-        return ("Access : " + String.valueOf(accessRate) + "\nCost : " + String.valueOf(cost) + "\nFailure : "
-                + String.valueOf(availability) + "\nTotal : " + String.valueOf(accessRate + cost + availability)
-                + "\n\n");
+        return ("Access : " + String.valueOf(accessRate) + "\nCost : " + String.valueOf(cost) + "\nAvailability : "
+                + String.valueOf(availability) + "\nTotal : " + String.valueOf(accessRate + cost + availability));
     }
 
     @Override

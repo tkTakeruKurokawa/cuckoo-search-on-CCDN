@@ -30,7 +30,7 @@ public class Nest implements Control {
 
     public void setEgg(Egg newEgg) {
         egg = newEgg;
-        evaluation = ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), availableNodeSize, content);
+        evaluation = ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), content);
     }
 
     public Egg getEgg() {
@@ -38,7 +38,7 @@ public class Nest implements Control {
     }
 
     public Egg levyFlight() {
-        int nowIndex = SharedData.getRandomInt(availableNodeSize);
+        int nowIndex = SharedData.getRandomIntForCuckoo(availableNodeSize);
         Egg newEgg = new Egg(availableNodes);
         int totalChanges = levyDistribution(availableNodeSize);
         double nowEvaluation = evaluation;
@@ -57,7 +57,7 @@ public class Nest implements Control {
                 newEgg.setLocation(nowIndex, 0);
             }
 
-            newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(), availableNodeSize, content);
+            newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(), content);
 
             if (newEvaluation > nowEvaluation) {
                 newEgg.setLocation(nowIndex, previousValue);
@@ -80,7 +80,7 @@ public class Nest implements Control {
 
         newEgg = new Egg(availableNodes);
         initializeEgg(newEgg);
-        newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(), availableNodeSize, content);
+        newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(), content);
 
         if (newEvaluation < evaluation) {
             egg = newEgg;
@@ -97,15 +97,15 @@ public class Nest implements Control {
 
         initializeEgg(egg);
 
-        evaluation = ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), availableNodeSize, this.content);
+        evaluation = ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), this.content);
     }
 
     private void initializeEgg(Egg egg) {
-        int totalReplicas = SharedData.getRandomInt(availableNodeSize);
+        int totalReplicas = SharedData.getRandomIntForCuckoo(availableNodeSize);
 
         ArrayList<Integer> nodes = new ArrayList<Integer>(availableNodes);
         for (int replicaCount = 0; replicaCount < totalReplicas; replicaCount++) {
-            int eggId = SharedData.getRandomInt(nodes.size());
+            int eggId = SharedData.getRandomIntForCuckoo(nodes.size());
             egg.setLocation(eggId, 1);
             nodes.remove(eggId);
         }
@@ -114,7 +114,7 @@ public class Nest implements Control {
     private int levyDistribution(int totalNodes) {
         int totalChanges;
         do {
-            double d = SharedData.getRandomDouble();
+            double d = SharedData.getRandomDoubleForCuckoo();
             totalChanges = (int) Math.round(Math.pow(d, -1.0 * fractalDimension));
         } while (totalChanges > totalNodes);
 
@@ -140,7 +140,7 @@ public class Nest implements Control {
         data += String.valueOf(evaluation);
         data += "\n";
 
-        ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), availableNodeSize, content);
+        ObjectiveFunction.getEvaluation(egg.getPlacementNodes(), content);
 
         return data;
     }

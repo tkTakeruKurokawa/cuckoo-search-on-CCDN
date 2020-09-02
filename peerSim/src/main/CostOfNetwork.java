@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import peersim.cdsim.CDState;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -29,11 +28,6 @@ public class CostOfNetwork {
         costs.add(fails);
 
         try {
-            File dir = new File("result/eps");
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
             writer = new PrintWriter(
                     new BufferedWriter(new FileWriter("./result/Average_Hops" + "[" + name + "].tsv", false)));
         } catch (Exception e) {

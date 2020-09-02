@@ -11,7 +11,6 @@ import peersim.config.Configuration;
 import peersim.core.Control;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -40,11 +39,6 @@ public class CuckooSearch implements Control {
         originId = SharedData.getOriginId();
 
         try {
-            File dir = new File("result/eps");
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
             writer = new PrintWriter(new BufferedWriter(new FileWriter("./result/Cuckoo_Result.txt", false)));
         } catch (Exception e) {
             System.out.println(e);
@@ -52,37 +46,8 @@ public class CuckooSearch implements Control {
         }
     }
 
-    private static boolean initializeNestSet(Content content) {
-        ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
-        availableNodes = new ArrayList<Integer>();
-
-        for (int i = 0; i < reachableNodes.size(); i++) {
-            ReplicaServer node = SharedData.getNode(reachableNodes.get(i));
-            if (node.getStorageCapacity(0) - content.getSize() >= 0) {
-                availableNodes.add(node.getIndex());
-            }
-        }
-
-        nestSet = new ArrayList<Nest>();
-        if (availableNodes.size() == 0) {
-            availableNodes.add(originId);
-            nestSet.add(new Nest(availableNodes, content));
-            writeFile(nestSet.get(0), content);
-
-            return false;
-        }
-
-        for (int i = 0; i < totalNests; i++) {
-            nestSet.add(new Nest(availableNodes, content));
-        }
-
-        sort();
-
-        return true;
-    }
-
-    public static ArrayList<Integer> runSearch(Content content) {
-        if (!initializeNestSet(content)) {
+    public static ArrayList<Integer> runSearch(int algorithmId, Content content) {
+        if (!initializeNestSet(algorithmId, content)) {
             return new ArrayList<Integer>(Arrays.asList(originId));
         }
 
@@ -114,6 +79,27 @@ public class CuckooSearch implements Control {
         writer.close();
     }
 
+    private static boolean initializeNestSet(int algorithmId, Content content) {
+        availableNodes = SharedData.getAvailableNodes(algorithmId, content);
+
+        nestSet = new ArrayList<Nest>();
+        if (availableNodes.size() == 0) {
+            availableNodes.add(originId);
+            nestSet.add(new Nest(availableNodes, content));
+            writeFile(nestSet.get(0), content);
+
+            return false;
+        }
+
+        for (int i = 0; i < totalNests; i++) {
+            nestSet.add(new Nest(availableNodes, content));
+        }
+
+        sort();
+
+        return true;
+    }
+
     private static void smartCuckoo() {
         int totalImprovements = (int) Math.round(((double) totalNests) * improvementRate);
 
@@ -127,7 +113,7 @@ public class CuckooSearch implements Control {
 
     private static void randomCuckoo() {
         Nest bestNest = nestSet.get(0);
-        Nest randomNest = nestSet.get(SharedData.getRandomInt(nestSet.size()));
+        Nest randomNest = nestSet.get(SharedData.getRandomIntForCuckoo(nestSet.size()));
 
         runLevyFlight(bestNest, randomNest);
 
@@ -163,7 +149,10 @@ public class CuckooSearch implements Control {
         writer.println("Content ID: " + content.getContentId() + ", Popularity: " + content.getPopularity() + ", Size: "
                 + content.getSize() + ", Cycle: " + CDState.getCycle() + "\n");
         writer.println(bestNest.getData());
+        writer.println("Flooding Result:");
         writer.println(Flooding.getData());
+        writer.println("\nObjective Function Result:");
+        writer.println(ObjectiveFunction.getData());
         writer.println("==========================================================================================");
         writer.println("\n\n");
     }
