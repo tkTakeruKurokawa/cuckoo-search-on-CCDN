@@ -1,6 +1,6 @@
 elements=3
-directoryName="Contents"
-array paths[elements]=["Contents100", "Contents500", "Contents1000"]
+directoryName="FailureMagnification"
+array paths[elements]=["FailureMagnification0.1", "FailureMagnification0.5", "FailureMagnification1.0"]
 array colors[6]=["red", "blue", "forest-green", "magenta", "dark-orange", "black"]
 
 
@@ -8,12 +8,12 @@ array colors[6]=["red", "blue", "forest-green", "magenta", "dark-orange", "black
 set xrange [0:500]
 # set yrange 
 set xlabel 'Cycle'
-set ylabel 'Storage Usage'
+set ylabel 'Average Storage Usage of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Cost_of_Storage[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
 unset table
-set output 'proposed/'.directoryName.'/Cost_of_Storage.eps'
+set output 'proposed/'.directoryName.'/Average_Storage.eps'
 set terminal postscript eps color
 replot
 
@@ -22,12 +22,12 @@ replot
 set xrange [0:500]
 # set yrange 
 set xlabel 'Cycle'
-set ylabel 'Processing Usage'
+set ylabel 'Average Processing Usage of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Cost_of_Processing[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
 unset table
-set output 'proposed/'.directoryName.'/Cost_of_Processing.eps'
+set output 'proposed/'.directoryName.'/Average_Processing.eps'
 set terminal postscript eps color
 replot
 
@@ -36,12 +36,12 @@ replot
 set xrange [0:500]
 # set yrange 
 set xlabel 'Cycle'
-set ylabel 'Transmission Usage'
+set ylabel 'Average Transmission Usage of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Cost_of_Transmission[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
 unset table
-set output 'proposed/'.directoryName.'/Cost_of_Transmission.eps'
+set output 'proposed/'.directoryName.'/Average_Transmission.eps'
 set terminal postscript eps color
 replot
 
@@ -50,37 +50,23 @@ replot
 set xrange [0:500]
 # set yrange 
 set xlabel 'Cycle'
-set ylabel 'Number of Hops'
+set ylabel 'Average Total Usage of Proposed'
+
+plot for [i = 1:elements] paths[i]."/Cost_Total[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
+
+unset table
+set output 'proposed/'.directoryName.'/Average_Total.eps'
+set terminal postscript eps color
+replot
+
+
+
+set xrange [0:500]
+# set yrange 
+set xlabel 'Cycle'
+set ylabel 'Average Request Hops of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Number_of_Hops[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
-
-unset table
-set output 'proposed/'.directoryName.'/Number_of_Hops.eps'
-set terminal postscript eps color
-replot
-
-
-
-set xrange [0:500]
-# set yrange 
-set xlabel 'Cycle'
-set ylabel 'Number of Fails'
-
-plot for [i = 1:elements] paths[i]."/Number_of_Fails[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
-
-unset table
-set output 'proposed/'.directoryName.'/Number_of_Fails.eps'
-set terminal postscript eps color
-replot
-
-
-
-set xrange [0:500]
-# set yrange 
-set xlabel 'Cycle'
-set ylabel 'Average Hops'
-
-plot for [i = 1:elements] paths[i]."/Average_Hops[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
 unset table
 set output 'proposed/'.directoryName.'/Average_Hops.eps'
@@ -92,21 +78,22 @@ replot
 set xrange [0:500]
 # set yrange 
 set xlabel 'Cycle'
-set ylabel 'Total Cost'
+set ylabel 'Average Failed Requests of Proposed'
 
-plot for [i = 1:elements] paths[i]."/Cost_Total[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
+plot for [i = 1:elements] paths[i]."/Number_of_Fails[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
 unset table
-set output 'proposed/'.directoryName.'/Total_Cost.eps'
+set output 'proposed/'.directoryName.'/Average_Fails.eps'
 set terminal postscript eps color
 replot
 
 
 
+
 set xrange [0:500]
-# set yrange 
+set yrange [0:]
 set xlabel 'Cycle'
-set ylabel 'Average Storage Full Nodes'
+set ylabel 'Average Storage Full Nodes of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Average_Full_Storage[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
@@ -118,9 +105,9 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+set yrange [0:]
 set xlabel 'Cycle'
-set ylabel 'Average Processing Full Nodes'
+set ylabel 'Average Processing Full Nodes of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Average_Full_Processing[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 
@@ -132,9 +119,9 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+set yrange [0:]
 set xlabel 'Cycle'
-set ylabel 'Average Transmission Full Nodes'
+set ylabel 'Average Transmission Full Links of Proposed'
 
 plot for [i = 1:elements] paths[i]."/Average_Full_Transmission[Cuckoo_Search].tsv" with lines title paths[i] lw 1 lc rgb colors[i],\
 

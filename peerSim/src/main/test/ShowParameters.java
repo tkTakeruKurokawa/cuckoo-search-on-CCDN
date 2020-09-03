@@ -27,8 +27,8 @@ public class ShowParameters implements Control {
     }
 
     private static void showFulls() {
-        System.out.println();
-        System.out.println();
+        // System.out.println();
+        // System.out.println();
         for (int algorithmId = 0; algorithmId < SharedData.getTotalAlgorithms(); algorithmId++) {
             System.out.println("--------------------------------------------------------------");
             System.out.println(SharedData.getAlgorithmName(algorithmId) + ": ");
@@ -39,8 +39,8 @@ public class ShowParameters implements Control {
                     "This Cycle " + algorithms.get(algorithmId).transmission + " Nodes Transmission Capacity Full");
             System.out.println("--------------------------------------------------------------");
         }
-        System.out.println();
-        System.out.println();
+        // System.out.println();
+        // System.out.println();
     }
 
     private static void aggregate() {
@@ -62,8 +62,8 @@ public class ShowParameters implements Control {
     }
 
     private static void showAggregate() {
-        System.out.println();
-        System.out.println();
+        // System.out.println();
+        // System.out.println();
         for (int algorithmId = 0; algorithmId < SharedData.getTotalAlgorithms(); algorithmId++) {
             System.out.println("--------------------------------------------------------------");
             System.out.println(SharedData.getAlgorithmName(algorithmId) + ": ");
@@ -79,8 +79,8 @@ public class ShowParameters implements Control {
             algorithms.get(algorithmId).processingWriter.close();
             algorithms.get(algorithmId).transmissionWriter.close();
         }
-        System.out.println();
-        System.out.println();
+        // System.out.println();
+        // System.out.println();
     }
 
     @Override
@@ -117,7 +117,7 @@ public class ShowParameters implements Control {
                     }
                 }
             }
-            System.out.println();
+            // System.out.println();
         }
 
         for (FullNodes algorithm : algorithms) {
