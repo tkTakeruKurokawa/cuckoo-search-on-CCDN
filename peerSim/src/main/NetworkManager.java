@@ -15,7 +15,8 @@ public class NetworkManager implements Control {
         totalCycles = SharedData.getTotalCycles();
 
         try {
-            writer = new PrintWriter(new BufferedWriter(new FileWriter("./result/Failed_Servers.tsv", false)));
+            writer = new PrintWriter(
+                    new BufferedWriter(new FileWriter(SharedData.getDirectoryName() + "/Failed_Servers.tsv", false)));
         } catch (Exception e) {
         }
     }
@@ -34,7 +35,7 @@ public class NetworkManager implements Control {
             }
 
             double failureRate = node.getFailureRate();
-            double rand = SharedData.getRandomDouble();
+            double rand = SharedData.getRandomDoubleForFailure();
             if (rand < failureRate) {
                 node.setServerState(false);
                 node.resetContents();

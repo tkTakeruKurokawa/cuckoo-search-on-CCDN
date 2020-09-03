@@ -2,7 +2,6 @@ package main;
 
 import peersim.core.*;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import peersim.config.*;
@@ -16,10 +15,14 @@ public class SharedData implements Control {
 	private static int totalCycles;
 	private static final String PAR_TOTAL_CONTENTS = "totalContents";
 	private static int totalContents;
+	private static final String PAR_DIRECTORY_NAME = "directoryName";
+	private static String directoryName;
 
-	private static Random random;
+	private static Random randomForRequest;
 	private static Random randomForCuckoo;
 	private static Random randomForRandom;
+	private static Random randomForFailure;
+	private static Random randomForParameters;
 	private static ArrayList<Content> contentSet;
 	private static ArrayList<Content> replicatedContents;
 	private static ArrayList<String> algorithmNames;
@@ -29,11 +32,7 @@ public class SharedData implements Control {
 		originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLES);
 		totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
-
-		File dir = new File("result/eps");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
+		directoryName = Configuration.getString(prefix + "." + PAR_DIRECTORY_NAME);
 	}
 
 	public SharedData() {
@@ -43,9 +42,11 @@ public class SharedData implements Control {
 		algorithmNames.add("Greedy");
 		algorithmNames.add("Original_Only");
 
-		random = new Random(1L);
+		randomForRequest = new Random(1L);
 		randomForCuckoo = new Random(2L);
 		randomForRandom = new Random(3L);
+		randomForFailure = new Random(4L);
+		randomForParameters = new Random(5L);
 	}
 
 	public static ReplicaServer getNode(int nodeIndex) {
@@ -68,6 +69,10 @@ public class SharedData implements Control {
 		replicatedContents = contents;
 	}
 
+	public static String getDirectoryName() {
+		return "result/" + directoryName;
+	}
+
 	public static int getOriginId() {
 		return originId;
 	}
@@ -88,12 +93,8 @@ public class SharedData implements Control {
 		return algorithmNames.get(algorithmId);
 	}
 
-	public static int getRandomInt(int upperLimit) {
-		return random.nextInt(upperLimit);
-	}
-
-	public static double getRandomDouble() {
-		return random.nextDouble();
+	public static int getRandomIntForRequest(int upperLimit) {
+		return randomForRequest.nextInt(upperLimit);
 	}
 
 	public static int getRandomIntForCuckoo(int upperLimit) {
@@ -106,6 +107,22 @@ public class SharedData implements Control {
 
 	public static int getRandomIntForRandom(int upperLimit) {
 		return randomForRandom.nextInt(upperLimit);
+	}
+
+	public static int getRandomIntForFailure(int upperLimit) {
+		return randomForFailure.nextInt(upperLimit);
+	}
+
+	public static double getRandomDoubleForFailure() {
+		return randomForFailure.nextDouble();
+	}
+
+	public static int getRandomIntForParameters(int upperLimit) {
+		return randomForParameters.nextInt(upperLimit);
+	}
+
+	public static double getRandomDoubleForParameters() {
+		return randomForParameters.nextDouble();
 	}
 
 	public static ArrayList<Integer> getAvailableNodes(int algorithmId, Content content) {

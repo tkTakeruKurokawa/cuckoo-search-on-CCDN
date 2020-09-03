@@ -46,7 +46,7 @@ public class FailureTest implements Control {
             }
             double failureRate = node.getFailureRate();
 
-            double rand = SharedData.getRandomDouble();
+            double rand = SharedData.getRandomDoubleForFailure();
             if (rand < failureRate) {
                 node.setServerState(false);
                 failures.set(i, failures.get(i) + 1);

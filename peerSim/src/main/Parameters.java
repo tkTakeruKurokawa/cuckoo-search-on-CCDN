@@ -92,7 +92,7 @@ public class Parameters implements Control {
     }
 
     public static int getUploadCycle() {
-        return SharedData.getRandomInt(totalCycles - (poissonAverage * 2));
+        return SharedData.getRandomIntForParameters(totalCycles - (poissonAverage * 2));
     }
 
     public static int getSize(int contentId) {
@@ -127,7 +127,7 @@ public class Parameters implements Control {
         int[] requests = new int[totalCycles];
         int count = 0;
         while (count < total) {
-            double rand = SharedData.getRandomDouble();
+            double rand = SharedData.getRandomDoubleForParameters();
 
             boolean flag = false;
             for (int cycle = 0; cycle <= duration * 2; cycle++) {
@@ -176,7 +176,7 @@ public class Parameters implements Control {
     private static void setSize(double[] cdf, int sizeCount) {
         int contentId = 0;
         while (contentId < totalContents) {
-            double rand = SharedData.getRandomDouble();
+            double rand = SharedData.getRandomDoubleForParameters();
 
             for (int cdfId = 0; cdfId < sizeCount; cdfId++) {
                 if (rand < cdf[cdfId]) {
@@ -244,7 +244,7 @@ public class Parameters implements Control {
     private static void setMagnification(double[] cdf) {
         int nodeId = 0;
         while (nodeId < totalNodes) {
-            double rand = SharedData.getRandomDouble();
+            double rand = SharedData.getRandomDoubleForParameters();
             boolean flag = false;
 
             if (nodeId == originId) {

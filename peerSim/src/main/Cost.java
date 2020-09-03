@@ -1,7 +1,6 @@
 package main;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -17,12 +16,8 @@ public class Cost {
         totalPerContent = 0;
 
         try {
-            File dir = new File("result/eps");
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
-            writer = new PrintWriter(new BufferedWriter(new FileWriter("./result/" + fileName + ".tsv", false)));
+            writer = new PrintWriter(
+                    new BufferedWriter(new FileWriter(SharedData.getDirectoryName() + "/" + fileName + ".tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);

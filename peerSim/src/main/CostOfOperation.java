@@ -28,8 +28,8 @@ public class CostOfOperation {
         costs.add(transmission);
 
         try {
-            writer = new PrintWriter(
-                    new BufferedWriter(new FileWriter("./result/Cost_Total" + "[" + name + "].tsv", false)));
+            writer = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Cost_Total" + "[" + name + "].tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
@@ -117,7 +117,9 @@ public class CostOfOperation {
     }
 
     private void writeCycleCost(Cost cost) {
-        String description = CDState.getCycle() + "\t" + cost.getPerCycle();
+        int cycle = CDState.getCycle() + 1;
+        double average = ((double) cost.getPerSimulation()) / ((double) cycle);
+        String description = CDState.getCycle() + "\t" + average;
         cost.addedDescription(description);
 
         if (CDState.getCycle() == totalCycles - 1) {

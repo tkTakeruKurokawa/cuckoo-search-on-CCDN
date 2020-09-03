@@ -39,7 +39,8 @@ public class CuckooSearch implements Control {
         originId = SharedData.getOriginId();
 
         try {
-            writer = new PrintWriter(new BufferedWriter(new FileWriter("./result/Cuckoo_Result.txt", false)));
+            writer = new PrintWriter(
+                    new BufferedWriter(new FileWriter(SharedData.getDirectoryName() + "/Cuckoo_Result.txt", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);

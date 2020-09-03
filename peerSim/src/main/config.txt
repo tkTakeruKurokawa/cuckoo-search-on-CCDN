@@ -1,14 +1,14 @@
 ############## Variable ###############
 
 totalNodes 100
-totalContents 100
+totalContents 1000.0
 totalCycles 500
-users 1000
+users 10.0
 originId 57
 repairDuration 50
-maxStorageCapacity 100
-maxProcessingCapacity 100
-maxTransmissionCapacity 100
+maxStorageCapacity 100.0
+maxProcessingCapacity 100.0
+maxTransmissionCapacity 100.0
 totalTrials 500
 failureMagnification 0.1
 
@@ -42,6 +42,7 @@ init.sd.link link
 init.sd.originId originId
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
+init.sd.directoryName Contents1000
 
 init.p Parameters
 init.p.weibullShape 1.0
@@ -89,12 +90,12 @@ control.rp Replicate
 
 control.rq Request
 
-#control.sp ShowParameters
+control.sp ShowParameters
 
 control.nm NetworkManager
 
 #control.ft FailureTest
 
-#order.control ul rp rq sp nm
-order.control ul rp rq  nm 
+order.control ul rp rq sp nm
+#order.control ul rp rq  nm 
 #order.control ul rp rq ft 

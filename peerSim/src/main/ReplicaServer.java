@@ -141,7 +141,7 @@ public class ReplicaServer implements Node {
 			result.havingContents.put(i, new ArrayList<Integer>());
 		}
 
-		result.failurePosition = SharedData.getRandomInt(totalCycles);
+		result.failurePosition = SharedData.getRandomIntForFailure(totalCycles);
 		// result.failurePosition = 0;
 		result.serverState = true;
 		result.progressCycle = 0;
@@ -316,11 +316,12 @@ public class ReplicaServer implements Node {
 		int storageRemaining = getStorageCapacity(algorithmId) - content.getSize();
 
 		if (contains(algorithmId, content.getContentId())) {
-			System.out.println("Node " + index + " Having Content " + content.getContentId());
+			System.out.println(SharedData.getAlgorithmName(algorithmId) + ": Node " + index + " Having Content "
+					+ content.getContentId());
 			System.out.println(havingContents.get(index));
 			return false;
-		} else if (storageRemaining < 0) {
-			System.out.println("Node " + index + " Storage Full");
+		} else if (index != SharedData.getOriginId() && storageRemaining < 0) {
+			System.out.println(SharedData.getAlgorithmName(algorithmId) + ": Node " + index + " Storage Full");
 			System.out.println("  Storage: " + storageRemaining + ", Content Size: " + content.getSize());
 			return false;
 		}

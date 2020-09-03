@@ -44,7 +44,8 @@ public class Request implements Control {
         }
 
         try {
-            writer = new PrintWriter(new BufferedWriter(new FileWriter("./result/Simulation_Result.tsv", false)));
+            writer = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Simulation_Result.tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
@@ -77,7 +78,7 @@ public class Request implements Control {
     }
 
     private Content getRandomContent(ArrayList<Integer> randomContentIndices) {
-        int randomIndex = SharedData.getRandomInt(randomContentIndices.size());
+        int randomIndex = SharedData.getRandomIntForRequest(randomContentIndices.size());
         int contentId = randomContentIndices.get(randomIndex);
 
         Content content = SharedData.getContent(contentId);
@@ -101,12 +102,12 @@ public class Request implements Control {
         for (int requestCount = 0; requestCount < totalRequests; requestCount++) {
             int nodeId;
             do {
-                nodeId = SharedData.getRandomInt(Network.size());
+                nodeId = SharedData.getRandomIntForRequest(Network.size());
             } while (nodeId == originId);
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
-                System.out.println("==================================================================");
-                System.out.println(SharedData.getAlgorithmName(algorithmId) + ": ");
+                // System.out.println("==================================================================");
+                // System.out.println(SharedData.getAlgorithmName(algorithmId) + ": ");
                 CostOfNetwork networkCost = networkCosts.get(algorithmId);
                 CostOfOperation operationCost = operationCosts.get(algorithmId);
 
@@ -123,7 +124,7 @@ public class Request implements Control {
                     operationCost
                             .setContentTransmission(operationCost.getContentTransmission() + (content.getSize() * hop));
                     // System.out.println(Flooding.getAllPath());
-                    System.out.println(Flooding.getPath());
+                    // System.out.println(Flooding.getPath());
                 }
             }
         }
