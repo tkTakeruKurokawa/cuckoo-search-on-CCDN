@@ -49,7 +49,7 @@ public class RandomAlgorithm implements Control {
     private static double randomSearch(Content content) {
         placementNodes = new ArrayList<>();
 
-        setPlace(SharedData.getRandomIntForRandom(availableNodes.size()));
+        setPlace(SharedData.getRandomIntForRandom(availableNodes.size() + 1));
         placementNodes.add(SharedData.getOriginId());
 
         return ObjectiveFunction.getEvaluation(placementNodes, content);

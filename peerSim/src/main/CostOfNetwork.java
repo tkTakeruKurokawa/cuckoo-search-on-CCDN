@@ -13,14 +13,15 @@ public class CostOfNetwork {
     private Cost requests;
     private Cost hops;
     private Cost fails;
-    private PrintWriter writer;
+    private PrintWriter hopsWriter;
+    private PrintWriter failsWriter;
 
     public CostOfNetwork(String name, int totalCycles) {
         this.totalCycles = totalCycles;
 
-        requests = new Cost("Number_of_Requests" + "[" + name + "]");
-        hops = new Cost("Number_of_Hops" + "[" + name + "]");
-        fails = new Cost("Number_of_Fails" + "[" + name + "]");
+        requests = new Cost("Average_Requests" + "[" + name + "]");
+        hops = new Cost("Average_Hops" + "[" + name + "]");
+        fails = new Cost("Average_Fails" + "[" + name + "]");
 
         costs = new ArrayList<>();
         costs.add(requests);
@@ -28,8 +29,10 @@ public class CostOfNetwork {
         costs.add(fails);
 
         try {
-            writer = new PrintWriter(new BufferedWriter(
-                    new FileWriter(SharedData.getDirectoryName() + "/Average_Hops" + "[" + name + "].tsv", false)));
+            hopsWriter = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Cumulative_Hops" + "[" + name + "].tsv", false)));
+            failsWriter = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Cumulative_Fails" + "[" + name + "].tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
@@ -42,9 +45,10 @@ public class CostOfNetwork {
             int totalPerSimulation = cost.getPerSimulation();
             cost.setPerSimulation(totalPerCycle + totalPerSimulation);
 
-            writeCycleCost(cost);
+            writeAverageCost(cost);
         }
-        writeAverageHops(hops);
+        writeCumulativeCost(hops, hopsWriter);
+        writeCumulativeCost(fails, failsWriter);
     }
 
     public void calculateCycleCost() {
@@ -115,7 +119,7 @@ public class CostOfNetwork {
         return fails.getPerContent();
     }
 
-    private void writeCycleCost(Cost cost) {
+    private void writeAverageCost(Cost cost) {
         int cycle = CDState.getCycle() + 1;
         double average = ((double) cost.getPerSimulation()) / ((double) cycle);
         String description = CDState.getCycle() + "\t" + average;
@@ -126,12 +130,12 @@ public class CostOfNetwork {
         }
     }
 
-    private void writeAverageHops(Cost hops) {
-        int cycle = CDState.getCycle() + 1;
-        double average = ((double) getSimulationHops()) / ((double) cycle);
-        writer.println((cycle - 1) + "\t" + average);
+    private void writeCumulativeCost(Cost cost, PrintWriter writer) {
+        int cycle = CDState.getCycle();
+        double cumulative = (double) cost.getPerSimulation();
+        writer.println((cycle) + "\t" + cumulative);
 
-        if (cycle == totalCycles) {
+        if (cycle == totalCycles - 1) {
             writer.close();
         }
     }

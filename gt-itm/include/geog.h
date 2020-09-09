@@ -47,6 +47,7 @@
 #define DEFAULT_SEED	417890326
 #define BIGINT		LONG_MAX
 #define randfrac()	(gb_next_rand() / (double) LONG_MAX)
+// #define randfrac()  gb_next_rand()
 
 typedef struct geo_parm_struct {
     long	n;	/* number of nodes	*/

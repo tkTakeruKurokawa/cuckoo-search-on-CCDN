@@ -28,8 +28,8 @@ public class ObjectiveFunction implements Control {
         accessRate = calculateAccessRate(placementNodes, content);
         // cost = Math.log(calculateCost(placementNodes.size(), content));
         cost = calculateCost(placementNodes.size(), content);
-        availability = calculateAvailability(placementNodes);
-        double total = accessRate + cost;
+        availability = calculateAvailability(placementNodes, content);
+        double total = cost + availability;
         // double total = accessRate + cost - availability;
         // double total = (accessRate / availability) + cost;
         // double total = (accessRate + cost) / availability;
@@ -63,15 +63,18 @@ public class ObjectiveFunction implements Control {
     }
 
     // 故障確率: [0.001095430219427455, 0.005380420859253009]
-    private static double calculateAvailability(ArrayList<Integer> placementNodes) {
+    private static double calculateAvailability(ArrayList<Integer> placementNodes, Content content) {
         // double totalAvailability = 0.0;
         // double totalReplicas = (double) placementNodes.size();
 
         // for (Integer nodeId : placementNodes) {
         // totalAvailability += SharedData.getNode(nodeId).getAvailability();
         // }
+        double totalRequests = content.getPopularity() * (double) totalNodes * (double) users;
 
-        return availabilityCoefficient * Flooding.getAvailability();
+        return (totalRequests * ((double) content.getSize())) / Flooding.getAvailability();
+        // return totalRequests / Flooding.getAvailability();
+        // return availabilityCoefficient * Flooding.getAvailability();
         // return availabilityCoefficient * (1.0 - (totalAvailability / totalReplicas));
     }
 

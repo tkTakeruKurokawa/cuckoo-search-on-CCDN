@@ -7,20 +7,16 @@
 # Note: If you are using Solaris, you MUST edit the Makefile to 
 #       uncomment the two Solaris lines below, and comment the SunOS line.
 # 
-# For Solaris: uncomment the next two lines
-#SYS = -DSYSV
-#LIBS = -lm -lgb5
 
-# For SunOS: uncomment the next line
-LIBS = -lm -lgb4
+LIBS = -lm -lgb
  
+BSDF = -DFBSD
 
 IDIR = ../include
 LDIR = ../lib
 BDIR = ../bin
 
-CFLAGS = -I$(IDIR) -L$(LDIR) $(SYS)
-CC = gcc 
+CFLAGS = -I$(IDIR) -L$(LDIR) $(SYS) $(BSDF)
 
 GO = itm.o geog.o ts.o dfs.o
 CO = sgb2alt.o 
@@ -45,21 +41,18 @@ ts.o: $(GH)
 
 dfs.o: $(GH)
 
+sgb2alt.o: $(CH)
 
 sgb2alt: $(CO)
 	$(CC) $(CFLAGS) -o $(BDIR)/sgb2alt $(CO) $(LIBS) 
 
-sgb2alt.o: $(CH)
+eval.o: $(IDIR)/gb_graph.h $(IDIR)/gb_dijk.h $(IDIR)/eval.h
 
+edriver.o: $(EH)
 
 edriver: $(EO)
 	$(CC) $(CFLAGS) -o $(BDIR)/edriver $(EO) $(LIBS)
 
-edriver.o: $(EH)
-
-eval.o: $(IDIR)/gb_graph.h $(IDIR)/gb_dijk.h $(IDIR)/eval.h
-
-	
 clean:  
 	\rm -f *.o
 

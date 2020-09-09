@@ -6,8 +6,17 @@
  */
 
 #include <stdio.h>
-#include <sys/types.h>		/* for NBBY */
+#include <stdlib.h>
+#include <time.h>
+/* #include <sys/types.h>		for NBBY */
+/* instead define as foll */
+#ifndef NBBY
+#define NBBY 8
+#endif
+
+#ifndef FBSD
 #include <alloca.h>
+#endif
 #include <assert.h>
 #include <string.h>		/* for strchr() */
 #include "gb_graph.h"
@@ -28,6 +37,14 @@
 
 
 #define sub	u.G		/* domain graph vertex expands into	*/
+
+#ifndef u_char
+typedef unsigned char u_char;
+#endif 
+
+#ifndef u_long
+typedef unsigned long u_long;
+#endif
 
 static char geogId[]="$Id: geog.c,v 1.1 1996/10/04 13:36:46 calvert Exp $";
 
@@ -209,6 +226,7 @@ char namestr[128];
     }
 
 /* Now go back and add the edges */
+    srand(time(NULL));
 	
     for (i=0,up = G->vertices; i<(pp->n)-1; i++,up++)
 	for (j=i+1, vp = &G->vertices[i+1]; j<pp->n; j++,vp++) { 
@@ -236,8 +254,12 @@ char namestr[128];
 	    default:
 		die("Bad edge method in geo()!");
 	    }
-	    if (randfrac() < p) 
+
+	    double random = (double) rand()/RAND_MAX;
+	    if (random < p){
+	    	// printf("%f, %f\n", rand, p);
 		gb_new_edge(up,vp,(int)rint(d));
+	    }
 		
 	}
 

@@ -37,39 +37,74 @@ public class Nest implements Control {
         return egg;
     }
 
+    // Greedy的局所最適化
+    // public Egg levyFlight() {
+    // int nowIndex = SharedData.getRandomIntForCuckoo(availableNodeSize);
+    // Egg newEgg = new Egg(availableNodes);
+    // int totalChanges = levyDistribution(availableNodeSize);
+    // double nowEvaluation = evaluation;
+    // double newEvaluation = evaluation;
+
+    // newEgg.clonePlacementLocation(egg.getLocations());
+
+    // for (int changedCount = 0; changedCount < totalChanges; changedCount++) {
+    // int previousValue;
+
+    // if (newEgg.getLocation(nowIndex) == 0) {
+    // previousValue = 0;
+    // newEgg.setLocation(nowIndex, 1);
+    // } else {
+    // previousValue = 1;
+    // newEgg.setLocation(nowIndex, 0);
+    // }
+
+    // newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(),
+    // content);
+
+    // if (newEvaluation > nowEvaluation) {
+    // newEgg.setLocation(nowIndex, previousValue);
+    // } else {
+    // nowEvaluation = newEvaluation;
+    // }
+
+    // nowIndex++;
+    // if (nowIndex == availableNodeSize) {
+    // nowIndex = 0;
+    // }
+    // }
+
+    // return (newEvaluation > evaluation) ? null : newEgg;
+    // }
+
+    // 完全ランダムな局所最適化
     public Egg levyFlight() {
-        int nowIndex = SharedData.getRandomIntForCuckoo(availableNodeSize);
         Egg newEgg = new Egg(availableNodes);
-        int totalChanges = levyDistribution(availableNodeSize);
-        double nowEvaluation = evaluation;
         double newEvaluation = evaluation;
+        int nowId = SharedData.getRandomIntForCuckoo(availableNodeSize);
+        int totalCandidates = levyDistribution(availableNodeSize);
 
         newEgg.clonePlacementLocation(egg.getLocations());
 
-        for (int changedCount = 0; changedCount < totalChanges; changedCount++) {
-            int previousValue;
+        ArrayList<Integer> candidateIndices = new ArrayList<>();
+        for (int i = 0; i < totalCandidates; i++) {
+            candidateIndices.add(nowId);
+            newEgg.setLocation(nowId, 0);
 
-            if (newEgg.getLocation(nowIndex) == 0) {
-                previousValue = 0;
-                newEgg.setLocation(nowIndex, 1);
-            } else {
-                previousValue = 1;
-                newEgg.setLocation(nowIndex, 0);
-            }
-
-            newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(), content);
-
-            if (newEvaluation > nowEvaluation) {
-                newEgg.setLocation(nowIndex, previousValue);
-            } else {
-                nowEvaluation = newEvaluation;
-            }
-
-            nowIndex++;
-            if (nowIndex == availableNodeSize) {
-                nowIndex = 0;
+            nowId++;
+            if (nowId == availableNodes.size()) {
+                nowId = 0;
             }
         }
+
+        int totalReplicas = SharedData.getRandomIntForCuckoo(totalCandidates + 1);
+        for (int replicaCount = 0; replicaCount < totalReplicas; replicaCount++) {
+            int candidateId = SharedData.getRandomIntForCuckoo(candidateIndices.size());
+            int eggId = candidateIndices.get(candidateId);
+            newEgg.setLocation(eggId, 1);
+            candidateIndices.remove(candidateId);
+        }
+
+        newEvaluation = ObjectiveFunction.getEvaluation(newEgg.getPlacementNodes(), content);
 
         return (newEvaluation > evaluation) ? null : newEgg;
     }
@@ -101,7 +136,7 @@ public class Nest implements Control {
     }
 
     private void initializeEgg(Egg egg) {
-        int totalReplicas = SharedData.getRandomIntForCuckoo(availableNodeSize);
+        int totalReplicas = SharedData.getRandomIntForCuckoo(availableNodeSize + 1);
 
         ArrayList<Integer> nodes = new ArrayList<Integer>(availableNodes);
         for (int replicaCount = 0; replicaCount < totalReplicas; replicaCount++) {
@@ -116,7 +151,7 @@ public class Nest implements Control {
         do {
             double d = SharedData.getRandomDoubleForCuckoo();
             totalChanges = (int) Math.round(Math.pow(d, -1.0 * fractalDimension));
-        } while (totalChanges > totalNodes);
+        } while (totalChanges > totalNodes || totalChanges < 0);
 
         return totalChanges;
     }

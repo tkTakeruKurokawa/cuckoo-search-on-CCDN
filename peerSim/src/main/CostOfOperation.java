@@ -13,14 +13,15 @@ public class CostOfOperation {
     private Cost storage;
     private Cost processing;
     private Cost transmission;
-    private PrintWriter writer;
+    private PrintWriter averageWriter;
+    private PrintWriter cumulativeWriter;
 
     public CostOfOperation(String name, int totalCycles) {
         this.totalCycles = totalCycles;
 
-        storage = new Cost("Cost_of_Storage" + "[" + name + "]");
-        processing = new Cost("Cost_of_Processing" + "[" + name + "]");
-        transmission = new Cost("Cost_of_Transmission" + "[" + name + "]");
+        storage = new Cost("Average_Storage" + "[" + name + "]");
+        processing = new Cost("Average_Processing" + "[" + name + "]");
+        transmission = new Cost("Average_Transmission" + "[" + name + "]");
 
         costs = new ArrayList<>();
         costs.add(storage);
@@ -28,8 +29,10 @@ public class CostOfOperation {
         costs.add(transmission);
 
         try {
-            writer = new PrintWriter(new BufferedWriter(
-                    new FileWriter(SharedData.getDirectoryName() + "/Cost_Total" + "[" + name + "].tsv", false)));
+            averageWriter = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Average_Total" + "[" + name + "].tsv", false)));
+            cumulativeWriter = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Cumulative_Total" + "[" + name + "].tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
@@ -42,10 +45,10 @@ public class CostOfOperation {
             int totalPerSimulation = cost.getPerSimulation();
             cost.setPerSimulation(totalPerCycle + totalPerSimulation);
 
-            writeCycleCost(cost);
+            writeAverageCost(cost);
         }
 
-        writeTotalCostPerCycle();
+        writeTotalCost();
     }
 
     public void calculateCycleCost() {
@@ -116,7 +119,7 @@ public class CostOfOperation {
         return transmission.getPerContent();
     }
 
-    private void writeCycleCost(Cost cost) {
+    private void writeAverageCost(Cost cost) {
         int cycle = CDState.getCycle() + 1;
         double average = ((double) cost.getPerSimulation()) / ((double) cycle);
         String description = CDState.getCycle() + "\t" + average;
@@ -127,19 +130,23 @@ public class CostOfOperation {
         }
     }
 
-    private void writeTotalCostPerCycle() {
+    private void writeTotalCost() {
         int totalCost = 0;
 
         for (Cost cost : costs) {
-            totalCost += cost.getPerCycle();
+            totalCost += cost.getPerSimulation();
         }
 
         int cycle = CDState.getCycle();
         String description = cycle + "\t" + totalCost;
-        writer.println(description);
+        cumulativeWriter.println(description);
+
+        description = cycle + "\t" + ((double) totalCost / (double) (cycle + 1));
+        averageWriter.println(description);
 
         if (cycle == totalCycles - 1) {
-            writer.close();
+            averageWriter.close();
+            cumulativeWriter.close();
         }
     }
 }

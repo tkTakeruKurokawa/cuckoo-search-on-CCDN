@@ -1,5 +1,5 @@
 # set xrange [0:10]
-set xlabel 'Node Identifier'
+set xlabel 'Cycle'
 set yrange [0.0:0.01]
 
 set ylabel 'Failure Rate'
