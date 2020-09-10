@@ -62,7 +62,7 @@ public class FailureTest implements Control {
         ArrayList<Integer> brokenNodes = new ArrayList<Integer>();
         int separates = 0;
         System.out.println("Networks: ");
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < Network.size(); i++) {
             if (!SharedData.getNode(i).getServerState()) {
                 brokenNodes.add(i);
             } else if (!totalAddedNodes.contains(i)) {

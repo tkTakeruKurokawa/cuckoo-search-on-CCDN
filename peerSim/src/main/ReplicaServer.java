@@ -62,7 +62,8 @@ public class ReplicaServer implements Node {
 	 * clone must be able to set it.
 	 */
 	private long ID;
-
+	private static final String PAR_TOTAL_NODES = "totalNodes";
+	private static int totalNodes;
 	private static final String PAR_TOTAL_CYCLE = "totalCycles";
 	private static int totalCycles;
 	private static final String PAR_MAX_STORAGE_CAPACITY = "maxStorageCapacity";
@@ -71,10 +72,9 @@ public class ReplicaServer implements Node {
 	private static int maxProcessingCapacity;
 	private static final String PAR_REPAIR_DURATION = "repairDuration";
 	private static int repairDuration;
-	private static final String PAR_ORIGIN_ID = "originId";
-	private static int originId;
 
 	private static int totalAlgorithms;
+	private static int originId;
 
 	private HashMap<Integer, ArrayList<Integer>> havingContents;
 	private int storageCapacity[];
@@ -95,14 +95,15 @@ public class ReplicaServer implements Node {
 	 */
 	public ReplicaServer(String prefix) {
 		String[] names = Configuration.getNames(PAR_PROT);
+		totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLE);
 		maxStorageCapacity = Configuration.getInt(prefix + "." + PAR_MAX_STORAGE_CAPACITY);
 		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_PROCESSING_CAPACITY);
 		repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
-		originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
 
 		new SharedData();
 		totalAlgorithms = SharedData.getTotalAlgorithms();
+		originId = SharedData.getOriginId(totalNodes);
 
 		CommonState.setNode(this);
 		ID = nextID();
@@ -320,7 +321,7 @@ public class ReplicaServer implements Node {
 					+ content.getContentId());
 			System.out.println(havingContents.get(index));
 			return false;
-		} else if (index != SharedData.getOriginId() && storageRemaining < 0) {
+		} else if (index != originId && storageRemaining < 0) {
 			System.out.println(SharedData.getAlgorithmName(algorithmId) + ": Node " + index + " Storage Full");
 			System.out.println("  Storage: " + storageRemaining + ", Content Size: " + content.getSize());
 			return false;

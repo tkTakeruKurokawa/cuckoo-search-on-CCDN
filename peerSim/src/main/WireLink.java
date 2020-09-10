@@ -9,11 +9,14 @@ import peersim.graph.*;
 public class WireLink extends WireGraph {
     private static final String PAR_PROT = "protocol";
     private final int pid;
+    private static final String PAR_TOTAL_NODES = "totalNodes";
+    private static int totalNodes;
     private Graph g;
 
     public WireLink(String prefix) {
         super(prefix);
         pid = Configuration.getPid(prefix + "." + PAR_PROT);
+        totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
     }
 
     public void wire(Graph g) {
@@ -21,7 +24,7 @@ public class WireLink extends WireGraph {
 
         try {
             BufferedReader br = new BufferedReader(
-                    new InputStreamReader(new FileInputStream("./src/main/BaseNetwork")));
+                    new InputStreamReader(new FileInputStream("./src/main/" + totalNodes + "NodesNetwork")));
 
             String line;
             String words[] = new String[4];

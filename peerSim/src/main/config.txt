@@ -1,31 +1,26 @@
 ############## Variable ###############
 
-totalNodes 100
-totalContents 100.0
+totalNodes 50.0
+totalContents 500.0
 totalCycles 500
 users 100.0
-originId 57
 repairDuration 50
 maxStorageCapacity 100.0
 maxProcessingCapacity 100.0
 maxTransmissionCapacity 100.0
 totalTrials 500.0
-failureMagnification 1.0
-
-### 100NodesNetwork →  Node: 100,  Edge: 320,  EdgesPerNode: 3.3
-### 500NodesNetwork →  Node: 500,  Edge: 2914, EdgesPerNode: 5.828
-### 1000NodesNetwork → Node: 1000, Edge: 5464, EdgesPerNode: 5.464
+failureMagnification 0.1
 
 ############## Network ###############
 
 network.size totalNodes
 
 network.node ReplicaServer
+network.node.totalNodes totalNodes
 network.node.totalCycles totalCycles
 network.node.maxStorageCapacity maxStorageCapacity
 network.node.maxProcessingCapacity maxProcessingCapacity
 network.node.repairDuration repairDuration
-network.node.originId originId
 
 simulation.cycles totalCycles
 
@@ -44,10 +39,10 @@ init.wl.totalNodes totalNodes
 
 init.sd SharedData
 init.sd.link link
-init.sd.originId originId
+init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
-init.sd.directoryName FailureMagnification1.0
+init.sd.directoryName Contents500
 
 init.p Parameters
 init.p.weibullShape 1.0
@@ -77,7 +72,7 @@ init.n.fractalDimension 1.5
 init.e Egg
 
 init.r RandomAlgorithm
-init.r.totalTrials 10
+init.r.totalTrials 1
 
 init.of ObjectiveFunction
 init.of.users users

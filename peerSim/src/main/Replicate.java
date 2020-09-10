@@ -32,7 +32,7 @@ public class Replicate implements Control {
             setReplica(placementNodes, content, 1);
             placementNodes = GreedyAlgorithm.runSearch(2, content);
             setReplica(placementNodes, content, 2);
-            placementNodes = new ArrayList<>(Arrays.asList(57));
+            placementNodes = new ArrayList<>(Arrays.asList(SharedData.getOriginId()));
             setReplica(placementNodes, content, 3);
         }
 

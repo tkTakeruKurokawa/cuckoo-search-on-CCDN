@@ -3,14 +3,15 @@ package main;
 import peersim.core.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import peersim.config.*;
 
 public class SharedData implements Control {
 	private static final String PAR_LNK = "link";
 	private static int pid_lnk;
-	private static final String PAR_ORIGIN_ID = "originId";
-	private static int originId;
+	private static final String PAR_TOTAL_NODES = "totalNodes";
+	private static int totalNodes;
 	private static final String PAR_TOTAL_CYCLES = "totalCycles";
 	private static int totalCycles;
 	private static final String PAR_TOTAL_CONTENTS = "totalContents";
@@ -26,10 +27,11 @@ public class SharedData implements Control {
 	private static ArrayList<Content> contentSet;
 	private static ArrayList<Content> replicatedContents;
 	private static ArrayList<String> algorithmNames;
+	private static HashMap<Integer, Integer> originIndices;
 
 	public SharedData(String prefix) {
 		pid_lnk = Configuration.getPid(prefix + "." + PAR_LNK);
-		originId = Configuration.getInt(prefix + "." + PAR_ORIGIN_ID);
+		totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLES);
 		totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
 		directoryName = Configuration.getString(prefix + "." + PAR_DIRECTORY_NAME);
@@ -47,6 +49,12 @@ public class SharedData implements Control {
 		randomForRandom = new Random(3L);
 		randomForFailure = new Random(4L);
 		randomForParameters = new Random(5L);
+
+		originIndices = new HashMap<>();
+		originIndices.put(50, 14);
+		originIndices.put(100, 67);
+		originIndices.put(500, 23);
+		originIndices.put(1000, 881);
 	}
 
 	public static ReplicaServer getNode(int nodeIndex) {
@@ -74,7 +82,11 @@ public class SharedData implements Control {
 	}
 
 	public static int getOriginId() {
-		return originId;
+		return originIndices.get(totalNodes);
+	}
+
+	public static int getOriginId(int nodes) {
+		return originIndices.get(nodes);
 	}
 
 	public static int getTotalCycles() {

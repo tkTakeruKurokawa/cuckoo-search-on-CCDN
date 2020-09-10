@@ -1,4 +1,4 @@
-filePath="./FailureMagnification1.0"
+filePath="./Contents500"
 
 set xrange [0:500]
 # set yrange 

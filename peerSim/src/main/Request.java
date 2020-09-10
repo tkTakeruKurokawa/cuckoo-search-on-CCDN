@@ -144,7 +144,7 @@ public class Request implements Control {
             operationCost.calculateCycleCost();
 
             if (networkCost.getContentHops() > 0) {
-                showContentCost(content, networkCost);
+                // showContentCost(content, networkCost);
             }
         }
     }
@@ -167,8 +167,9 @@ public class Request implements Control {
         operationCosts.get(algorithmId).setCycleStorage(cumulativeStorage);
     }
 
-    private void showCycleCost(CostOfNetwork networkCost, CostOfOperation operationCost) {
+    private void showCycleCost(String name, CostOfNetwork networkCost, CostOfOperation operationCost) {
         System.out.println("==================================================================");
+        System.out.println(name);
         System.out.println("This Cycle " + networkCost.getCycleRequests() + " requests");
         System.out.println("This Cycle " + networkCost.getCycleHops() + " hops");
         System.out.println("This Cycle " + networkCost.getCycleFails() + " fails");
@@ -188,7 +189,7 @@ public class Request implements Control {
             networkCost.calculateSimulationCost();
             operationCost.calculateSimulationCost();
 
-            showCycleCost(networkCost, operationCost);
+            showCycleCost(SharedData.getAlgorithmName(algorithmId), networkCost, operationCost);
         }
     }
 
