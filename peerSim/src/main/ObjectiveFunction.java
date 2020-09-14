@@ -17,6 +17,7 @@ public class ObjectiveFunction implements Control {
     private static double accessRate;
     private static double cost;
     private static double availability;
+    private static double total;
 
     public ObjectiveFunction(String prefix) {
         totalNodes = Network.size() - 1;
@@ -29,7 +30,7 @@ public class ObjectiveFunction implements Control {
         // cost = Math.log(calculateCost(placementNodes.size(), content));
         cost = calculateCost(placementNodes.size(), content);
         availability = calculateAvailability(placementNodes, content);
-        double total = cost + availability;
+        total = cost + availability;
         // double total = accessRate + cost - availability;
         // double total = (accessRate / availability) + cost;
         // double total = (accessRate + cost) / availability;
@@ -79,8 +80,8 @@ public class ObjectiveFunction implements Control {
     }
 
     public static String getData() {
-        return ("Access : " + String.valueOf(accessRate) + "\nCost : " + String.valueOf(cost) + "\nAvailability : "
-                + String.valueOf(availability) + "\nTotal : " + String.valueOf(accessRate + cost + availability));
+        return ("Access : " + accessRate + "\nCost : " + cost + "\nAvailability : " + availability + "\nTotal : "
+                + total);
     }
 
     @Override

@@ -1,6 +1,6 @@
 ############## Variable ###############
 
-totalNodes 50.0
+totalNodes 1000.0
 totalContents 500.0
 totalCycles 500
 users 100.0
@@ -42,7 +42,7 @@ init.sd.link link
 init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
-init.sd.directoryName Contents500
+init.sd.directoryName Nodes1000
 
 init.p Parameters
 init.p.weibullShape 1.0
@@ -74,13 +74,15 @@ init.e Egg
 init.r RandomAlgorithm
 init.r.totalTrials 1
 
+init.g GreedyAlgorithm
+
 init.of ObjectiveFunction
 init.of.users users
 init.of.availabilityCoefficient 1.0
 
 init.f Flooding
 
-order.init wl sd p cs n e r of f
+order.init wl sd p cs n e r g of f
 
 ############## Control ###############
 

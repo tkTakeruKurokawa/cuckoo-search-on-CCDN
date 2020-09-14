@@ -45,7 +45,7 @@ public class Request implements Control {
 
         try {
             writer = new PrintWriter(new BufferedWriter(
-                    new FileWriter(SharedData.getDirectoryName() + "/Simulation_Result.tsv", false)));
+                    new FileWriter(SharedData.getDirectoryName() + "/Simulation_Result.txt", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
@@ -264,6 +264,7 @@ public class Request implements Control {
             showSimulationCost();
             writer.close();
             CuckooSearch.closeFile();
+            GreedyAlgorithm.closeFile();
         }
 
         return false;
