@@ -1,4 +1,4 @@
-filePath="./Nodes1000"
+filePath="./FailureMagnification1.0"
 
 set xrange [0:500]
 # set yrange 
@@ -154,6 +154,42 @@ replot
 
 
 set xrange [0:500]
+set yrange [0:] 
+set xlabel 'Cycle'
+set ylabel 'Cumulative Lack of Processing'
+
+plot filePath."/Cumulative_Lack_of_Processing[Original_Only].tsv" with lines title "Original Only" lw 1 lc rgb "magenta",\
+filePath."/Cumulative_Lack_of_Processing[Random].tsv"  with lines title "Random"  lw 1 lc rgb "forest-green",\
+filePath."/Cumulative_Lack_of_Processing[Greedy].tsv"  with lines title "Greedy"  lw 1 lc rgb "blue",\
+filePath."/Cumulative_Lack_of_Processing[Cuckoo_Search].tsv"  with lines title "Proposed"  lw 1 lc rgb "red",\
+# "Failed_Servers.tsv" with lines notitle lw 1 lc rgb "magenta"
+
+unset table
+set output filePath.'/eps/Cumulative_Lack_of_Processing.eps'
+set terminal postscript eps color
+replot
+
+
+
+set xrange [0:500]
+set yrange [0:] 
+set xlabel 'Cycle'
+set ylabel 'Cumulative Lack of Transmission'
+
+plot filePath."/Cumulative_Lack_of_Transmission[Original_Only].tsv" with lines title "Original Only" lw 1 lc rgb "magenta",\
+filePath."/Cumulative_Lack_of_Transmission[Random].tsv"  with lines title "Random"  lw 1 lc rgb "forest-green",\
+filePath."/Cumulative_Lack_of_Transmission[Greedy].tsv"  with lines title "Greedy"  lw 1 lc rgb "blue",\
+filePath."/Cumulative_Lack_of_Transmission[Cuckoo_Search].tsv"  with lines title "Proposed"  lw 1 lc rgb "red",\
+# "Failed_Servers.tsv" with lines notitle lw 1 lc rgb "magenta"
+
+unset table
+set output filePath.'/eps/Cumulative_Lack_of_Transmission.eps'
+set terminal postscript eps color
+replot
+
+
+
+set xrange [0:500]
 # set yrange 
 set xlabel 'Cycle'
 set ylabel 'Average Requests'
@@ -181,54 +217,17 @@ replot
 
 
 
-set xrange [0:500]
-set yrange [0:] 
-set xlabel 'Cycle'
-set ylabel 'Average Storage Full Nodes'
+set autoscale x 
+# set yrange 
+set xlabel 'Hops'
+set ylabel 'Number of Failed Requests'
 
-plot filePath."/Average_Full_Storage[Original_Only].tsv" with lines title "Original Only" lw 1 lc rgb "magenta",\
-filePath."/Average_Full_Storage[Random].tsv"  with lines title "Random"  lw 1 lc rgb "forest-green",\
-filePath."/Average_Full_Storage[Greedy].tsv"  with lines title "Greedy"  lw 1 lc rgb "blue",\
-filePath."/Average_Full_Storage[Cuckoo_Search].tsv"  with lines title "Proposed"  lw 1 lc rgb "red",\
-# "Failed_Servers.tsv" with lines notitle lw 1 lc rgb "magenta"
-
-unset table
-set output filePath.'/eps/Average_Full_Storage.eps'
-set terminal postscript eps color
-replot
-
-
-
-set xrange [0:500]
-set yrange [0:] 
-set xlabel 'Cycle'
-set ylabel 'Average Processing Full Nodes'
-
-plot filePath."/Average_Full_Processing[Original_Only].tsv" with lines title "Original Only" lw 1 lc rgb "magenta",\
-filePath."/Average_Full_Processing[Random].tsv"  with lines title "Random"  lw 1 lc rgb "forest-green",\
-filePath."/Average_Full_Processing[Greedy].tsv"  with lines title "Greedy"  lw 1 lc rgb "blue",\
-filePath."/Average_Full_Processing[Cuckoo_Search].tsv"  with lines title "Proposed"  lw 1 lc rgb "red",\
-# "Failed_Servers.tsv" with lines notitle lw 1 lc rgb "magenta"
+plot filePath."/Failed_Hops_Distribution[Original_Only].tsv" with lines title "Original Only" lw 1 lc rgb "magenta",\
+filePath."/Failed_Hops_Distribution[Random].tsv"  with lines title "Random"  lw 1 lc rgb "forest-green",\
+filePath."/Failed_Hops_Distribution[Greedy].tsv"  with lines title "Greedy"  lw 1 lc rgb "blue",\
+filePath."/Failed_Hops_Distribution[Cuckoo_Search].tsv"  with lines title "Proposed"  lw 1 lc rgb "red",\
 
 unset table
-set output filePath.'/eps/Average_Full_Processing.eps'
-set terminal postscript eps color
-replot
-
-
-
-set xrange [0:500]
-set yrange [0:] 
-set xlabel 'Cycle'
-set ylabel 'Average Transmission Full Links'
-
-plot filePath."/Average_Full_Transmission[Original_Only].tsv" with lines title "Original Only" lw 1 lc rgb "magenta",\
-filePath."/Average_Full_Transmission[Random].tsv"  with lines title "Random"  lw 1 lc rgb "forest-green",\
-filePath."/Average_Full_Transmission[Greedy].tsv"  with lines title "Greedy"  lw 1 lc rgb "blue",\
-filePath."/Average_Full_Transmission[Cuckoo_Search].tsv"  with lines title "Proposed"  lw 1 lc rgb "red",\
-# "Failed_Servers.tsv" with lines notitle lw 1 lc rgb "magenta"
-
-unset table
-set output filePath.'/eps/Average_Full_Transmission.eps'
+set output filePath.'/eps/Failed_Request_Hops.eps'
 set terminal postscript eps color
 replot

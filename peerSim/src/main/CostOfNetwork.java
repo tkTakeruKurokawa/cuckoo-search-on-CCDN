@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import peersim.cdsim.CDState;
+import peersim.core.Network;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -9,15 +10,18 @@ import java.io.PrintWriter;
 
 public class CostOfNetwork {
     private int totalCycles;
+    private int failedHops[];
     private ArrayList<Cost> costs;
     private Cost requests;
     private Cost hops;
     private Cost fails;
     private PrintWriter hopsWriter;
     private PrintWriter failsWriter;
+    private PrintWriter failedHopsWriter;
 
     public CostOfNetwork(String name, int totalCycles) {
         this.totalCycles = totalCycles;
+        this.failedHops = new int[Network.size()];
 
         requests = new Cost("Average_Requests" + "[" + name + "]");
         hops = new Cost("Average_Hops" + "[" + name + "]");
@@ -33,6 +37,8 @@ public class CostOfNetwork {
                     new FileWriter(SharedData.getDirectoryName() + "/Cumulative_Hops" + "[" + name + "].tsv", false)));
             failsWriter = new PrintWriter(new BufferedWriter(
                     new FileWriter(SharedData.getDirectoryName() + "/Cumulative_Fails" + "[" + name + "].tsv", false)));
+            failedHopsWriter = new PrintWriter(new BufferedWriter(new FileWriter(
+                    SharedData.getDirectoryName() + "/Failed_Hops_Distribution" + "[" + name + "].tsv", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
@@ -49,6 +55,7 @@ public class CostOfNetwork {
         }
         writeCumulativeCost(hops, hopsWriter);
         writeCumulativeCost(fails, failsWriter);
+        writeFailedHops();
     }
 
     public void calculateCycleCost() {
@@ -119,6 +126,10 @@ public class CostOfNetwork {
         return fails.getPerContent();
     }
 
+    public void setFailedHops(int hops) {
+        failedHops[hops]++;
+    }
+
     private void writeAverageCost(Cost cost) {
         int cycle = CDState.getCycle() + 1;
         double average = ((double) cost.getPerSimulation()) / ((double) cycle);
@@ -137,6 +148,18 @@ public class CostOfNetwork {
 
         if (cycle == totalCycles - 1) {
             writer.close();
+        }
+    }
+
+    private void writeFailedHops() {
+        if (CDState.getCycle() == totalCycles - 1) {
+            for (int i = 0; i < failedHops.length; i++) {
+                if (failedHops[i] > 0) {
+                    failedHopsWriter.println(i + "\t" + failedHops[i]);
+                }
+            }
+
+            failedHopsWriter.close();
         }
     }
 }

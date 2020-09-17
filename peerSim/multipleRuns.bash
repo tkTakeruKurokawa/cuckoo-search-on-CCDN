@@ -38,7 +38,7 @@ for value in ${array[@]}; do
   cd ../
 done
 
-rm -rf result/proposed/directoryName
+rm -rf result/proposed/${directoryName}
 java ChangeParameter ${values} ${directoryName}
 
 cd ./result/

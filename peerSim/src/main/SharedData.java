@@ -2,9 +2,14 @@ package main;
 
 import peersim.core.*;
 
+import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
+import peersim.cdsim.CDState;
 import peersim.config.*;
 
 public class SharedData implements Control {
@@ -28,6 +33,7 @@ public class SharedData implements Control {
 	private static ArrayList<Content> replicatedContents;
 	private static ArrayList<String> algorithmNames;
 	private static HashMap<Integer, Integer> originIndices;
+	private static ArrayList<FailedReason> failedCounters;
 
 	public SharedData(String prefix) {
 		pid_lnk = Configuration.getPid(prefix + "." + PAR_LNK);
@@ -35,6 +41,11 @@ public class SharedData implements Control {
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLES);
 		totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
 		directoryName = Configuration.getString(prefix + "." + PAR_DIRECTORY_NAME);
+
+		failedCounters = new ArrayList<>();
+		for (String name : algorithmNames) {
+			failedCounters.add(new FailedReason(totalCycles, name));
+		}
 	}
 
 	public SharedData() {
@@ -151,6 +162,20 @@ public class SharedData implements Control {
 		return availableNodes;
 	}
 
+	public static void increaseLackingProcessing(int algorithmId) {
+		failedCounters.get(algorithmId).increaseProcessing();
+	}
+
+	public static void increaseLackingTransmission(int algorithmId) {
+		failedCounters.get(algorithmId).increaseTransmission();
+	}
+
+	public static void closeFile() {
+		for (FailedReason element : failedCounters) {
+			element.closeFile();
+		}
+	}
+
 	public boolean execute() {
 
 		contentSet = new ArrayList<Content>();
@@ -159,5 +184,57 @@ public class SharedData implements Control {
 		}
 
 		return false;
+	}
+}
+
+/**
+ * FailedReason
+ */
+class FailedReason {
+	private int totalCycles;
+	private int[] lackProcessingCount;
+	private int[] lackTransmissionCount;
+	private PrintWriter lackProcessingWriter;
+	private PrintWriter lackTransmissionWriter;
+
+	public FailedReason(int totalCycles, String name) {
+		this.totalCycles = totalCycles;
+
+		lackProcessingCount = new int[totalCycles];
+		lackTransmissionCount = new int[totalCycles];
+
+		try {
+			lackProcessingWriter = new PrintWriter(new BufferedWriter(new FileWriter(
+					SharedData.getDirectoryName() + "/Cumulative_Lack_of_Processing[" + name + "].tsv", false)));
+			lackTransmissionWriter = new PrintWriter(new BufferedWriter(new FileWriter(
+					SharedData.getDirectoryName() + "/Cumulative_Lack_of_Transmission[" + name + "].tsv", false)));
+		} catch (Exception e) {
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+
+	public void increaseProcessing() {
+		lackProcessingCount[CDState.getCycle()]++;
+	}
+
+	public void increaseTransmission() {
+		lackTransmissionCount[CDState.getCycle()]++;
+	}
+
+	public void closeFile() {
+		int totalProcessing = 0;
+		int totalTransmission = 0;
+
+		for (int i = 0; i < totalCycles; i++) {
+			totalProcessing += lackProcessingCount[i];
+			totalTransmission += lackTransmissionCount[i];
+
+			lackProcessingWriter.println((i + 1) + "\t" + totalProcessing);
+			lackTransmissionWriter.println((i + 1) + "\t" + totalTransmission);
+		}
+
+		lackProcessingWriter.close();
+		lackTransmissionWriter.close();
 	}
 }

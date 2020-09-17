@@ -1,6 +1,6 @@
 ############## Variable ###############
 
-totalNodes 1000.0
+totalNodes 100.0
 totalContents 500.0
 totalCycles 500
 users 100.0
@@ -9,7 +9,10 @@ maxStorageCapacity 100.0
 maxProcessingCapacity 100.0
 maxTransmissionCapacity 100.0
 totalTrials 500.0
-failureMagnification 0.1
+failureMagnification 1.0
+type 0
+##### 0: cost + availability #####
+##### 1: access + availability #####
 
 ############## Network ###############
 
@@ -42,7 +45,7 @@ init.sd.link link
 init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
-init.sd.directoryName Nodes1000
+init.sd.directoryName FailureMagnification1.0
 
 init.p Parameters
 init.p.weibullShape 1.0
@@ -77,6 +80,7 @@ init.r.totalTrials 1
 init.g GreedyAlgorithm
 
 init.of ObjectiveFunction
+init.of.type type
 init.of.users users
 init.of.availabilityCoefficient 1.0
 
@@ -92,12 +96,12 @@ control.rp Replicate
 
 control.rq Request
 
-control.sp ShowParameters
+#control.sp ShowParameters
 
 control.nm NetworkManager
 
 #control.ft FailureTest
 
-order.control ul rp rq sp nm
-#order.control ul rp rq  nm 
+#order.control ul rp rq sp nm
+order.control ul rp rq nm 
 #order.control ul rp rq ft 

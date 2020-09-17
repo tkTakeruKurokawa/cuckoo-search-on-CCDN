@@ -96,10 +96,12 @@ public class Flooding implements Control {
 
     public static int getHops(int nodeIndex, int algorithmId, Content content) {
         initialize(nodeIndex, algorithmId, content);
+        int failedHops = 0;
 
         while (Objects.nonNull(queue.peek())) {
             ReplicaServer node = SharedData.getNode(queue.poll());
             int nodeId = node.getIndex();
+            failedHops = hop.get(nodeId);
 
             if (node.contains(algorithmId, content.getContentId())) {
                 // System.out.println("Node " + node.getIndex() + " Having Content " +
@@ -134,7 +136,7 @@ public class Flooding implements Control {
         }
 
         // System.out.println("Total Nodes: " + addedNodes.size());
-        return -1;
+        return -1 * failedHops;
     }
 
     private static void initialize() {
@@ -176,7 +178,7 @@ public class Flooding implements Control {
         if (checkNode(nodeId, algorithmId, content.getSize())) {
             addedNodes.add(nodeId);
             queue.add(nodeId);
-            hop.put(nodeId, 0);
+            hop.put(nodeId, 1);
             allPath += "Start Node ID: " + addedNodes.get(0) + ", Search Content ID: " + content.getContentId() + "\n";
         }
         // System.out.println("Start Node ID: " + nodeId);
@@ -238,6 +240,7 @@ public class Flooding implements Control {
             return false;
         }
         if (node.getProcessingCapacity(algorithmId) - contentSize < 0) {
+            SharedData.increaseLackingProcessing(algorithmId);
             return false;
         }
 
@@ -251,12 +254,14 @@ public class Flooding implements Control {
             return false;
         }
         if (neighbor.getProcessingCapacity(algorithmId) - contentSize < 0) {
+            SharedData.increaseLackingProcessing(algorithmId);
             return false;
         }
 
         ReplicaServer node = SharedData.getNode(nodeId);
         Link link = SharedData.getLink(node);
         if (link.getTransmissionCapacity(algorithmId, neighborId) - contentSize < 0) {
+            SharedData.increaseLackingTransmission(algorithmId);
             return false;
         }
 

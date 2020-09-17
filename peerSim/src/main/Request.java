@@ -112,11 +112,12 @@ public class Request implements Control {
                 CostOfOperation operationCost = operationCosts.get(algorithmId);
 
                 int hop = Flooding.getHops(nodeId, algorithmId, content);
-                if (hop == -1) {
+                if (hop <= 0) {
                     networkCost.setContentFails(networkCost.getContentFails() + 1);
                     // System.out.println("****************** Content " + content.getContentId()
                     // + " request Failed ******************");
                     // System.out.println(Flooding.getAllPath());
+                    networkCost.setFailedHops(hop * -1);
                 } else {
                     networkCost.setContentHops(networkCost.getContentHops() + hop);
                     operationCost.setContentProcessing(
@@ -265,6 +266,7 @@ public class Request implements Control {
             writer.close();
             CuckooSearch.closeFile();
             GreedyAlgorithm.closeFile();
+            SharedData.closeFile();
         }
 
         return false;
