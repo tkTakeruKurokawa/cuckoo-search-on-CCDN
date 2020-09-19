@@ -9,8 +9,8 @@ maxStorageCapacity 100.0
 maxProcessingCapacity 100.0
 maxTransmissionCapacity 100.0
 totalTrials 500.0
-failureMagnification 1.0
-type 0
+failureMagnification 0.1
+type 1
 ##### 0: cost + availability #####
 ##### 1: access + availability #####
 
@@ -45,7 +45,7 @@ init.sd.link link
 init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
-init.sd.directoryName FailureMagnification1.0
+init.sd.directoryName Nodes1000
 
 init.p Parameters
 init.p.weibullShape 1.0
