@@ -1,4 +1,4 @@
-filePath="./Nodes1000"
+filePath="./FailureMagnification1.0/1000Nodes"
 
 set xrange [0:500]
 # set yrange 

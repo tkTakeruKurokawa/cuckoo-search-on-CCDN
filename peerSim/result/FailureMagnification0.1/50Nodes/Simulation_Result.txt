@@ -1,0 +1,52 @@
+==================================================================
+Cuckoo_Search
+All Requests: 4928, Average: 9.875751503006011
+All Hops: 9277, Average: 18.59118236472946
+All Fails: 967, Average: 1.937875751503006
+All Storage Used: 1746556, Average: 3500.112224448898
+All Processing Used: 168712, Average: 338.1002004008016
+All Transmission Used: 116386, Average: 233.23847695390782
+Total Cost: 2031654, Average: 4071.4509018036074
+==================================================================
+
+
+
+==================================================================
+Random
+All Requests: 4928, Average: 9.875751503006011
+All Hops: 9329, Average: 18.695390781563127
+All Fails: 1666, Average: 3.338677354709419
+All Storage Used: 3478467, Average: 6970.875751503006
+All Processing Used: 146144, Average: 292.87374749498997
+All Transmission Used: 111973, Average: 224.39478957915833
+Total Cost: 3736584, Average: 7488.144288577154
+==================================================================
+
+
+
+==================================================================
+Greedy
+All Requests: 4928, Average: 9.875751503006011
+All Hops: 10580, Average: 21.20240480961924
+All Fails: 1479, Average: 2.963927855711423
+All Storage Used: 1502812, Average: 3011.6472945891783
+All Processing Used: 166851, Average: 334.3707414829659
+All Transmission Used: 127750, Average: 256.0120240480962
+Total Cost: 1797413, Average: 3602.0300601202407
+==================================================================
+
+
+
+==================================================================
+Original_Only
+All Requests: 4928, Average: 9.875751503006011
+All Hops: 10845, Average: 21.733466933867735
+All Fails: 1703, Average: 3.4128256513026054
+All Storage Used: 1396297, Average: 2798.190380761523
+All Processing Used: 147863, Average: 296.3186372745491
+All Transmission Used: 115090, Average: 230.64128256513027
+Total Cost: 1659250, Average: 3325.1503006012026
+==================================================================
+
+
+
