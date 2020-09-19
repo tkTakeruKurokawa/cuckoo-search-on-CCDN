@@ -8,12 +8,12 @@ public class plot {
         try {
             PrintWriter plot = new PrintWriter(new BufferedWriter(new FileWriter("./plot.tsv", false)));
 
-            double mu = 10;
-            double sigma = 10;
+            double mu = 20;
+            double sigma = 20;
             int total = 0;
 
-            double[] cdf = new double[21];
-            for (int i = 1; i <= 21; i++) {
+            double[] cdf = new double[30];
+            for (int i = 10; i <= 30; i++) {
                 double x = (double) i;
                 // double result = (1 / (Math.sqrt(2.0 * Math.PI * sigma)))
                 // * Math.exp(-1 * (Math.pow(x - mu, 2.0) / (2.0 * sigma)));
@@ -22,8 +22,8 @@ public class plot {
             }
             System.out.println("===============================");
 
-            int[] count = new int[21];
-            int num = 100;
+            int[] count = new int[30];
+            int num = 1000;
             int index = 0;
             while (index < num) {
                 double rand = Math.random();
@@ -48,7 +48,7 @@ public class plot {
                 index++;
             }
 
-            for (int i = 0; i < count.length; i++) {
+            for (int i = 9; i < count.length; i++) {
                 System.out.println((i + 1) / 10.0 + ", " + count[i]);
                 plot.println((i + 1) / 10.0 + "\t" + count[i]);
             }

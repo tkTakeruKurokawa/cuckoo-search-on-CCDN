@@ -17,14 +17,14 @@ public class plot {
                 denominator += Math.pow(n, s);
             }
 
-            for (int id = 1; id <= 101; id++) {
+            for (int id = 1; id <= 501; id++) {
                 double k = (double) id;
                 double result = Math.pow(k, s) / denominator;
 
                 int value = (int) Math.round(result * 990.0);
                 total += value;
                 System.out.println(value);
-                plot.println(value);
+                plot.println(result);
             }
             System.out.println("total: " + total);
             plot.close();

@@ -37,7 +37,7 @@ public class plot {
             double[] useSize = new double[num];
             int i = 0;
             int sum = 0;
-            while (i < 10000) {
+            while (i < 500) {
                 double rand = random.nextDouble();
                 boolean flag = false;
 
@@ -54,29 +54,6 @@ public class plot {
                 if (flag) {
                     continue;
                 }
-                // double oldLength = Math.abs(rand - size[1]);
-                // for (int j = 1; j < num; j++) {
-                // // double nowLength = Math.abs(rand - size[j]);
-
-                // // System.out.println(rand + ", " + size[j] + ", " + nowLength + ", " +
-                // // oldLength);
-                // if (oldLength < nowLength) {
-                // useSize[j - 1]++;
-                // break;
-                // } else {
-                // if (j == num - 1) {
-                // // System.out.println(j + ", " + rand + ", " + size[j] + ", " + nowLength +
-                // ", "
-                // // + oldLength);
-                // flag = true;
-                // }
-                // }
-                // oldLength = nowLength;
-                // }
-
-                // if (flag) {
-                // continue;
-                // }
                 i++;
             }
 

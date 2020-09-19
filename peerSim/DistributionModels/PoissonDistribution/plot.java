@@ -40,10 +40,11 @@ public class plot {
 
             int count = 0;
             int total = 0;
-            int[] list = new int[100];
-            while (count < 1) {
+            int size = 32243;
+            int[] list = new int[size];
+            while (count < size) {
                 double rand = Math.random();
-                System.out.println("rand: " + rand);
+                // System.out.println("rand: " + rand);
 
                 boolean flag = false;
                 for (int cdfId = 0; cdfId <= num * 2; cdfId++) {
@@ -70,7 +71,7 @@ public class plot {
                 count++;
             }
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < size; i++) {
                 if (list[i] > 0) {
                     System.out.println(i + ", " + list[i]);
                     plot.println(i + ", " + list[i]);
