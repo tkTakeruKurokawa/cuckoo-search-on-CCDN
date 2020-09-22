@@ -40,6 +40,7 @@ public class GreedyAlgorithm implements Control {
 
             if (nowEvaluation >= bestEvaluation) {
                 writeFile(content);
+                // System.out.println("Greedy: " + bestEvaluation);
                 return bestPlaces;
             } else {
                 bestEvaluation = nowEvaluation;
@@ -47,6 +48,7 @@ public class GreedyAlgorithm implements Control {
             }
         }
 
+        // System.out.println("Greedy: " + bestEvaluation);
         writeFile(content);
         return bestPlaces;
     }

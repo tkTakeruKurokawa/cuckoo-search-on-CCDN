@@ -33,6 +33,7 @@ public class RandomAlgorithm implements Control {
             }
         }
 
+        // System.out.println("Random: " + bestEvaluation);
         return bestPlaces;
     }
 

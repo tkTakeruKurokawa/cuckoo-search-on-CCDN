@@ -200,24 +200,28 @@ public class Flooding implements Control {
         for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode : coverNodes.entrySet()) {
             ReplicaServer replicaNode = SharedData.getNode(coverNode.getKey());
 
-            double totalCoveredAvailability = 0;
-            totalCoveredAvailability += replicaNode.getAvailability();
+            double coveredSize = coverNode.getValue().size();
+            double totalAvailabilityPerReplica = 0;
+            if (replicaNode.getIndex() != SharedData.getOriginId()) {
+                coveredSize = coveredSize + 1.0;
+                totalAvailabilityPerReplica += replicaNode.getAvailability();
+            }
+
             for (Integer coveredNodeId : coverNode.getValue()) {
                 ReplicaServer node = SharedData.getNode(coveredNodeId);
 
-                double totalPathAvailability = 1.0;
-                totalPathAvailability *= node.getAvailability();
+                double totalAvailabilityPerPath = 1.0;
+                totalAvailabilityPerPath *= node.getAvailability();
 
                 Integer parentId = coveredNodeId;
                 while (Objects.nonNull(connection.get(parentId))) {
                     parentId = connection.get(parentId);
-                    totalPathAvailability *= SharedData.getNode(parentId).getAvailability();
+                    totalAvailabilityPerPath *= SharedData.getNode(parentId).getAvailability();
                 }
-                totalCoveredAvailability += totalPathAvailability;
+                totalAvailabilityPerReplica += totalAvailabilityPerPath;
             }
-            totalAvailability += totalCoveredAvailability / ((double) (coverNode.getValue().size() + 1));
+            totalAvailability += totalAvailabilityPerReplica / coveredSize;
         }
-
         availability = totalAvailability / ((double) totalReplicas);
     }
 
