@@ -54,14 +54,14 @@ public class Request implements Control {
 
     private void resetProcessingCapacity() {
         for (int i = 0; i < Network.size(); i++) {
-            ReplicaServer node = SharedData.getNode(i);
+            SurrogateServer node = SharedData.getNode(i);
             Link link = SharedData.getLink(node);
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
                 node.resetProcessingCapacity(algorithmId);
 
                 for (int index = 0; index < link.degree(); index++) {
-                    ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                    SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                     link.resetTransmissionCapacity(algorithmId, neighbor.getIndex());
                 }
             }
@@ -153,7 +153,7 @@ public class Request implements Control {
     private void calculateStorageCost(int algorithmId, ArrayList<CostOfOperation> operationCosts) {
         int cumulativeStorage = 0;
         for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
-            ReplicaServer node = SharedData.getNode(nodeId);
+            SurrogateServer node = SharedData.getNode(nodeId);
             if (!node.getServerState()) {
                 continue;
             }

@@ -68,8 +68,8 @@ public class SharedData implements Control {
 		originIndices.put(1000, 881);
 	}
 
-	public static ReplicaServer getNode(int nodeIndex) {
-		return (ReplicaServer) Network.get(nodeIndex);
+	public static SurrogateServer getNode(int nodeIndex) {
+		return (SurrogateServer) Network.get(nodeIndex);
 	}
 
 	public static Link getLink(Node node) {
@@ -153,7 +153,7 @@ public class SharedData implements Control {
 		ArrayList<Integer> availableNodes = new ArrayList<Integer>();
 
 		for (int i = 0; i < reachableNodes.size(); i++) {
-			ReplicaServer node = getNode(reachableNodes.get(i));
+			SurrogateServer node = getNode(reachableNodes.get(i));
 			if ((node.getStorageCapacity(algorithmId) - content.getSize()) >= 0) {
 				availableNodes.add(node.getIndex());
 			}

@@ -7,7 +7,7 @@ import java.util.Queue;
 import java.io.*;
 
 import main.Link;
-import main.ReplicaServer;
+import main.SurrogateServer;
 import main.SharedData;
 import peersim.core.Control;
 import peersim.core.Network;
@@ -37,7 +37,7 @@ public class FailureTest implements Control {
         int failureCount = 0;
         int totalFailure = 0;
         for (int i = 0; i < Network.size(); i++) {
-            ReplicaServer node = SharedData.getNode(i);
+            SurrogateServer node = SharedData.getNode(i);
 
             if (!node.getServerState()) {
                 node.proceedProgressCycle();
@@ -72,10 +72,10 @@ public class FailureTest implements Control {
                 totalAddedNodes.add(i);
 
                 while (Objects.nonNull(queue.peek())) {
-                    ReplicaServer node = SharedData.getNode(queue.poll());
+                    SurrogateServer node = SharedData.getNode(queue.poll());
                     Link link = SharedData.getLink(node);
                     for (int index = 0; index < link.degree(); index++) {
-                        ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                        SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                         if (!neighbor.getServerState()) {
                             continue;
                         }

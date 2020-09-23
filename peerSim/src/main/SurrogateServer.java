@@ -32,7 +32,7 @@ import peersim.core.Protocol;
  * This is the default {@link Node} class that is used to compose the
  * {@link Network}.
  */
-public class ReplicaServer implements Node {
+public class SurrogateServer implements Node {
 
 	// ================= fields ========================================
 	// =================================================================
@@ -84,6 +84,9 @@ public class ReplicaServer implements Node {
 	private boolean serverState;
 	private int progressCycle;
 
+	private int coordinateX;
+	private int coordinateY;
+
 	// ================ constructor and initialization =================
 	// =================================================================
 
@@ -93,7 +96,7 @@ public class ReplicaServer implements Node {
 	 * not used. It reads the protocol components (components that have type
 	 * {@value peersim.core.Node#PAR_PROT}) from the configuration.
 	 */
-	public ReplicaServer(String prefix) {
+	public SurrogateServer(String prefix) {
 		String[] names = Configuration.getNames(PAR_PROT);
 		totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLE);
@@ -120,9 +123,9 @@ public class ReplicaServer implements Node {
 
 	public Object clone() {
 
-		ReplicaServer result = null;
+		SurrogateServer result = null;
 		try {
-			result = (ReplicaServer) super.clone();
+			result = (SurrogateServer) super.clone();
 		} catch (CloneNotSupportedException e) {
 		} // never happens
 		result.protocol = new Protocol[protocol.length];
@@ -146,6 +149,8 @@ public class ReplicaServer implements Node {
 		// result.failurePosition = 0;
 		result.serverState = true;
 		result.progressCycle = 0;
+		result.coordinateX = 0;
+		result.coordinateY = 0;
 
 		return result;
 	}
@@ -338,6 +343,19 @@ public class ReplicaServer implements Node {
 
 	public boolean contains(int algorithmId, int contentId) {
 		return havingContents.get(algorithmId).contains(contentId);
+	}
+
+	public void setCoordinate(int x, int y) {
+		coordinateX = x;
+		coordinateY = y;
+	}
+
+	public int getCoordinateX() {
+		return coordinateX;
+	}
+
+	public int getCoordinateY() {
+		return coordinateY;
 	}
 
 	// ------------------------------------------------------------------

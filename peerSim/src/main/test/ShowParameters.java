@@ -3,7 +3,7 @@ package main.test;
 import java.util.ArrayList;
 
 import main.Link;
-import main.ReplicaServer;
+import main.SurrogateServer;
 import main.SharedData;
 import peersim.cdsim.CDState;
 import peersim.core.Control;
@@ -87,7 +87,7 @@ public class ShowParameters implements Control {
     public boolean execute() {
 
         for (int i = 0; i < Network.size(); i++) {
-            ReplicaServer node = SharedData.getNode(i);
+            SurrogateServer node = SharedData.getNode(i);
             Link link = SharedData.getLink(node);
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
@@ -107,7 +107,7 @@ public class ShowParameters implements Control {
                 }
 
                 for (int index = 0; index < link.degree(); index++) {
-                    ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                    SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                     // System.out.println(" " + algorithmId + ": (" + node.getIndex() + ", " +
                     // neighbor.getIndex()
                     // + "), Transmission: " + link.getTransmissionCapacity(algorithmId,
