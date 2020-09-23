@@ -62,10 +62,10 @@ public class SharedData implements Control {
 		randomForParameters = new Random(5L);
 
 		originIndices = new HashMap<>();
-		originIndices.put(50, 14);
-		originIndices.put(100, 67);
-		originIndices.put(500, 23);
-		originIndices.put(1000, 881);
+		originIndices.put(50, 47);
+		originIndices.put(100, 69);
+		originIndices.put(500, 249);
+		originIndices.put(1000, 68);
 	}
 
 	public static SurrogateServer getNode(int nodeIndex) {
