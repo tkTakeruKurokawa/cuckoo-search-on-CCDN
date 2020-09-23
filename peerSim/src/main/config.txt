@@ -75,7 +75,7 @@ init.n.fractalDimension 1.5
 init.e Egg
 
 init.r RandomAlgorithm
-init.r.totalTrials 500
+init.r.totalTrials 1
 
 init.g GreedyAlgorithm
 
