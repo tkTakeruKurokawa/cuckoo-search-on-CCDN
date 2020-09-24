@@ -200,12 +200,7 @@ public class Flooding implements Control {
         for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode : coverNodes.entrySet()) {
             SurrogateServer replicaNode = SharedData.getNode(coverNode.getKey());
 
-            double coveredSize = coverNode.getValue().size();
-            double totalAvailabilityPerReplica = 0;
-            if (replicaNode.getIndex() != SharedData.getOriginId()) {
-                coveredSize = coveredSize + 1.0;
-                totalAvailabilityPerReplica += replicaNode.getAvailability();
-            }
+            double totalAvailabilityPerReplica = replicaNode.getAvailability();
 
             for (Integer coveredNodeId : coverNode.getValue()) {
                 SurrogateServer node = SharedData.getNode(coveredNodeId);
@@ -220,7 +215,7 @@ public class Flooding implements Control {
                 }
                 totalAvailabilityPerReplica += totalAvailabilityPerPath;
             }
-            totalAvailability += totalAvailabilityPerReplica / coveredSize;
+            totalAvailability += totalAvailabilityPerReplica / ((double) coverNode.getValue().size() + 1);
         }
         availability = totalAvailability / ((double) totalReplicas);
     }

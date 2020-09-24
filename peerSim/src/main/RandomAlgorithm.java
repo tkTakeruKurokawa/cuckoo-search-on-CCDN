@@ -22,9 +22,10 @@ public class RandomAlgorithm implements Control {
             return new ArrayList<Integer>(Arrays.asList(SharedData.getOriginId()));
         }
 
-        double bestEvaluation = Double.MAX_VALUE;
         ArrayList<Integer> bestPlaces = new ArrayList<>();
-        for (int i = 0; i < totalTrials; i++) {
+        double bestEvaluation = randomSearch(content);
+        bestPlaces = new ArrayList<Integer>(placementNodes);
+        for (int i = 0; i < totalTrials - 1; i++) {
             double nowEvaluation = randomSearch(content);
 
             if (nowEvaluation < bestEvaluation) {
@@ -33,7 +34,7 @@ public class RandomAlgorithm implements Control {
             }
         }
 
-        // System.out.println("Random: " + bestEvaluation);
+        System.out.println("Random: " + bestEvaluation);
         return bestPlaces;
     }
 

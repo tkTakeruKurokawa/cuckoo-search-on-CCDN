@@ -62,7 +62,7 @@ public class SharedData implements Control {
 		randomForParameters = new Random(5L);
 
 		originIndices = new HashMap<>();
-		originIndices.put(50, 47);
+		originIndices.put(50, 44);
 		originIndices.put(100, 69);
 		originIndices.put(500, 249);
 		originIndices.put(1000, 68);
@@ -148,6 +148,13 @@ public class SharedData implements Control {
 		return randomForParameters.nextDouble();
 	}
 
+	/*
+	 * 複製配置の際に使用
+	 * 
+	 * オリジンサーバから到達可能なノードの集合
+	 * 
+	 * かつ，該当コンテンツ分のストレージを持つノードの集合
+	 */
 	public static ArrayList<Integer> getAvailableNodes(int algorithmId, Content content) {
 		ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
 		ArrayList<Integer> availableNodes = new ArrayList<Integer>();
@@ -159,7 +166,7 @@ public class SharedData implements Control {
 			}
 		}
 
-		return availableNodes;
+		return new ArrayList<Integer>(availableNodes);
 	}
 
 	public static void increaseLackingProcessing(int algorithmId) {

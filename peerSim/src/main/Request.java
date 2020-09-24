@@ -101,9 +101,7 @@ public class Request implements Control {
         int totalRequests = content.getRequest();
         for (int requestCount = 0; requestCount < totalRequests; requestCount++) {
             int nodeId;
-            do {
-                nodeId = SharedData.getRandomIntForRequest(Network.size());
-            } while (nodeId == originId);
+            nodeId = SharedData.getRandomIntForRequest(Network.size());
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
                 // System.out.println("==================================================================");

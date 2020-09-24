@@ -71,11 +71,10 @@ init.cs.abandonRate 0.4
 
 init.n Nest
 init.n.fractalDimension 1.5
-
-init.e Egg
+init.n.tolerance 45.0
 
 init.r RandomAlgorithm
-init.r.totalTrials 1
+init.r.totalTrials 500
 
 init.g GreedyAlgorithm
 
@@ -86,7 +85,7 @@ init.of.availabilityCoefficient 1.0
 
 init.f Flooding
 
-order.init wl sd p cs n e r g of f
+order.init wl sd p cs n r g of f
 
 ############## Control ###############
 

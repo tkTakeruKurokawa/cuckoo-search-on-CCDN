@@ -46,8 +46,8 @@ public class ObjectiveFunction implements Control {
                 break;
         }
 
-        // System.out.println("Number of Replica: " + placementNodes.size() + ",
-        // Access:" + accessRate + ", Cost: " + cost
+        // System.out.println("Number of Replica: " + placementNodes.size() + ",Access:"
+        // + accessRate + ", Cost: " + cost
         // + ", Failure: " + availability);
         // System.out.println("Total = " + total);
         // System.out.println();

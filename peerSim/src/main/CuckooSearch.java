@@ -56,13 +56,17 @@ public class CuckooSearch implements Control {
         // System.out.println("\t" + nestSet.get(i).getEvaluation());
         // }
         for (int generation = 0; generation < maxGeneration; generation++) {
-            smartCuckoo();
+            // smartCuckoo();
             randomCuckoo();
+            // System.out.println("Best: " +
+            // nestSet.get(0).getEgg().getPlacementNodes().toString());
             abandon();
+            // System.out.prinftln("|||||||||||||||||||||||| END GENERATION
+            // ||||||||||||||||||||||||");
         }
 
         // for (int i = 0; i < nestSet.size(); i++) {
-        // System.out.println("Cuckoo: " + nestSet.get(0).getEvaluation());
+        System.out.println("Cuckoo: " + nestSet.get(0).getEvaluation());
         // }
 
         // System.out.println();
@@ -86,14 +90,14 @@ public class CuckooSearch implements Control {
         nestSet = new ArrayList<Nest>();
         if (availableNodes.size() == 0) {
             availableNodes.add(originId);
-            nestSet.add(new Nest(availableNodes, content));
+            nestSet.add(new Nest(availableNodes, content, algorithmId));
             writeFile(nestSet.get(0), content);
 
             return false;
         }
 
         for (int i = 0; i < totalNests; i++) {
-            nestSet.add(new Nest(availableNodes, content));
+            nestSet.add(new Nest(availableNodes, content, algorithmId));
         }
 
         sort();
@@ -134,10 +138,12 @@ public class CuckooSearch implements Control {
     }
 
     private static void runLevyFlight(Nest baseNest, Nest improvedNest) {
-        Egg newEgg = baseNest.levyFlight();
+        Egg newEgg = baseNest.levyWalk();
 
         if (Objects.nonNull(newEgg)) {
             improvedNest.setEgg(newEgg);
+            // System.out.println("Changed: " +
+            // improvedNest.getEgg().getPlacementNodes().toString());
         }
     }
 
