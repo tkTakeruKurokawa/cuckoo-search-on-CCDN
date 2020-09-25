@@ -1,7 +1,9 @@
-コンパイルとシミュレータ実行方法
+コンパイル
+```
+bash make.bash
+```
 
-	1.コンパイル: bash make.bash
-
-	2.シミュレータ実行: bash runSimulator.bash
-
-	3.「result」ディレクトリに各生データが出力され，「result/eps」ディレクトリにGnuplotにより図が生成される
+実行
+```
+bash multipleRuns.bash
+```

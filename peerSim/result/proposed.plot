@@ -1,6 +1,6 @@
-elements=1
-directoryName="Nodes"
-array paths[elements]=["Nodes50"]
+elements=2
+directoryName="Contents"
+array paths[elements]=["Contents100", "Contents500"]
 array colors[6]=["red", "blue", "forest-green", "magenta", "dark-orange", "black"]
 
 

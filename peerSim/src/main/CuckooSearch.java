@@ -61,7 +61,7 @@ public class CuckooSearch implements Control {
             // System.out.println("Best: " +
             // nestSet.get(0).getEgg().getPlacementNodes().toString());
             abandon();
-            // System.out.prinftln("|||||||||||||||||||||||| END GENERATION
+            // System.out.println("|||||||||||||||||||||||| END GENERATION
             // ||||||||||||||||||||||||");
         }
 

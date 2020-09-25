@@ -34,7 +34,7 @@ public class Flooding implements Control {
 
         while (Objects.nonNull(queue.peek())) {
             SurrogateServer node = SharedData.getNode(queue.poll());
-            int nodeId = node.getIndex();
+            // int nodeId = node.getIndex();
             Link link = SharedData.getLink(node);
             // System.out.printf("%d: ", nodeId);
 
@@ -88,6 +88,16 @@ public class Flooding implements Control {
         // System.out.println("Total Nodes: " + addedNodes.size());
         calculateAvailability(nodes.size());
         return calculateAverage();
+    }
+
+    public static double getRemainingStorage(ArrayList<Integer> placementNodes, int algorithmId) {
+        double total = 0;
+        for (Integer nodeId : placementNodes) {
+            double remainingStorage = SharedData.getNode(nodeId).getStorageCapacity(algorithmId);
+            total += (remainingStorage / 100.0);
+        }
+
+        return total;
     }
 
     public static double getAvailability() {

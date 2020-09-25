@@ -13,6 +13,8 @@ public class RandomAlgorithm implements Control {
     private static ArrayList<Integer> availableNodes;
     private static ArrayList<Integer> placementNodes;
 
+    private static int algorithmId;
+
     public RandomAlgorithm(String prefix) {
         totalTrials = Configuration.getInt(prefix + "." + PAR_TOTAL_TRIALS);
     }
@@ -38,7 +40,8 @@ public class RandomAlgorithm implements Control {
         return bestPlaces;
     }
 
-    private static boolean initialize(int algorithmId, Content content) {
+    private static boolean initialize(int id, Content content) {
+        algorithmId = id;
         availableNodes = SharedData.getAvailableNodes(algorithmId, content);
 
         if (availableNodes.size() == 0) {

@@ -1,4 +1,4 @@
-filePath="./Nodes50"
+filePath="./Contents500"
 
 set xrange [0:500]
 # set yrange 

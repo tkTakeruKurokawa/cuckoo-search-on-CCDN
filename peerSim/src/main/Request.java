@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class Request implements Control {
-    private static int originId;
     private static int totalCycles;
     private static int totalContents;
     private static int totalAlgorithms;
@@ -27,7 +26,6 @@ public class Request implements Control {
     }
 
     public Request(String prefix) {
-        originId = SharedData.getOriginId();
         totalCycles = SharedData.getTotalCycles();
         totalContents = SharedData.getTotalContents();
         totalAlgorithms = SharedData.getTotalAlgorithms();
@@ -129,10 +127,11 @@ public class Request implements Control {
         }
     }
 
-    private void showContentCost(Content content, CostOfNetwork networkCost) {
-        System.out.println("Content " + content.getContentId() + ": " + networkCost.getContentRequests() + " requests, "
-                + networkCost.getContentHops() + " hops, size: " + content.getSize());
-    }
+    // private void showContentCost(Content content, CostOfNetwork networkCost) {
+    // System.out.println("Content " + content.getContentId() + ": " +
+    // networkCost.getContentRequests() + " requests, "
+    // + networkCost.getContentHops() + " hops, size: " + content.getSize());
+    // }
 
     private void calculateCycleCost(Content content) {
         for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
