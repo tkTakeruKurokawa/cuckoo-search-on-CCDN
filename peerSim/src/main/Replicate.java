@@ -12,7 +12,7 @@ public class Replicate implements Control {
 
     private static void setReplica(ArrayList<Integer> placementNodes, Content content, int algorithmId) {
         for (Integer nodeId : placementNodes) {
-            ReplicaServer node = SharedData.getNode(nodeId);
+            SurrogateServer node = SharedData.getNode(nodeId);
 
             if (!node.setContent(algorithmId, content)) {
                 System.exit(-1);

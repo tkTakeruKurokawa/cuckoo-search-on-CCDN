@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class Request implements Control {
-    private static int originId;
     private static int totalCycles;
     private static int totalContents;
     private static int totalAlgorithms;
@@ -27,7 +26,6 @@ public class Request implements Control {
     }
 
     public Request(String prefix) {
-        originId = SharedData.getOriginId();
         totalCycles = SharedData.getTotalCycles();
         totalContents = SharedData.getTotalContents();
         totalAlgorithms = SharedData.getTotalAlgorithms();
@@ -54,14 +52,14 @@ public class Request implements Control {
 
     private void resetProcessingCapacity() {
         for (int i = 0; i < Network.size(); i++) {
-            ReplicaServer node = SharedData.getNode(i);
+            SurrogateServer node = SharedData.getNode(i);
             Link link = SharedData.getLink(node);
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
                 node.resetProcessingCapacity(algorithmId);
 
                 for (int index = 0; index < link.degree(); index++) {
-                    ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                    SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                     link.resetTransmissionCapacity(algorithmId, neighbor.getIndex());
                 }
             }
@@ -101,9 +99,7 @@ public class Request implements Control {
         int totalRequests = content.getRequest();
         for (int requestCount = 0; requestCount < totalRequests; requestCount++) {
             int nodeId;
-            do {
-                nodeId = SharedData.getRandomIntForRequest(Network.size());
-            } while (nodeId == originId);
+            nodeId = SharedData.getRandomIntForRequest(Network.size());
 
             for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
                 // System.out.println("==================================================================");
@@ -131,10 +127,11 @@ public class Request implements Control {
         }
     }
 
-    private void showContentCost(Content content, CostOfNetwork networkCost) {
-        System.out.println("Content " + content.getContentId() + ": " + networkCost.getContentRequests() + " requests, "
-                + networkCost.getContentHops() + " hops, size: " + content.getSize());
-    }
+    // private void showContentCost(Content content, CostOfNetwork networkCost) {
+    // System.out.println("Content " + content.getContentId() + ": " +
+    // networkCost.getContentRequests() + " requests, "
+    // + networkCost.getContentHops() + " hops, size: " + content.getSize());
+    // }
 
     private void calculateCycleCost(Content content) {
         for (int algorithmId = 0; algorithmId < totalAlgorithms; algorithmId++) {
@@ -153,7 +150,7 @@ public class Request implements Control {
     private void calculateStorageCost(int algorithmId, ArrayList<CostOfOperation> operationCosts) {
         int cumulativeStorage = 0;
         for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
-            ReplicaServer node = SharedData.getNode(nodeId);
+            SurrogateServer node = SharedData.getNode(nodeId);
             if (!node.getServerState()) {
                 continue;
             }

@@ -15,6 +15,8 @@ public class GreedyAlgorithm implements Control {
     private static ArrayList<Integer> remainingNodes;
     private static ArrayList<Integer> bestPlaces;
 
+    private static int algorithmId;
+
     private static int localBestNodeId;
 
     private static PrintWriter writer;
@@ -57,7 +59,8 @@ public class GreedyAlgorithm implements Control {
         writer.close();
     }
 
-    private static boolean initialize(int algorithmId, Content content) {
+    private static boolean initialize(int id, Content content) {
+        algorithmId = id;
         availableNodes = SharedData.getAvailableNodes(algorithmId, content);
 
         if (availableNodes.size() == 0) {

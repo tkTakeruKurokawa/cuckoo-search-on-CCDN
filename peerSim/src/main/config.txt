@@ -1,7 +1,7 @@
 ############## Variable ###############
 
 totalNodes 100.0
-totalContents 500.0
+totalContents 100.0
 totalCycles 500
 users 100.0
 repairDuration 50
@@ -10,15 +10,12 @@ maxProcessingCapacity 100.0
 maxTransmissionCapacity 100.0
 totalTrials 500.0
 failureMagnification 0.1
-type 0
-##### 0: cost + availability #####
-##### 1: access + availability #####
 
 ############## Network ###############
 
 network.size totalNodes
 
-network.node ReplicaServer
+network.node SurrogateServer
 network.node.totalNodes totalNodes
 network.node.totalCycles totalCycles
 network.node.maxStorageCapacity maxStorageCapacity
@@ -69,10 +66,13 @@ init.cs.totalNests 30
 init.cs.improvementRate 0.6
 init.cs.abandonRate 0.4
 
-init.n Nest
-init.n.fractalDimension 1.5
-
-init.e Egg
+init.lw LevyWalk
+init.lw.fractalDimension 1.5
+init.lw.tolerance 45.0
+init.lw.type 0
+##### 0: Remove #####
+##### 1: Add #####
+##### 2: Remove & Add #####
 
 init.r RandomAlgorithm
 init.r.totalTrials 1
@@ -80,13 +80,15 @@ init.r.totalTrials 1
 init.g GreedyAlgorithm
 
 init.of ObjectiveFunction
-init.of.type type
 init.of.users users
 init.of.availabilityCoefficient 1.0
+init.of.type 0
+##### 0: cost + availability #####
+##### 1: access + availability #####
 
 init.f Flooding
 
-order.init wl sd p cs n e r g of f
+order.init wl sd p cs lw r g of f
 
 ############## Control ###############
 

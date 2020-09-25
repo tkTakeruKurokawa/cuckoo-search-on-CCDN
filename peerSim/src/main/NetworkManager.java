@@ -26,7 +26,7 @@ public class NetworkManager implements Control {
 
         int failureCount = 0;
         for (int i = 0; i < Network.size(); i++) {
-            ReplicaServer node = SharedData.getNode(i);
+            SurrogateServer node = SharedData.getNode(i);
 
             if (!node.getServerState()) {
                 node.proceedProgressCycle();

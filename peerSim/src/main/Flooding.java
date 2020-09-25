@@ -33,13 +33,13 @@ public class Flooding implements Control {
         initialize();
 
         while (Objects.nonNull(queue.peek())) {
-            ReplicaServer node = SharedData.getNode(queue.poll());
-            int nodeId = node.getIndex();
+            SurrogateServer node = SharedData.getNode(queue.poll());
+            // int nodeId = node.getIndex();
             Link link = SharedData.getLink(node);
             // System.out.printf("%d: ", nodeId);
 
             for (int index = 0; index < link.degree(); index++) {
-                ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                 int neighborId = neighbor.getIndex();
 
                 if (!neighbor.getServerState()) {
@@ -62,13 +62,13 @@ public class Flooding implements Control {
         initialize(nodes);
 
         while (Objects.nonNull(queue.peek())) {
-            ReplicaServer node = SharedData.getNode(queue.poll());
+            SurrogateServer node = SharedData.getNode(queue.poll());
             int nodeId = node.getIndex();
             Link link = SharedData.getLink(node);
             // System.out.printf("%d(%d) : ", nodeId, hop.get(nodeId));
 
             for (int index = 0; index < link.degree(); index++) {
-                ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                 int neighborId = neighbor.getIndex();
 
                 if (!neighbor.getServerState()) {
@@ -90,6 +90,16 @@ public class Flooding implements Control {
         return calculateAverage();
     }
 
+    public static double getRemainingStorage(ArrayList<Integer> placementNodes, int algorithmId) {
+        double total = 0;
+        for (Integer nodeId : placementNodes) {
+            double remainingStorage = SharedData.getNode(nodeId).getStorageCapacity(algorithmId);
+            total += (remainingStorage / 100.0);
+        }
+
+        return total;
+    }
+
     public static double getAvailability() {
         return availability;
     }
@@ -99,7 +109,7 @@ public class Flooding implements Control {
         int failedHops = 0;
 
         while (Objects.nonNull(queue.peek())) {
-            ReplicaServer node = SharedData.getNode(queue.poll());
+            SurrogateServer node = SharedData.getNode(queue.poll());
             int nodeId = node.getIndex();
             failedHops = hop.get(nodeId);
 
@@ -116,7 +126,7 @@ public class Flooding implements Control {
             // System.out.printf("%d(%d) : ", nodeId, hop.get(nodeId));
 
             for (int index = 0; index < link.degree(); index++) {
-                ReplicaServer neighbor = (ReplicaServer) link.getNeighbor(index);
+                SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
                 int neighborId = neighbor.getIndex();
 
                 // 隣接ノードが故障中，隣接ノードの処理能力が0未満，隣接ノードとのリンクの処理能力が0未満の場合，その隣接ノードは利用できない
@@ -198,17 +208,12 @@ public class Flooding implements Control {
     private static void calculateAvailability(int totalReplicas) {
         double totalAvailability = 0;
         for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode : coverNodes.entrySet()) {
-            ReplicaServer replicaNode = SharedData.getNode(coverNode.getKey());
+            SurrogateServer replicaNode = SharedData.getNode(coverNode.getKey());
 
-            double coveredSize = coverNode.getValue().size();
-            double totalAvailabilityPerReplica = 0;
-            if (replicaNode.getIndex() != SharedData.getOriginId()) {
-                coveredSize = coveredSize + 1.0;
-                totalAvailabilityPerReplica += replicaNode.getAvailability();
-            }
+            double totalAvailabilityPerReplica = replicaNode.getAvailability();
 
             for (Integer coveredNodeId : coverNode.getValue()) {
-                ReplicaServer node = SharedData.getNode(coveredNodeId);
+                SurrogateServer node = SharedData.getNode(coveredNodeId);
 
                 double totalAvailabilityPerPath = 1.0;
                 totalAvailabilityPerPath *= node.getAvailability();
@@ -220,7 +225,7 @@ public class Flooding implements Control {
                 }
                 totalAvailabilityPerReplica += totalAvailabilityPerPath;
             }
-            totalAvailability += totalAvailabilityPerReplica / coveredSize;
+            totalAvailability += totalAvailabilityPerReplica / ((double) coverNode.getValue().size() + 1);
         }
         availability = totalAvailability / ((double) totalReplicas);
     }
@@ -238,7 +243,7 @@ public class Flooding implements Control {
     }
 
     private static boolean checkNode(int nodeId, int algorithmId, int contentSize) {
-        ReplicaServer node = SharedData.getNode(nodeId);
+        SurrogateServer node = SharedData.getNode(nodeId);
 
         if (!node.getServerState()) {
             return false;
@@ -252,7 +257,7 @@ public class Flooding implements Control {
     }
 
     private static boolean checkNeighbor(int nodeId, int neighborId, int algorithmId, int contentSize) {
-        ReplicaServer neighbor = SharedData.getNode(neighborId);
+        SurrogateServer neighbor = SharedData.getNode(neighborId);
 
         if (!neighbor.getServerState()) {
             return false;
@@ -262,7 +267,7 @@ public class Flooding implements Control {
             return false;
         }
 
-        ReplicaServer node = SharedData.getNode(nodeId);
+        SurrogateServer node = SharedData.getNode(nodeId);
         Link link = SharedData.getLink(node);
         if (link.getTransmissionCapacity(algorithmId, neighborId) - contentSize < 0) {
             SharedData.increaseLackingTransmission(algorithmId);
@@ -283,12 +288,12 @@ public class Flooding implements Control {
         path += "\n";
 
         for (int index = 0; index < useNodes.size(); index++) {
-            ReplicaServer nowNode = SharedData.getNode(useNodes.get(index));
+            SurrogateServer nowNode = SharedData.getNode(useNodes.get(index));
             int processingCapacity = nowNode.getProcessingCapacity(algorithmId);
             nowNode.setProcessingCapacity(algorithmId, processingCapacity - contentSize);
 
             if (index > 0) {
-                ReplicaServer oldNode = SharedData.getNode(useNodes.get(index - 1));
+                SurrogateServer oldNode = SharedData.getNode(useNodes.get(index - 1));
                 calculateTransmissionCapacity(algorithmId, contentSize, oldNode, nowNode);
             }
             // else {
@@ -297,8 +302,8 @@ public class Flooding implements Control {
         }
     }
 
-    private static void calculateTransmissionCapacity(int algorithmId, int contentSize, ReplicaServer oldNode,
-            ReplicaServer nowNode) {
+    private static void calculateTransmissionCapacity(int algorithmId, int contentSize, SurrogateServer oldNode,
+            SurrogateServer nowNode) {
         Link oldToNew = SharedData.getLink(oldNode);
         int nowNodeId = nowNode.getIndex();
         int transmissionCapacity = oldToNew.getTransmissionCapacity(algorithmId, nowNodeId);

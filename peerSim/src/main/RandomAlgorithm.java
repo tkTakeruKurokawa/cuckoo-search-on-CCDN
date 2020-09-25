@@ -13,6 +13,8 @@ public class RandomAlgorithm implements Control {
     private static ArrayList<Integer> availableNodes;
     private static ArrayList<Integer> placementNodes;
 
+    private static int algorithmId;
+
     public RandomAlgorithm(String prefix) {
         totalTrials = Configuration.getInt(prefix + "." + PAR_TOTAL_TRIALS);
     }
@@ -22,9 +24,10 @@ public class RandomAlgorithm implements Control {
             return new ArrayList<Integer>(Arrays.asList(SharedData.getOriginId()));
         }
 
-        double bestEvaluation = Double.MAX_VALUE;
         ArrayList<Integer> bestPlaces = new ArrayList<>();
-        for (int i = 0; i < totalTrials; i++) {
+        double bestEvaluation = randomSearch(content);
+        bestPlaces = new ArrayList<Integer>(placementNodes);
+        for (int i = 0; i < totalTrials - 1; i++) {
             double nowEvaluation = randomSearch(content);
 
             if (nowEvaluation < bestEvaluation) {
@@ -33,11 +36,12 @@ public class RandomAlgorithm implements Control {
             }
         }
 
-        // System.out.println("Random: " + bestEvaluation);
+        System.out.println("Random: " + bestEvaluation);
         return bestPlaces;
     }
 
-    private static boolean initialize(int algorithmId, Content content) {
+    private static boolean initialize(int id, Content content) {
+        algorithmId = id;
         availableNodes = SharedData.getAvailableNodes(algorithmId, content);
 
         if (availableNodes.size() == 0) {

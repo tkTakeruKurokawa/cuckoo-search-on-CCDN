@@ -62,14 +62,14 @@ public class SharedData implements Control {
 		randomForParameters = new Random(5L);
 
 		originIndices = new HashMap<>();
-		originIndices.put(50, 14);
-		originIndices.put(100, 67);
-		originIndices.put(500, 23);
-		originIndices.put(1000, 881);
+		originIndices.put(50, 44);
+		originIndices.put(100, 69);
+		originIndices.put(500, 249);
+		originIndices.put(1000, 68);
 	}
 
-	public static ReplicaServer getNode(int nodeIndex) {
-		return (ReplicaServer) Network.get(nodeIndex);
+	public static SurrogateServer getNode(int nodeIndex) {
+		return (SurrogateServer) Network.get(nodeIndex);
 	}
 
 	public static Link getLink(Node node) {
@@ -148,18 +148,25 @@ public class SharedData implements Control {
 		return randomForParameters.nextDouble();
 	}
 
+	/*
+	 * 複製配置の際に使用
+	 * 
+	 * オリジンサーバから到達可能なノードの集合
+	 * 
+	 * かつ，該当コンテンツ分のストレージを持つノードの集合
+	 */
 	public static ArrayList<Integer> getAvailableNodes(int algorithmId, Content content) {
 		ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
 		ArrayList<Integer> availableNodes = new ArrayList<Integer>();
 
 		for (int i = 0; i < reachableNodes.size(); i++) {
-			ReplicaServer node = getNode(reachableNodes.get(i));
+			SurrogateServer node = getNode(reachableNodes.get(i));
 			if ((node.getStorageCapacity(algorithmId) - content.getSize()) >= 0) {
 				availableNodes.add(node.getIndex());
 			}
 		}
 
-		return availableNodes;
+		return new ArrayList<Integer>(availableNodes);
 	}
 
 	public static void increaseLackingProcessing(int algorithmId) {
