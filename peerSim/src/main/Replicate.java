@@ -24,6 +24,11 @@ public class Replicate implements Control {
     public boolean execute() {
 
         ArrayList<Content> replicatedContents = SharedData.getReplicatedContents();
+
+        if (replicatedContents.size() > 0) {
+            SharedData.searchReachableNodes();
+        }
+
         for (Content content : replicatedContents) {
             ArrayList<Integer> placementNodes = new ArrayList<>();
             placementNodes = CuckooSearch.runSearch(0, content);
