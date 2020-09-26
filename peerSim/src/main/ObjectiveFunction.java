@@ -31,17 +31,19 @@ public class ObjectiveFunction implements Control {
     }
 
     public static double getEvaluation(ArrayList<Integer> placementNodes, Content content) {
-        accessRate = calculateAccessRate(placementNodes, content);
         cost = calculateCost(placementNodes.size(), content);
-        availability = calculateAvailability(placementNodes, content);
 
         switch (type) {
             case 0:
+                availability = calculateAvailability(placementNodes, content);
                 total = cost + availability;
                 break;
+
             case 1:
+                accessRate = calculateAccessRate(placementNodes, content);
                 total = accessRate + cost;
                 break;
+
             default:
                 System.exit(0);
                 break;
@@ -68,7 +70,7 @@ public class ObjectiveFunction implements Control {
     private static double calculateAvailability(ArrayList<Integer> placementNodes, Content content) {
         double totalRequests = content.getPopularity() * (double) totalNodes * (double) users;
 
-        return (totalRequests * ((double) content.getSize())) / Flooding.getAvailability();
+        return (totalRequests * ((double) content.getSize())) / Flooding.getAvailability(placementNodes);
     }
 
     public static String getData() {

@@ -34,6 +34,7 @@ public class SharedData implements Control {
 	private static ArrayList<String> algorithmNames;
 	private static HashMap<Integer, Integer> originIndices;
 	private static ArrayList<FailedReason> failedCounters;
+	private static ArrayList<Integer> reachableNodes;
 
 	public SharedData(String prefix) {
 		pid_lnk = Configuration.getPid(prefix + "." + PAR_LNK);
@@ -46,6 +47,8 @@ public class SharedData implements Control {
 		for (String name : algorithmNames) {
 			failedCounters.add(new FailedReason(totalCycles, name));
 		}
+
+		reachableNodes = new ArrayList<>();
 	}
 
 	public SharedData() {
@@ -148,6 +151,14 @@ public class SharedData implements Control {
 		return randomForParameters.nextDouble();
 	}
 
+	public static void searchReachableNodes() {
+		reachableNodes = Flooding.getReachableNodes();
+	}
+
+	public static ArrayList<Integer> getReachableNodes() {
+		return reachableNodes;
+	}
+
 	/*
 	 * 複製配置の際に使用
 	 * 
@@ -156,7 +167,6 @@ public class SharedData implements Control {
 	 * かつ，該当コンテンツ分のストレージを持つノードの集合
 	 */
 	public static ArrayList<Integer> getAvailableNodes(int algorithmId, Content content) {
-		ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
 		ArrayList<Integer> availableNodes = new ArrayList<Integer>();
 
 		for (int i = 0; i < reachableNodes.size(); i++) {

@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Queue;
 
 import peersim.core.Control;
+import peersim.core.Network;
 
 public class Flooding implements Control {
     private static int originId;
@@ -15,12 +16,11 @@ public class Flooding implements Control {
     private static Queue<Integer> queue;
     private static HashMap<Integer, Integer> hop;
     private static HashMap<Integer, Integer> connection;
-    private static HashMap<Integer, ArrayList<Integer>> coverNodes;
-
-    private static double availability;
 
     private static int searchedNodes;
     private static int totalHops;
+
+    private static double availability;
 
     private static String allPath;
     private static String path;
@@ -79,28 +79,42 @@ public class Flooding implements Control {
                     queue.add(neighborId);
                     hop.put(neighborId, hop.get(nodeId) + 1);
                     connection.put(neighborId, nodeId);
-                    setCoverNodes(neighborId);
                 }
             }
             // System.out.println();
         }
 
         // System.out.println("Total Nodes: " + addedNodes.size());
-        calculateAvailability(nodes.size());
         return calculateAverage();
     }
 
-    public static double getRemainingStorage(ArrayList<Integer> placementNodes, int algorithmId) {
-        double total = 0;
-        for (Integer nodeId : placementNodes) {
-            double remainingStorage = SharedData.getNode(nodeId).getStorageCapacity(algorithmId);
-            total += (remainingStorage / 100.0);
+    public static double getAvailability(ArrayList<Integer> placementNodes) {
+        double totalAvailability = 0.0;
+        double totalNodes;
+
+        // System.out.println("########## Replica Nodes ##########");
+        // System.out.println(placementNodes.toString());
+
+        ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
+        for (Integer nodeId : reachableNodes) {
+            totalAvailability += searchReplica(placementNodes, nodeId);
         }
+        totalNodes = reachableNodes.size();
 
-        return total;
-    }
+        // for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
+        // totalAvailability += searchReplica(placementNodes, nodeId);
+        // // System.out.println("Total Availability: " + totalAvailability);
+        // // System.out.println("===================================================");
+        // }
+        // totalNodes = Network.size();
 
-    public static double getAvailability() {
+        availability = (totalAvailability / totalNodes);
+
+        // System.out.println("Average Availability: " + (totalAvailability /
+        // totalNodes));
+        // System.out.println();
+        // System.out.println();
+
         return availability;
     }
 
@@ -164,17 +178,28 @@ public class Flooding implements Control {
         queue = new ArrayDeque<Integer>();
         hop = new HashMap<Integer, Integer>();
         connection = new HashMap<Integer, Integer>();
-        coverNodes = new HashMap<Integer, ArrayList<Integer>>();
 
         for (int i = 0; i < nodes.size(); i++) {
             int nodeId = nodes.get(i);
             if (SharedData.getNode(nodeId).getServerState()) {
                 addedNodes.add(nodeId);
                 queue.add(nodeId);
-                hop.put(nodeId, 0);
-                coverNodes.put(nodeId, new ArrayList<Integer>());
+                hop.put(nodeId, 1);
             }
         }
+    }
+
+    private static void initialize(int nodeId) {
+        addedNodes = new ArrayList<Integer>();
+        queue = new ArrayDeque<Integer>();
+        connection = new HashMap<Integer, Integer>();
+        hop = new HashMap<Integer, Integer>();
+
+        // if (SharedData.getNode(nodeId).getServerState()) {
+        addedNodes.add(nodeId);
+        queue.add(nodeId);
+        hop.put(nodeId, 1);
+        // }
     }
 
     private static void initialize(int nodeId, int algorithmId, Content content) {
@@ -194,40 +219,57 @@ public class Flooding implements Control {
         // System.out.println("Start Node ID: " + nodeId);
     }
 
-    private static void setCoverNodes(Integer neighborId) {
-        int parentId = neighborId;
-        while (Objects.nonNull(connection.get(parentId))) {
-            parentId = connection.get(parentId);
+    private static double searchReplica(ArrayList<Integer> placementNodes, int nodeIndex) {
+        initialize(nodeIndex);
+
+        while (Objects.nonNull(queue.peek())) {
+            SurrogateServer node = SharedData.getNode(queue.poll());
+            int nodeId = node.getIndex();
+            // System.out.printf("%d(%d) : ", nodeId, hop.get(nodeId));
+
+            if (placementNodes.contains(nodeId)) {
+                // System.out.println();
+                return calculatePathAvailability(nodeId);
+            }
+
+            Link link = SharedData.getLink(node);
+
+            for (int index = 0; index < link.degree(); index++) {
+                SurrogateServer neighbor = (SurrogateServer) link.getNeighbor(index);
+                int neighborId = neighbor.getIndex();
+
+                if (!addedNodes.contains(neighborId)) {
+                    // System.out.printf("%d, ", neighborId);
+                    addedNodes.add(neighborId);
+                    queue.add(neighborId);
+                    connection.put(neighborId, nodeId);
+                    hop.put(neighborId, hop.get(nodeId) + 1);
+                }
+            }
+            // System.out.println();
         }
 
-        ArrayList<Integer> coveringNodes = coverNodes.get(parentId);
-        coveringNodes.add(neighborId);
-        coverNodes.replace(parentId, coveringNodes);
+        System.exit(0);
+        // System.out.println("ERROR: Replica Not Found");
+        return -1;
     }
 
-    private static void calculateAvailability(int totalReplicas) {
-        double totalAvailability = 0;
-        for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode : coverNodes.entrySet()) {
-            SurrogateServer replicaNode = SharedData.getNode(coverNode.getKey());
+    private static double calculatePathAvailability(int nodeId) {
+        double pathAvailability = SharedData.getNode(nodeId).getAvailability();
 
-            double totalAvailabilityPerReplica = replicaNode.getAvailability();
-
-            for (Integer coveredNodeId : coverNode.getValue()) {
-                SurrogateServer node = SharedData.getNode(coveredNodeId);
-
-                double totalAvailabilityPerPath = 1.0;
-                totalAvailabilityPerPath *= node.getAvailability();
-
-                Integer parentId = coveredNodeId;
-                while (Objects.nonNull(connection.get(parentId))) {
-                    parentId = connection.get(parentId);
-                    totalAvailabilityPerPath *= SharedData.getNode(parentId).getAvailability();
-                }
-                totalAvailabilityPerReplica += totalAvailabilityPerPath;
-            }
-            totalAvailability += totalAvailabilityPerReplica / ((double) coverNode.getValue().size() + 1);
+        int parentId = nodeId;
+        // System.out.println(" " + parentId + "(" +
+        // SharedData.getNode(parentId).getAvailability() + ")");
+        while (Objects.nonNull(connection.get(parentId))) {
+            parentId = connection.get(parentId);
+            // System.out.println(" " + parentId + "(" +
+            // SharedData.getNode(parentId).getAvailability() + ")");
+            pathAvailability *= SharedData.getNode(parentId).getAvailability();
         }
-        availability = totalAvailability / ((double) totalReplicas);
+
+        // System.out.println("Path Availability: " + pathAvailability);
+
+        return pathAvailability;
     }
 
     private static double calculateAverage() {
@@ -317,9 +359,8 @@ public class Flooding implements Control {
     }
 
     public static String getData() {
-        return "Number of Searched Nodes: " + String.valueOf(searchedNodes) + "\nTotal Hops: "
-                + String.valueOf(totalHops) + "\nAverage Hops: "
-                + String.valueOf((double) totalHops / (double) searchedNodes);
+        return "Number of Searched Nodes: " + searchedNodes + "\nTotal Hops: " + totalHops + "\nAverage Hops: "
+                + ((double) totalHops / (double) searchedNodes) + "\nAvailability: " + availability;
     }
 
     public static String getPath() {
