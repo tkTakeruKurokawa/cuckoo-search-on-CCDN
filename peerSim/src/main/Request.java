@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import peersim.cdsim.CDState;
 import peersim.core.Control;
@@ -18,7 +19,12 @@ public class Request implements Control {
     private static ArrayList<CostOfNetwork> networkCosts;
     private static ArrayList<CostOfOperation> operationCosts;
 
-    private static PrintWriter writer;
+    private static PrintWriter resultWriter;
+    private static PrintWriter compareWriter;
+
+    private static List<String> costCompare;
+    private static List<String> hopCompare;
+    private static List<String> failCompare;
 
     private void createCosts(String name) {
         networkCosts.add(new CostOfNetwork(name, totalCycles));
@@ -41,13 +47,60 @@ public class Request implements Control {
             createCosts(SharedData.getAlgorithmName(algorithmId));
         }
 
+        costCompare = new ArrayList<>();
+        hopCompare = new ArrayList<>();
+        failCompare = new ArrayList<>();
+
         try {
-            writer = new PrintWriter(new BufferedWriter(
+            resultWriter = new PrintWriter(new BufferedWriter(
                     new FileWriter(SharedData.getDirectoryName() + "/Simulation_Result.txt", false)));
+            compareWriter = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Compare_to_Cuckoo.txt", false)));
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
         }
+    }
+
+    @Override
+    public boolean execute() {
+
+        System.out.println();
+        System.out.println();
+
+        resetProcessingCapacity();
+
+        resetCycleCost();
+        ArrayList<Integer> randomContentIndices = new ArrayList<>(contentIndices);
+        for (int contentCount = 0; contentCount < totalContents; contentCount++) {
+            Content content = getRandomContent(randomContentIndices);
+
+            resetContentCost(content.getRequest());
+
+            search(content);
+
+            calculateCycleCost(content);
+        }
+
+        calculateSimulationCost();
+        System.out.println();
+        System.out.println();
+
+        if ((CDState.getCycle() + 1) % 100 == 0) {
+            calculateCompare(CDState.getCycle() + 1);
+        }
+
+        if (CDState.getCycle() == totalCycles - 1) {
+            showSimulationCost();
+            writeCompare();
+            resultWriter.close();
+            compareWriter.close();
+            CuckooSearch.closeFile();
+            GreedyAlgorithm.closeFile();
+            SharedData.closeFile();
+        }
+
+        return false;
     }
 
     private void resetProcessingCapacity() {
@@ -219,54 +272,87 @@ public class Request implements Control {
             System.out.println("Total Cost: " + totalCost + ", Average: " + ((double) totalCost / cycle));
             System.out.println("==================================================================");
 
-            writer.println("==================================================================");
-            writer.println(SharedData.getAlgorithmName(algorithmId));
-            writer.println("All Requests: " + request + ", Average: " + (((double) request) / cycle));
-            writer.println("All Hops: " + hop + ", Average: " + (((double) hop) / cycle));
-            writer.println("All Fails: " + fail + ", Average: " + (((double) fail) / cycle));
-            writer.println("All Storage Used: " + storage + ", Average: " + (((double) storage) / cycle));
-            writer.println("All Processing Used: " + processing + ", Average: " + (((double) processing) / cycle));
-            writer.println(
+            resultWriter.println("==================================================================");
+            resultWriter.println(SharedData.getAlgorithmName(algorithmId));
+            resultWriter.println("All Requests: " + request + ", Average: " + (((double) request) / cycle));
+            resultWriter.println("All Hops: " + hop + ", Average: " + (((double) hop) / cycle));
+            resultWriter.println("All Fails: " + fail + ", Average: " + (((double) fail) / cycle));
+            resultWriter.println("All Storage Used: " + storage + ", Average: " + (((double) storage) / cycle));
+            resultWriter
+                    .println("All Processing Used: " + processing + ", Average: " + (((double) processing) / cycle));
+            resultWriter.println(
                     "All Transmission Used: " + transmission + ", Average: " + (((double) transmission) / cycle));
-            writer.println("Total Cost: " + totalCost + ", Average: " + ((double) totalCost / cycle));
-            writer.println("==================================================================");
-            writer.println("\n\n");
+            resultWriter.println("Total Cost: " + totalCost + ", Average: " + ((double) totalCost / cycle));
+            resultWriter.println("==================================================================");
+            resultWriter.println("\n\n");
         }
     }
 
-    @Override
-    public boolean execute() {
+    private static void calculateCompare(int cycle) {
+        CostOfNetwork networkCostCuckoo = networkCosts.get(0);
+        CostOfOperation operationCostCuckoo = operationCosts.get(0);
+        int totalCostCuckoo = operationCostCuckoo.getSimulationStorage() + operationCostCuckoo.getSimulationProcessing()
+                + operationCostCuckoo.getSimulationTransmission();
+        int hopCuckoo = networkCostCuckoo.getSimulationHops();
+        int failCuckoo = networkCostCuckoo.getSimulationFails();
 
-        System.out.println();
-        System.out.println();
+        if (cycle == 100) {
+            costCompare
+                    .add("Cumulative Total Cost\n==================================================================");
+            hopCompare.add("Cumulative Hops\n==================================================================");
+            failCompare.add("Cumulative Fails\n==================================================================");
+        }
+        costCompare.add(cycle + " cycle");
+        hopCompare.add(cycle + " cycle");
+        failCompare.add(cycle + " cycle");
 
-        resetProcessingCapacity();
+        for (int algorithmId = 1; algorithmId < totalAlgorithms; algorithmId++) {
+            CostOfNetwork networkCost = networkCosts.get(algorithmId);
+            CostOfOperation operationCost = operationCosts.get(algorithmId);
+            int totalCost = operationCost.getSimulationStorage() + operationCost.getSimulationProcessing()
+                    + operationCost.getSimulationTransmission();
+            int hop = networkCost.getSimulationHops();
+            int fail = networkCost.getSimulationFails();
 
-        resetCycleCost();
-        ArrayList<Integer> randomContentIndices = new ArrayList<>(contentIndices);
-        for (int contentCount = 0; contentCount < totalContents; contentCount++) {
-            Content content = getRandomContent(randomContentIndices);
-
-            resetContentCost(content.getRequest());
-
-            search(content);
-
-            calculateCycleCost(content);
+            addCompare(cycle, totalCostCuckoo, totalCost, SharedData.getAlgorithmName(algorithmId), costCompare);
+            addCompare(cycle, hopCuckoo, hop, SharedData.getAlgorithmName(algorithmId), hopCompare);
+            addCompare(cycle, failCuckoo, fail, SharedData.getAlgorithmName(algorithmId), failCompare);
         }
 
-        calculateSimulationCost();
-        System.out.println();
-        System.out.println();
-
-        if (CDState.getCycle() == totalCycles - 1) {
-            showSimulationCost();
-            writer.close();
-            CuckooSearch.closeFile();
-            GreedyAlgorithm.closeFile();
-            SharedData.closeFile();
+        if (cycle == totalCycles) {
+            costCompare.add("==================================================================\n\n");
+            hopCompare.add("==================================================================\n\n");
+            failCompare.add("==================================================================\n\n");
+        } else {
+            costCompare.add("");
+            hopCompare.add("");
+            failCompare.add("");
         }
-
-        return false;
     }
 
+    private static void addCompare(int cycle, double cuckooValue, double otherValue, String name, List<String> list) {
+        if (cuckooValue > otherValue) {
+            double value = (1.0 - (otherValue / cuckooValue)) * 100.0;
+            double roundValue = ((double) Math.round(value * 100)) / 100;
+            list.add(name + ": " + "+" + roundValue);
+        } else if (cuckooValue < otherValue) {
+            double value = (1.0 - (cuckooValue / otherValue)) * 100.0;
+            double roundValue = ((double) Math.round(value * 100)) / 100;
+            list.add(name + ": " + "-" + roundValue);
+        } else {
+            list.add(name + ": " + "0.00");
+        }
+    }
+
+    private static void writeCompare() {
+        writeFile(costCompare);
+        writeFile(hopCompare);
+        writeFile(failCompare);
+    }
+
+    private static void writeFile(List<String> list) {
+        for (String string : list) {
+            compareWriter.println(string);
+        }
+    }
 }
