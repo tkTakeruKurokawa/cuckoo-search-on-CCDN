@@ -1,6 +1,6 @@
 ############## Variable ###############
 
-totalNodes 50.0
+totalNodes 1000.0
 totalContents 100.0
 totalCycles 500
 users 100.0
@@ -9,7 +9,7 @@ maxStorageCapacity 100.0
 maxProcessingCapacity 100.0
 maxTransmissionCapacity 100.0
 totalTrials 500.0
-failureMagnification 0.1
+failureMagnification 1.0
 
 ############## Network ###############
 
@@ -42,7 +42,7 @@ init.sd.link link
 init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
-init.sd.directoryName Nodes50
+init.sd.directoryName Nodes1000
 
 init.p Parameters
 init.p.weibullShape 1.0
