@@ -1,6 +1,10 @@
 package main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import peersim.config.Configuration;
 import peersim.core.Control;
@@ -21,6 +25,10 @@ public class ObjectiveFunction implements Control {
     private static double cost;
     private static double availability;
     private static double total;
+
+    private static List<PrintWriter> availabilityWriter;
+    private static List<PrintWriter> evaluationWriter;
+    private static PrintWriter costWriter;
 
     public ObjectiveFunction(String prefix) {
         totalNodes = Network.size() - 1;
@@ -78,7 +86,69 @@ public class ObjectiveFunction implements Control {
 
     @Override
     public boolean execute() {
+        availabilityWriter = new ArrayList<>();
+        evaluationWriter = new ArrayList<>();
+        String[] names = { "Replica", "Whole" };
+
+        createFile(names);
+
+        Content content = SharedData.getContent(3);
+        ArrayList<Integer> placementNodes = new ArrayList<>();
+        ArrayList<Integer> random = new ArrayList<>();
+        for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
+            random.add(nodeId);
+        }
+
+        for (int i = 1; i <= Network.size(); i++) {
+            int index = SharedData.getRandomIntForObjectiveFunction(random.size());
+            placementNodes.add(random.get(index));
+            random.remove(index);
+            Flooding.getAverageHops(placementNodes);
+            writeFile(i, content);
+        }
+
+        closeFile(names);
         return false;
     }
 
+    private static void createFile(String[] names) {
+        try {
+            for (String name : names) {
+                availabilityWriter.add(new PrintWriter(new BufferedWriter(new FileWriter(
+                        SharedData.getDirectoryName() + "/Transition_" + name + "_Availability.tsv", false))));
+                evaluationWriter.add(new PrintWriter(new BufferedWriter(new FileWriter(
+                        SharedData.getDirectoryName() + "/Transition_" + name + "_Evaluation.tsv", false))));
+            }
+            costWriter = new PrintWriter(
+                    new BufferedWriter(new FileWriter(SharedData.getDirectoryName() + "/Transition_Cost.tsv", false)));
+
+        } catch (Exception e) {
+            System.out.println(e);
+            System.exit(0);
+        }
+    }
+
+    private static void writeFile(int totalReplicas, Content content) {
+        double totalRequests = content.getPopularity() * (double) totalNodes * (double) users;
+        double contentLoad = totalRequests * ((double) content.getSize());
+        double totalCost = totalReplicas * content.getSize();
+
+        double value = Flooding.calculateReplicaAvailability(totalReplicas);
+        availabilityWriter.get(0).println(totalReplicas + "\t" + value);
+        evaluationWriter.get(0).println(totalReplicas + "\t" + ((contentLoad / value) + totalCost));
+
+        value = Flooding.calculateWholeAvailability();
+        availabilityWriter.get(1).println(totalReplicas + "\t" + value);
+        evaluationWriter.get(1).println(totalReplicas + "\t" + ((contentLoad / value) + totalCost));
+
+        costWriter.println(totalReplicas + "\t" + totalCost);
+    }
+
+    private static void closeFile(String[] names) {
+        for (int i = 0; i < names.length; i++) {
+            availabilityWriter.get(i).close();
+            evaluationWriter.get(i).close();
+        }
+        costWriter.close();
+    }
 }

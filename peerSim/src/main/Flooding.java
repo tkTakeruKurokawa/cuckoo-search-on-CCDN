@@ -2,7 +2,6 @@ package main;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Queue;
@@ -87,7 +86,9 @@ public class Flooding implements Control {
         }
 
         // System.out.println("Total Nodes: " + addedNodes.size());
-        calculateAvailability(nodes);
+        // calculateAvailability();
+        calculateReplicaAvailability(nodes.size());
+        // calculateWholeAvailability();
         return calculateAverage();
     }
 
@@ -206,60 +207,24 @@ public class Flooding implements Control {
         coverNodes.replace(parentId, coveringNodes);
     }
 
-    private static void calculateAvailability(ArrayList<Integer> placementNodes) {
-        // System.out.println("########## Replica Nodes ##########");
-        // System.out.println(placementNodes.toString());
+    private static void calculateAvailability() {
         double totalAvailability = 0.0;
 
         ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
-        // Collections.sort(reachableNodes);
         for (Integer nodeId : reachableNodes) {
             double pathAvailability = SharedData.getNode(nodeId).getAvailability();
 
             int parentId = nodeId;
-            // System.out.println(" " + parentId + "(" +
-            // SharedData.getNode(parentId).getAvailability() + ")");
             while (Objects.nonNull(connection.get(parentId))) {
                 parentId = connection.get(parentId);
-                // System.out.println(" " + parentId + "(" +
-                // SharedData.getNode(parentId).getAvailability() + ")");
                 pathAvailability *= SharedData.getNode(parentId).getAvailability();
             }
-            // System.out.println("Path Availability: " + pathAvailability);
-            // System.out.println("===================================================");
             totalAvailability += pathAvailability;
         }
 
         double totalNodes = reachableNodes.size();
 
         availability = totalAvailability / totalNodes;
-        // System.out.println("Average Availability: " + availability);
-        // System.out.println();
-        // System.out.println();
-
-        // for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode :
-        // coverNodes.entrySet()) {
-        // SurrogateServer replicaNode = SharedData.getNode(coverNode.getKey());
-
-        // totalAvailability += replicaNode.getAvailability();
-        // totalNodes++;
-
-        // for (Integer coveredNodeId : coverNode.getValue()) {
-        // SurrogateServer node = SharedData.getNode(coveredNodeId);
-
-        // double totalAvailabilityPerPath = 1.0;
-        // totalAvailabilityPerPath *= node.getAvailability();
-
-        // Integer parentId = coveredNodeId;
-        // while (Objects.nonNull(connection.get(parentId))) {
-        // parentId = connection.get(parentId);
-        // totalAvailabilityPerPath *= SharedData.getNode(parentId).getAvailability();
-        // }
-        // totalAvailability += totalAvailabilityPerPath;
-        // }
-        // totalNodes += ((double) coverNode.getValue().size());
-        // }
-        // availability = totalAvailability / totalNodes;
     }
 
     private static double calculateAverage() {
@@ -360,6 +325,54 @@ public class Flooding implements Control {
 
     public static String getAllPath() {
         return allPath;
+    }
+
+    public static double calculateReplicaAvailability(double totalReplicas) {
+        double totalAvailability = 0;
+        for (HashMap.Entry<Integer, ArrayList<Integer>> coverNode : coverNodes.entrySet()) {
+            SurrogateServer replicaNode = SharedData.getNode(coverNode.getKey());
+
+            double totalAvailabilityPerReplica = replicaNode.getAvailability();
+
+            for (Integer coveredNodeId : coverNode.getValue()) {
+                SurrogateServer node = SharedData.getNode(coveredNodeId);
+
+                double totalAvailabilityPerPath = 1.0;
+                totalAvailabilityPerPath *= node.getAvailability();
+
+                Integer parentId = coveredNodeId;
+                while (Objects.nonNull(connection.get(parentId))) {
+                    parentId = connection.get(parentId);
+                    totalAvailabilityPerPath *= SharedData.getNode(parentId).getAvailability();
+                }
+                totalAvailabilityPerReplica += totalAvailabilityPerPath;
+            }
+            totalAvailability += totalAvailabilityPerReplica / ((double) coverNode.getValue().size() + 1);
+        }
+
+        availability = totalAvailability / totalReplicas;
+        return availability;
+    }
+
+    public static double calculateWholeAvailability() {
+        double totalAvailability = 0.0;
+
+        ArrayList<Integer> reachableNodes = Flooding.getReachableNodes();
+        for (Integer nodeId : reachableNodes) {
+            double pathAvailability = SharedData.getNode(nodeId).getAvailability();
+
+            int parentId = nodeId;
+            while (Objects.nonNull(connection.get(parentId))) {
+                parentId = connection.get(parentId);
+                pathAvailability *= SharedData.getNode(parentId).getAvailability();
+            }
+            totalAvailability += pathAvailability;
+        }
+
+        double totalNodes = reachableNodes.size();
+
+        availability = totalAvailability / totalNodes;
+        return availability;
     }
 
     @Override

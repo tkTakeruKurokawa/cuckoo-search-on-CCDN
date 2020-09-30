@@ -29,6 +29,7 @@ public class SharedData implements Control {
 	private static Random randomForRandom;
 	private static Random randomForFailure;
 	private static Random randomForParameters;
+	private static Random randomForObjectiveFunction;
 	private static ArrayList<Content> contentSet;
 	private static ArrayList<Content> replicatedContents;
 	private static ArrayList<String> algorithmNames;
@@ -61,6 +62,7 @@ public class SharedData implements Control {
 		randomForRandom = new Random(3L);
 		randomForFailure = new Random(4L);
 		randomForParameters = new Random(5L);
+		randomForObjectiveFunction = new Random(6L);
 
 		originIndices = new HashMap<>();
 		originIndices.put(50, 44);
@@ -147,6 +149,10 @@ public class SharedData implements Control {
 
 	public static double getRandomDoubleForParameters() {
 		return randomForParameters.nextDouble();
+	}
+
+	public static int getRandomIntForObjectiveFunction(int upperLimit) {
+		return randomForObjectiveFunction.nextInt(upperLimit);
 	}
 
 	public static void searchReachableNodes() {
