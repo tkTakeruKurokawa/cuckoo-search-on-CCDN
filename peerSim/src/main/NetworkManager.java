@@ -15,8 +15,8 @@ public class NetworkManager implements Control {
         totalCycles = SharedData.getTotalCycles();
 
         try {
-            writer = new PrintWriter(
-                    new BufferedWriter(new FileWriter(SharedData.getDirectoryName() + "/Failed_Servers.tsv", false)));
+            writer = new PrintWriter(new BufferedWriter(
+                    new FileWriter(SharedData.getDirectoryName() + "/Number_of_Failure_Servers.tsv", false)));
         } catch (Exception e) {
         }
     }

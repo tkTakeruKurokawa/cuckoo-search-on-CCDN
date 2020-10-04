@@ -23,7 +23,7 @@ public class CostOfNetwork {
         this.totalCycles = totalCycles;
         this.failedHops = new int[Network.size()];
 
-        requests = new Cost("Average_Requests" + "[" + name + "]");
+        requests = new Cost("Number_of_Requests" + "[" + name + "]");
         hops = new Cost("Average_Hops" + "[" + name + "]");
         fails = new Cost("Average_Fails" + "[" + name + "]");
 
@@ -46,12 +46,16 @@ public class CostOfNetwork {
     }
 
     public void calculateSimulationCost() {
-        for (Cost cost : costs) {
-            int totalPerCycle = cost.getPerCycle();
-            int totalPerSimulation = cost.getPerSimulation();
-            cost.setPerSimulation(totalPerCycle + totalPerSimulation);
+        for (int i = 0; i < costs.size(); i++) {
+            int totalPerCycle = costs.get(i).getPerCycle();
+            int totalPerSimulation = costs.get(i).getPerSimulation();
+            costs.get(i).setPerSimulation(totalPerCycle + totalPerSimulation);
 
-            writeAverageCost(cost);
+            if (i == 0) {
+                writeNumberOfRequests(costs.get(i));
+            } else {
+                writeAverageCost(costs.get(i));
+            }
         }
         writeCumulativeCost(hops, hopsWriter);
         writeCumulativeCost(fails, failsWriter);
@@ -130,13 +134,23 @@ public class CostOfNetwork {
         failedHops[hops]++;
     }
 
+    private void writeNumberOfRequests(Cost cost) {
+        int cycle = CDState.getCycle();
+        int requests = cost.getPerCycle();
+        cost.addedDescription(cycle + "\t" + requests);
+
+        if (cycle == totalCycles - 1) {
+            cost.closeFile();
+        }
+    }
+
     private void writeAverageCost(Cost cost) {
         int cycle = CDState.getCycle() + 1;
         double average = ((double) cost.getPerSimulation()) / ((double) cycle);
         String description = CDState.getCycle() + "\t" + average;
         cost.addedDescription(description);
 
-        if (CDState.getCycle() == totalCycles - 1) {
+        if (cycle == totalCycles) {
             cost.closeFile();
         }
     }
