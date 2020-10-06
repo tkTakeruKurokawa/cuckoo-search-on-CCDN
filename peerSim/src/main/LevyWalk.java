@@ -70,7 +70,7 @@ public class LevyWalk implements Control {
     }
 
     private static ArrayList<Integer> createNewSolution(ArrayList<Integer> placementNodes, boolean isRemove) {
-        int totalChanges = levyDistribution();
+        int totalChanges = SharedData.getRandomIntForCuckoo(placementNodes.size());
         int startIndex = SharedData.getRandomIntForCuckoo(placementNodes.size());
         SurrogateServer startNode = SharedData.getNode(placementNodes.get(startIndex));
 

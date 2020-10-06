@@ -33,7 +33,7 @@ def main():
                 graph.add_edge(d[a], d[b])
 
     # print(pos)
-    nx.draw_networkx(graph, node_size=10, width=0.1, font_size=2, pos=pos)
+    nx.draw_networkx(graph, node_size=30, width=0.00001, font_size=2, pos=pos)
     plt.savefig(args.alt_file.name.split(".")[0] + '.eps')
 
 
