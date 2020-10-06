@@ -94,15 +94,25 @@ public class ObjectiveFunction implements Control {
 
         Content content = SharedData.getContent(3);
         ArrayList<Integer> placementNodes = new ArrayList<>();
-        ArrayList<Integer> random = new ArrayList<>();
-        for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
-            random.add(nodeId);
-        }
 
         for (int i = 1; i <= Network.size(); i++) {
-            int index = SharedData.getRandomIntForObjectiveFunction(random.size());
-            placementNodes.add(random.get(index));
-            random.remove(index);
+            double bestEvaluation = Double.MAX_VALUE;
+            int bestNode = -1;
+
+            for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
+                if (!placementNodes.contains(nodeId)) {
+                    ArrayList<Integer> nodes = new ArrayList<>(placementNodes);
+                    nodes.add(nodeId);
+
+                    double evaluation = Flooding.getAverageHops(nodes);
+                    if (evaluation < bestEvaluation) {
+                        bestEvaluation = evaluation;
+                        bestNode = nodeId;
+                    }
+                }
+            }
+
+            placementNodes.add(bestNode);
             Flooding.getAverageHops(placementNodes);
             writeFile(i, content);
         }
