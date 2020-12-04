@@ -3,8 +3,11 @@ package main;
 import peersim.core.*;
 
 import java.io.PrintWriter;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -50,25 +53,56 @@ public class SharedData implements Control {
 		}
 	}
 
-	public SharedData() {
+	public SharedData(int tryId) {
 		algorithmNames = new ArrayList<String>();
 		algorithmNames.add("Cuckoo_Search");
 		algorithmNames.add("Random");
 		algorithmNames.add("Greedy");
 		algorithmNames.add("Original_Only");
 
-		randomForRequest = new Random(1L);
-		randomForCuckoo = new Random(2L);
-		randomForRandom = new Random(3L);
-		randomForFailure = new Random(4L);
-		randomForParameters = new Random(5L);
-		randomForObjectiveFunction = new Random(6L);
+		int[] seeds = getSeeds("./src/main/Seeds/Seed" + tryId + ".txt");
+
+		// randomForRequest = new Random(seeds[0]);
+		// randomForCuckoo = new Random(seeds[1]);
+		// randomForRandom = new Random(seeds[2]);
+		// randomForFailure = new Random(seeds[3]);
+		// randomForParameters = new Random(seeds[4]);
+		// randomForObjectiveFunction = new Random(0L);
+		Random random = new Random(seeds[0]);
+		randomForRequest = random;
+		randomForCuckoo = random;
+		randomForRandom = random;
+		randomForFailure = random;
+		randomForParameters = random;
+		randomForObjectiveFunction = random;
 
 		originIndices = new HashMap<>();
 		originIndices.put(50, 44);
-		originIndices.put(100, 69);
+		originIndices.put(100, 19);
 		originIndices.put(500, 249);
 		originIndices.put(1000, 68);
+	}
+
+	private static int[] getSeeds(String filePath) {
+		int[] seeds = new int[5];
+
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(filePath)));
+
+			String line;
+			int count = 0;
+			while ((line = reader.readLine()) != null) {
+				seeds[count] = Integer.valueOf(line);
+				count++;
+			}
+
+			reader.close();
+		} catch (Exception e) {
+			System.out.println(e);
+			System.exit(0);
+		}
+
+		return seeds;
 	}
 
 	public static SurrogateServer getNode(int nodeIndex) {

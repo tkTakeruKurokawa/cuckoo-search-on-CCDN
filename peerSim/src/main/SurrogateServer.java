@@ -72,6 +72,8 @@ public class SurrogateServer implements Node {
 	private static int maxProcessingCapacity;
 	private static final String PAR_REPAIR_DURATION = "repairDuration";
 	private static int repairDuration;
+	private static final String PAR_TRY_ID = "tryId";
+	private static int tryId;
 
 	private static int totalAlgorithms;
 	private static int originId;
@@ -103,8 +105,9 @@ public class SurrogateServer implements Node {
 		maxStorageCapacity = Configuration.getInt(prefix + "." + PAR_MAX_STORAGE_CAPACITY);
 		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_PROCESSING_CAPACITY);
 		repairDuration = Configuration.getInt(prefix + "." + PAR_REPAIR_DURATION);
+		tryId = Configuration.getInt(prefix + "." + PAR_TRY_ID);
 
-		new SharedData();
+		new SharedData(tryId);
 		totalAlgorithms = SharedData.getTotalAlgorithms();
 		originId = SharedData.getOriginId(totalNodes);
 

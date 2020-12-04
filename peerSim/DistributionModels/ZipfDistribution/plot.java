@@ -17,7 +17,7 @@ public class plot {
                 denominator += Math.pow(n, s);
             }
 
-            for (int id = 1; id <= 501; id++) {
+            for (int id = 1; id <= 101; id++) {
                 double k = (double) id;
                 double result = Math.pow(k, s) / denominator;
 

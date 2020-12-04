@@ -13,7 +13,7 @@ echo "   5. Processing Capacity"
 echo "   6. Transmission Capacity"
 echo "   7. Failure Magnification"
 echo "Select a Number"
-read answer 
+read answer
 
 parameterName=${parameters[$answer]}
 directoryName=${names[$answer]}
@@ -22,25 +22,37 @@ echo "Input values"
 declare -a array=()
 read array
 
-values=""
+# values=""
+totalTry=10
 
 for value in ${array[@]}; do
   path="${directoryName}${value}"
-  rm result/${path}/eps/*.eps
-  rm result/${path}/*.tsv
-  rm result/${path}/*.txt
+  rm -rf result/${path}/
 
+  # java ChangeParameter ${parameterName} ${value} ${directoryName}
+  # values="$values$value,"
+
+  for ((tryCount=0; tryCount < $totalTry; tryCount++)); do
+    java ChangeParameter ${tryCount} ${parameterName} ${value} ${directoryName}
+    java -cp "src:peersim-1.0.5.jar:jep-2.3.0.jar:djep-1.0.0.jar" peersim.Simulator src/main/config.txt
+
+    cd ./result/
+    gnuplot plot.plot
+    cd ../
+  done
+
+  java ExtractStatistics ${totalTry} ${value} ${directoryName}
   java ChangeParameter ${parameterName} ${value} ${directoryName}
-  values="$values$value,"
-  java -cp "src:peersim-1.0.5.jar:jep-2.3.0.jar:djep-1.0.0.jar" peersim.Simulator src/main/config.txt
-  cd ./result/
-  gnuplot plot.plot
-  cd ../
-done
-
-rm -rf result/proposed/${directoryName}
-java ChangeParameter ${values} ${directoryName}
 
 cd ./result/
-gnuplot proposed.plot
+gnuplot average.plot
 cd ../
+
+done
+
+# rm -rf result/proposed/${directoryName}
+# java ChangeParameter ${values} ${directoryName}
+
+# cd ./result/
+# gnuplot proposed.plot
+# cd ../

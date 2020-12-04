@@ -7,6 +7,7 @@ public class ChangeParameter {
     private static String directoryName;
     private static String name;
     private static String[] data;
+    private static String tryCount;
 
     private static void run(String filePath) {
         try {
@@ -23,6 +24,9 @@ public class ChangeParameter {
                 }
                 if (filePath.contains("proposed.plot")) {
                     line = checkAndReplaceProposed(line);
+                }
+                if (filePath.contains("average.plot")) {
+                    line = checkAndReplaceAverage(line);
                 }
                 outputs.add(line);
             }
@@ -44,10 +48,13 @@ public class ChangeParameter {
 
     private static String checkAndReplaceConfig(String line) {
         String[] words = line.split(" ");
+
         if (words[0].equals(parameterName)) {
             return words[0] + " " + parameterValue;
         } else if (words[0].equals("init.sd.directoryName")) {
-            return "init.sd.directoryName" + " " + directoryName;
+            return "init.sd.directoryName" + " " + directoryName + "/" + tryCount;
+        } else if (words[0].equals("tryId")) {
+            return "tryId" + " " + tryCount;
         }
 
         return line;
@@ -55,8 +62,9 @@ public class ChangeParameter {
 
     private static String checkAndReplacePlot(String line) {
         String[] words = line.split("=");
+
         if (words[0].equals("filePath")) {
-            return "filePath=" + "\"./" + directoryName + "\"";
+            return "filePath=" + "\"./" + directoryName + "/" + tryCount + "\"";
         }
 
         return line;
@@ -64,6 +72,7 @@ public class ChangeParameter {
 
     private static String checkAndReplaceProposed(String line) {
         String[] words = line.split("=");
+
         if (words[0].equals("elements")) {
             return "elements=" + data.length;
         } else if (words[0].equals("directoryName")) {
@@ -84,21 +93,18 @@ public class ChangeParameter {
         return line;
     }
 
+    private static String checkAndReplaceAverage(String line) {
+        String[] words = line.split("=");
+
+        if (words[0].equals("filePath")) {
+            return "filePath=" + "\"./" + directoryName + "/" + "\"";
+        }
+
+        return line;
+    }
+
     public static void main(String[] args) {
-        if (args.length == 3) {
-            parameterName = String.valueOf(args[0]);
-            parameterValue = Double.valueOf(args[1]);
-            name = String.valueOf(args[2]);
-            directoryName = name + args[1];
-
-            File dir = new File("result/" + directoryName + "/eps");
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-
-            run("./src/main/config.txt");
-            run("./result/plot.plot");
-        } else {
+        if (args.length == 2) {
             data = args[0].split(",");
             name = String.valueOf(args[1]);
 
@@ -108,6 +114,37 @@ public class ChangeParameter {
             }
 
             run("./result/proposed.plot");
+        } else if (args.length == 3) {
+            parameterName = args[0];
+            parameterValue = Double.valueOf(args[1]);
+            name = String.valueOf(args[2]);
+            directoryName = name + args[1];
+
+            File dir = new File("result/" + directoryName + "/eps");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            run("./result/average.plot");
+
+        } else if (args.length == 4) {
+            tryCount = args[0];
+            parameterName = args[1];
+            parameterValue = Double.valueOf(args[2]);
+            name = String.valueOf(args[3]);
+            directoryName = name + args[2];
+
+            File dir = new File("result/" + directoryName + "/" + tryCount + "/eps");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            run("./src/main/config.txt");
+            run("./result/plot.plot");
+
+        } else {
+            System.out.println("Bad arguments");
+            System.exit(0);
         }
     }
 }
