@@ -43,6 +43,7 @@ for value in ${array[@]}; do
 
   java ExtractStatistics ${totalTry} ${value} ${directoryName}
   java ChangeParameter ${parameterName} ${value} ${directoryName}
+  java ExtractDifference ${directoryName} ${value}
 
 cd ./result/
 gnuplot average.plot
