@@ -1,9 +1,9 @@
-filePath="./Nodes100/9"
+filePath="./Nodes1000/9"
 
 
 ####################################################################################################
-set autoscale x 
-# set yrange 
+set autoscale x
+# set yrange
 set xlabel 'Number of Replicas'
 set ylabel 'Average Shortest Path Availability'
 set key left top
@@ -18,8 +18,8 @@ replot
 
 
 
-set autoscale x 
-# set yrange 
+set autoscale x
+# set yrange
 set xlabel 'Number of Replicas'
 set ylabel 'Operational Cost'
 
@@ -32,8 +32,8 @@ replot
 
 
 
-set autoscale x 
-# set yrange 
+set autoscale x
+# set yrange
 set xlabel 'Number of Replicas'
 set ylabel 'Value Of Objective Function'
 set key right top
@@ -53,7 +53,7 @@ replot
 
 
 # set xrange [0:500]
-# # set yrange 
+# # set yrange
 # set xlabel 'Number of Cycles'
 # set ylabel 'Average Storage Usage'
 # set key left top
@@ -71,7 +71,7 @@ replot
 
 
 # set xrange [0:500]
-# # set yrange 
+# # set yrange
 # set xlabel 'Number of Cycles'
 # set ylabel 'Average Processing Usage'
 # set key left top
@@ -89,7 +89,7 @@ replot
 
 
 # set xrange [0:500]
-# # set yrange 
+# # set yrange
 # set xlabel 'Number of Cycles'
 # set ylabel 'Average Transmission Usage'
 # set key left top
@@ -107,7 +107,7 @@ replot
 
 
 # set xrange [0:500]
-# # set yrange 
+# # set yrange
 # set xlabel 'Number of Cycles'
 # set ylabel 'Average Total Usage'
 # set key left top
@@ -125,7 +125,7 @@ replot
 
 
 # set xrange [0:500]
-# # set yrange 
+# # set yrange
 # set xlabel 'Number of Cycles'
 # set ylabel 'Average Request Hops'
 # set key right top
@@ -143,7 +143,7 @@ replot
 
 
 # set xrange [0:500]
-# # set yrange 
+# # set yrange
 # set xlabel 'Number of Cycles'
 # set ylabel 'Average Failed Requests'
 # set key left top
@@ -165,7 +165,61 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+# set yrange
+set xlabel 'Number of Cycles'
+set ylabel 'Cumulative Storage Usage'
+set key left top
+
+plot filePath."/Cumulative_Storage[Original_Only].tsv"  with lines title "Original Only"  lw 3 lc rgb "magenta",\
+filePath."/Cumulative_Storage[Random].tsv" with lines title "Random" lw 3 lc rgb "forest-green",\
+filePath."/Cumulative_Storage[Greedy].tsv" with lines title "Greedy" lw 3 lc rgb "blue",\
+filePath."/Cumulative_Storage[Cuckoo_Search].tsv" with lines title "Proposed" lw 3 lc rgb "red",\
+
+unset table
+set output filePath.'/eps/Cumulative_Storage.eps'
+set terminal postscript eps color
+replot
+
+
+
+set xrange [0:500]
+# set yrange
+set xlabel 'Number of Cycles'
+set ylabel 'Cumulative Processing Usage'
+set key left top
+
+plot filePath."/Cumulative_Processing[Original_Only].tsv"  with lines title "Original Only"  lw 3 lc rgb "magenta",\
+filePath."/Cumulative_Processing[Random].tsv" with lines title "Random" lw 3 lc rgb "forest-green",\
+filePath."/Cumulative_Processing[Greedy].tsv" with lines title "Greedy" lw 3 lc rgb "blue",\
+filePath."/Cumulative_Processing[Cuckoo_Search].tsv" with lines title "Proposed" lw 3 lc rgb "red",\
+
+unset table
+set output filePath.'/eps/Cumulative_Processing.eps'
+set terminal postscript eps color
+replot
+
+
+
+set xrange [0:500]
+# set yrange
+set xlabel 'Number of Cycles'
+set ylabel 'Cumulative Transmission Usage'
+set key left top
+
+plot filePath."/Cumulative_Transmission[Original_Only].tsv"  with lines title "Original Only"  lw 3 lc rgb "magenta",\
+filePath."/Cumulative_Transmission[Random].tsv" with lines title "Random" lw 3 lc rgb "forest-green",\
+filePath."/Cumulative_Transmission[Greedy].tsv" with lines title "Greedy" lw 3 lc rgb "blue",\
+filePath."/Cumulative_Transmission[Cuckoo_Search].tsv" with lines title "Proposed" lw 3 lc rgb "red",\
+
+unset table
+set output filePath.'/eps/Cumulative_Transmission.eps'
+set terminal postscript eps color
+replot
+
+
+
+set xrange [0:500]
+# set yrange
 set xlabel 'Number of Cycles'
 set ylabel 'Cumulative Total Usage'
 set key left top
@@ -183,7 +237,7 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+# set yrange
 set xlabel 'Number of Cycles'
 set ylabel 'Cumulative Request Hops'
 set key left top
@@ -201,7 +255,7 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+# set yrange
 set xlabel 'Number of Cycles'
 set ylabel 'Cumulative Failed Requests'
 set key left top
@@ -219,7 +273,7 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+# set yrange
 set xlabel 'Number of Cycles'
 set ylabel 'Number of Requests'
 
@@ -233,7 +287,7 @@ replot
 
 
 set xrange [0:500]
-# set yrange 
+# set yrange
 set xlabel 'Number of Cycles'
 set ylabel 'Number of Failure Servers'
 
@@ -246,8 +300,8 @@ replot
 
 
 
-set autoscale x 
-# set yrange 
+set autoscale x
+# set yrange
 set xlabel 'Place of Failed Hop'
 set ylabel 'Number of Failed Requests'
 set key right top
@@ -265,7 +319,7 @@ replot
 
 
 # set xrange [0:500]
-# set yrange [0:] 
+# set yrange [0:]
 # set xlabel 'Number of Cycles'
 # set ylabel 'Cumulative Lack of Processing'
 # set key left top
@@ -284,7 +338,7 @@ replot
 
 
 # set xrange [0:500]
-# set yrange [0:] 
+# set yrange [0:]
 # set xlabel 'Number of Cycles'
 # set ylabel 'Cumulative Lack of Transmission'
 # set key left top

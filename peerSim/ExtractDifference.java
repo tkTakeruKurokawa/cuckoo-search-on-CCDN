@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
-import java.math.BigDecimal;
 
 public class ExtractDifference {
     private static List<List<Double>> failedRequests;

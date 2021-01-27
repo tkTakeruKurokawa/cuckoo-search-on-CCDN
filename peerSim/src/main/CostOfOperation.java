@@ -19,9 +19,9 @@ public class CostOfOperation {
     public CostOfOperation(String name, int totalCycles) {
         this.totalCycles = totalCycles;
 
-        storage = new Cost("Average_Storage" + "[" + name + "]");
-        processing = new Cost("Average_Processing" + "[" + name + "]");
-        transmission = new Cost("Average_Transmission" + "[" + name + "]");
+        storage = new Cost("Cumulative_Storage" + "[" + name + "]");
+        processing = new Cost("Cumulative_Processing" + "[" + name + "]");
+        transmission = new Cost("Cumulative_Transmission" + "[" + name + "]");
 
         costs = new ArrayList<>();
         costs.add(storage);
@@ -45,7 +45,7 @@ public class CostOfOperation {
             int totalPerSimulation = cost.getPerSimulation();
             cost.setPerSimulation(totalPerCycle + totalPerSimulation);
 
-            writeAverageCost(cost);
+            writeCumulativeCost(cost);
         }
 
         writeTotalCost();
@@ -119,10 +119,8 @@ public class CostOfOperation {
         return transmission.getPerContent();
     }
 
-    private void writeAverageCost(Cost cost) {
-        int cycle = CDState.getCycle() + 1;
-        double average = ((double) cost.getPerSimulation()) / ((double) cycle);
-        String description = CDState.getCycle() + "\t" + average;
+    private void writeCumulativeCost(Cost cost) {
+        String description = CDState.getCycle() + "\t" + ((double) cost.getPerSimulation());
         cost.addedDescription(description);
 
         if (CDState.getCycle() == totalCycles - 1) {

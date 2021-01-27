@@ -1,0 +1,87 @@
+==================================================================
+Failed Requests
+
+
+100 cycle
+Random	-32.04
+Greedy	-80.49
+Original_Only	-83.37
+
+200 cycle
+Random	-31.45
+Greedy	-77.14
+Original_Only	-81.7
+
+300 cycle
+Random	-26.75
+Greedy	-75.49
+Original_Only	-80.34
+
+400 cycle
+Random	-28.23
+Greedy	-68.83
+Original_Only	-74.73
+
+500 cycle
+Random	-25.12
+Greedy	-69.52
+Original_Only	-76.02
+
+==================================================================
+Total Costs
+
+
+100 cycle
+Random	-60.6
+Greedy	+71.99
+Original_Only	+85.0
+
+200 cycle
+Random	-70.34
+Greedy	+70.39
+Original_Only	+85.19
+
+300 cycle
+Random	-71.1
+Greedy	+70.52
+Original_Only	+86.04
+
+400 cycle
+Random	-66.44
+Greedy	+74.28
+Original_Only	+87.91
+
+500 cycle
+Random	-65.15
+Greedy	+74.28
+Original_Only	+88.2
+
+==================================================================
+Number of Hops
+
+
+100 cycle
+Random	+11.62
+Greedy	+0.39
+Original_Only	+25.66
+
+200 cycle
+Random	+20.38
+Greedy	-5.01
+Original_Only	+24.26
+
+300 cycle
+Random	+6.89
+Greedy	-6.67
+Original_Only	+23.04
+
+400 cycle
+Random	+8.25
+Greedy	-9.73
+Original_Only	+18.65
+
+500 cycle
+Random	+4.06
+Greedy	-14.66
+Original_Only	+16.34
+

@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 public class ExtractStatistics {
     private static List<Statistics> failedRequests;
     private static List<Statistics> numOfHops;
+    private static List<Statistics> storageCosts;
+    private static List<Statistics> processingCosts;
+    private static List<Statistics> transmissionCosts;
     private static List<Statistics> costs;
     private static List<Statistics> failedHops;
     private static Statistics numOfRequests;
@@ -17,6 +20,9 @@ public class ExtractStatistics {
     private static void initialize(int totalTry) {
         failedRequests = new ArrayList<>();
         numOfHops = new ArrayList<>();
+        storageCosts = new ArrayList<>();
+        processingCosts = new ArrayList<>();
+        transmissionCosts = new ArrayList<>();
         costs = new ArrayList<>();
         failedHops = new ArrayList<>();
         numOfRequests = new Statistics(totalTry);
@@ -33,16 +39,23 @@ public class ExtractStatistics {
         for (int i = 0; i < algorithmNames.size(); i++) {
             failedRequests.add(new Statistics(totalTry));
             numOfHops.add(new Statistics(totalTry));
+            storageCosts.add(new Statistics(totalTry));
+            processingCosts.add(new Statistics(totalTry));
+            transmissionCosts.add(new Statistics(totalTry));
             costs.add(new Statistics(totalTry));
             failedHops.add(new Statistics(totalTry));
         }
 
         fileNames.add("Cumulative_Fails");
         fileNames.add("Cumulative_Hops");
+        fileNames.add("Cumulative_Storage");
+        fileNames.add("Cumulative_Processing");
+        fileNames.add("Cumulative_Transmission");
         fileNames.add("Cumulative_Total");
         fileNames.add("Failed_Hops_Distribution");
         fileNames.add("Number_of_Requests");
         fileNames.add("Number_of_Failure_Servers");
+        fileNames.add("Success_Ratio");
     }
 
     public static void main(String[] args) {
@@ -77,10 +90,18 @@ public class ExtractStatistics {
             writeResult(failedRequests, algorithmId, directoryPath, fullFileName, totalTry);
         } else if (fileName.equals("Cumulative_Hops")) {
             writeResult(numOfHops, algorithmId, directoryPath, fullFileName, totalTry);
+        } else if (fileName.equals("Cumulative_Storage")) {
+            writeResult(storageCosts, algorithmId, directoryPath, fullFileName, totalTry);
+        } else if (fileName.equals("Cumulative_Processing")) {
+            writeResult(processingCosts, algorithmId, directoryPath, fullFileName, totalTry);
+        } else if (fileName.equals("Cumulative_Transmission")) {
+            writeResult(transmissionCosts, algorithmId, directoryPath, fullFileName, totalTry);
         } else if (fileName.equals("Cumulative_Total")) {
             writeResult(costs, algorithmId, directoryPath, fullFileName, totalTry);
         } else if (fileName.equals("Failed_Hops_Distribution")) {
             writeResult(failedHops, algorithmId, directoryPath, fullFileName, totalTry);
+        } else if (fileName.equals("Success_Ratio")) {
+            writeSuccessRatio(failedRequests, numOfRequests, algorithmId, directoryPath, fullFileName, totalTry);
         }
     }
 
@@ -220,6 +241,33 @@ public class ExtractStatistics {
         }
 
         return Math.sqrt(total / totalTry);
+    }
+
+    private static void writeSuccessRatio(List<Statistics> failedRequests, Statistics numOfRequests, int algorithmId,
+            String directoryPath, String fileName, int totalTry) {
+        try {
+
+            PrintWriter writer = new PrintWriter(
+                    new BufferedWriter(new FileWriter(directoryPath + "/" + fileName, false)));
+
+            double cumulativeRequests = 0.0;
+            for (int cycle = 0; cycle < 500; cycle++) {
+                double cumulativeFailedRequests = failedRequests.get(algorithmId).total[cycle] / ((double) totalTry);
+                cumulativeRequests += numOfRequests.total[cycle] / ((double) totalTry);
+
+                double successRatio = (cumulativeRequests - cumulativeFailedRequests) / cumulativeRequests;
+                String text = cycle + "\t" + successRatio + "\t";
+                // String text = cycle + "\t" + BigDecimal.valueOf(successRatio).toPlainString()
+                // + "\t";
+
+                writer.println(text);
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.exit(0);
+        }
     }
 }
 

@@ -1,0 +1,87 @@
+Cumulative Total Cost
+==================================================================
+100 cycle
+Random: -80.65
+Greedy: -6.34
+Original_Only: -11.02
+
+200 cycle
+Random: -70.12
+Greedy: +43.1
+Original_Only: +65.76
+
+300 cycle
+Random: -69.33
+Greedy: +49.6
+Original_Only: +72.31
+
+400 cycle
+Random: -71.42
+Greedy: +48.32
+Original_Only: +72.98
+
+500 cycle
+Random: -68.97
+Greedy: +54.52
+Original_Only: +77.02
+==================================================================
+
+
+Cumulative Hops
+==================================================================
+100 cycle
+Random: +43.22
+Greedy: -16.68
+Original_Only: -32.39
+
+200 cycle
+Random: +45.06
+Greedy: +0.32
+Original_Only: +7.62
+
+300 cycle
+Random: +12.89
+Greedy: -22.21
+Original_Only: -10.79
+
+400 cycle
+Random: +14.61
+Greedy: -24.81
+Original_Only: -12.32
+
+500 cycle
+Random: +15.43
+Greedy: -20.41
+Original_Only: -8.39
+==================================================================
+
+
+Cumulative Fails
+==================================================================
+100 cycle
+Random: +1.47
+Greedy: 0.00
+Original_Only: -12.82
+
+200 cycle
+Random: -73.05
+Greedy: -77.7
+Original_Only: -79.65
+
+300 cycle
+Random: -68.37
+Greedy: -73.82
+Original_Only: -79.76
+
+400 cycle
+Random: -64.33
+Greedy: -70.31
+Original_Only: -78.55
+
+500 cycle
+Random: -61.07
+Greedy: -68.49
+Original_Only: -76.51
+==================================================================
+
+

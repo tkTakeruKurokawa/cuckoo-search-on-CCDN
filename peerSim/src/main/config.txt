@@ -1,7 +1,7 @@
 ############## Variable ###############
 
 tryId 9
-totalNodes 100.0
+totalNodes 1000.0
 totalContents 100.0
 totalCycles 500
 users 100.0
@@ -44,7 +44,7 @@ init.sd.link link
 init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
-init.sd.directoryName Nodes100/9
+init.sd.directoryName Nodes1000/9
 
 init.p Parameters
 init.p.weibullShape 1.0
