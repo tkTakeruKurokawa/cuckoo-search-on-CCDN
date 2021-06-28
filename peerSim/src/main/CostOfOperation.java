@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 
 import peersim.cdsim.CDState;
+import peersim.core.Network;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -39,18 +41,30 @@ public class CostOfOperation {
         }
     }
 
+
+    /**
+     * シミュレーションの合計運用コスト
+     */
     public void calculateSimulationCost() {
-        for (Cost cost : costs) {
+        for (int i = 0; i < 3; i++) {
+            Cost cost = costs.get(i);
             int totalPerCycle = cost.getPerCycle();
             int totalPerSimulation = cost.getPerSimulation();
             cost.setPerSimulation(totalPerCycle + totalPerSimulation);
 
-            writeCumulativeCost(cost);
+            if (i == 2) {
+                writeAverageTransmissionCost(cost);
+            } else {
+                writeCumulativeCost(cost);
+            }
         }
 
         writeTotalCost();
     }
 
+    /**
+     * 各サイクルにおける合計運用コスト
+     */
     public void calculateCycleCost() {
         for (int i = 1; i < 3; i++) {
             int totalPerContent = costs.get(i).getPerContent();
@@ -145,6 +159,29 @@ public class CostOfOperation {
         if (cycle == totalCycles - 1) {
             averageWriter.close();
             cumulativeWriter.close();
+        }
+    }
+
+    private void writeAverageTransmissionCost(Cost cost){
+        double totalTransmissionCost = cost.getPerCycle();
+
+        int enableServers = 0;
+        for (int nodeId = 0; nodeId < Network.size(); nodeId++) {
+            SurrogateServer node = SharedData.getNode(nodeId);
+            if (node.getServerState()) {
+                enableServers++;
+            }
+        }
+
+        double maxTransmissionCapacity = SharedData.getMaxTransmissionCapacity();
+        double average = totalTransmissionCost / (maxTransmissionCapacity * enableServers);
+
+        int cycle = CDState.getCycle();
+        String description = cycle + "\t" + average;
+        cost.addedDescription(description);
+
+        if (cycle == totalCycles - 1) {
+           cost.closeFile();
         }
     }
 }

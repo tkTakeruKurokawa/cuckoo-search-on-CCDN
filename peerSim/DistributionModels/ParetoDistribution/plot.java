@@ -4,75 +4,78 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 public class plot {
-    public static void main(String[] args) {
+    private static final double PARATE_SHAPE = 0.3;
+    private static final int PARATE_MIN = 100;
+    private static final int PARATE_MAX = 1000;
+    private static final int TOTAL_CONTENT = 100000;
+    private static int[] size = new int[TOTAL_CONTENT];
+    private static Random random = new Random();
 
+    private static void setSize(double[] cdf, int sizeCount) {
+        int contentId = 0;
+        while (contentId < TOTAL_CONTENT) {
+            double rand = random.nextDouble();
+
+            for (int cdfId = 0; cdfId < sizeCount; cdfId++) {
+                if (rand < cdf[cdfId]) {
+                    size[contentId] = cdfId;
+                    System.out.println(size[contentId]);
+                    break;
+                }
+            }
+
+            contentId++;
+        }
+    }
+
+    private static void paretoDistribution() {
+        double alpha = PARATE_SHAPE;
+        double min = (double) PARATE_MIN;
+        double max = (double) PARATE_MAX + 1.0;
+        int sizeCount = PARATE_MAX + 1;
+
+        double cdf[] = new double[sizeCount];
+        for (int id = 1; id <= sizeCount; id++) {
+            double x = (double) id;
+            cdf[id - 1] = ((1 - Math.pow(min, alpha) * Math.pow(x, -1.0 * alpha)) / (1 - Math.pow(min / max, alpha)));
+        }
+
+        setSize(cdf, sizeCount);
+    }
+
+    private static void buildGraph() {
         try {
             PrintWriter plot = new PrintWriter(new BufferedWriter(new FileWriter("./plot.tsv", false)));
 
-            double alpha = 0.5;
-            double min = 1.0;
-            double max = 101.0;
-            double total = 0.0;
+            int range = 100;
 
-            Random random = new Random(1L);
-
-            int num = 101;
-
-            double[] size = new double[num];
-            for (int i = 1; i <= num; i++) {
-                double x = (double) i;
-                // double result = (alpha * Math.pow(1, alpha) / Math.pow(x, alpha + 1));
-                size[i - 1] = ((1 - Math.pow(min, alpha) * Math.pow(x, -1.0 * alpha))
-                        / (1 - Math.pow(min / max, alpha)));
-                // size[i - 1] = ((alpha * Math.pow(min, alpha) * Math.pow(x, -1.0 * alpha -
-                // 1.0))
-                // / (1.0 - Math.pow(min / max, alpha)));
-                total += size[i - 1];
-                System.out.println(i - 1 + ": " + size[i - 1]);
-                // plot.println(size[i - 1]);
-            }
-            System.out.println("total: " + total);
-            System.out.println("======================================================");
-
-            double[] useSize = new double[num];
-            int i = 0;
-            int sum = 0;
-            while (i < 500) {
-                double rand = random.nextDouble();
-                boolean flag = false;
-
-                for (int id = 0; id < num; id++) {
-
-                    if (rand < size[id]) {
-                        useSize[id]++;
-                        sum++;
-                        break;
-                    } else {
-                    }
-                }
-
-                if (flag) {
-                    continue;
-                }
-                i++;
+            int[] counter = new int[PARATE_MAX + 1];
+            for (int s : size) {
+                // for (int i = PARATE_MIN; i < PARATE_MAX; i += range) {
+                // if (i <= s && s <= i + range - 1) {
+                // counter[i]++;
+                // }
+                // }
+                counter[s]++;
             }
 
-            total = 0.0;
-            for (int j = 0; j < num; j++) {
-                if (useSize[j] > 0.0) {
-                    System.out.println(j + ": " + useSize[j]);
+            for (int i = 0; i < counter.length; i++) {
+                if (counter[i] > 0) {
+                    System.out.println(i + ": " + counter[i]);
                 }
-                plot.println(useSize[j]);
-                total += useSize[j];
+                plot.println(counter[i]);
             }
-            System.out.println("total: " + total);
+
             plot.close();
 
-        } catch (
-
-        Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
+    }
 
+    public static void main(String[] args) {
+
+        paretoDistribution();
+        buildGraph();
     }
 }

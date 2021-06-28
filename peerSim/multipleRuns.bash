@@ -1,5 +1,15 @@
 #!/bin/bash -u
 
+echo "Do only ExtractStatistics ?"
+echo "type y or n"
+read choice
+
+if [ $choice = "y" ]; then
+  onlyExtractAverage=true
+else
+  onlyExtractAverage=false
+fi
+
 declare -a names=("Nodes" "Contents" "Users" "Trials" "Storage" "Processing" "Transmission" "FailureMagnification")
 declare -a parameters=("totalNodes" "totalContents" "users" "totalTrials" "maxStorageCapacity" "maxProcessingCapacity" "maxTransmissionCapacity" "failureMagnification")
 
@@ -26,20 +36,24 @@ read array
 totalTry=10
 
 for value in ${array[@]}; do
-  path="${directoryName}${value}"
-  rm -rf result/${path}/
+  if [ $onlyExtractAverage = false ]; then
+    path="${directoryName}${value}"
+    rm -rf result/${path}/
+  fi
 
   # java ChangeParameter ${parameterName} ${value} ${directoryName}
   # values="$values$value,"
 
-  for ((tryCount=0; tryCount < $totalTry; tryCount++)); do
-    java ChangeParameter ${tryCount} ${parameterName} ${value} ${directoryName}
-    java -cp "src:peersim-1.0.5.jar:jep-2.3.0.jar:djep-1.0.0.jar" peersim.Simulator src/main/config.txt
+  if [ $onlyExtractAverage = false ]; then
+    for ((tryCount=0; tryCount < $totalTry; tryCount++)); do
+      java ChangeParameter ${tryCount} ${parameterName} ${value} ${directoryName}
+      java -cp "src:peersim-1.0.5.jar:jep-2.3.0.jar:djep-1.0.0.jar" peersim.Simulator src/main/config.txt
 
-    cd ./result/
-    gnuplot plot.plot
-    cd ../
-  done
+      cd ./result/
+      gnuplot plot.plot
+      cd ../
+    done
+  fi
 
   java ExtractStatistics ${totalTry} ${value} ${directoryName}
   java ExtractDifference ${directoryName} ${value}
@@ -50,10 +64,3 @@ gnuplot average.plot
 cd ../
 
 done
-
-# rm -rf result/proposed/${directoryName}
-# java ChangeParameter ${values} ${directoryName}
-
-# cd ./result/
-# gnuplot proposed.plot
-# cd ../

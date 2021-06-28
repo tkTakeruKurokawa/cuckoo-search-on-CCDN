@@ -41,7 +41,7 @@ replot
 set xrange [0:500]
 # set yrange
 set xlabel 'Number of Cycles'
-set ylabel 'Cumulative Transmission Usage'
+set ylabel 'Average Transmission Ratio'
 set key left top
 
 plot filePath."/Cumulative_Transmission[Original_Only].tsv"  with lines title "Original Only"  lw 3 lc rgb "magenta",\
@@ -160,7 +160,7 @@ set autoscale x
 set yrange[0.0:1.0]
 set xlabel 'Number of Cycles'
 set ylabel 'Success Ratio of Requests'
-set key left bottom
+set key right top
 
 plot filePath."/Success_Ratio[Original_Only].tsv" using 1:2 with lines title "Original Only" lw 3 lc rgb "magenta",\
 filePath."/Success_Ratio[Random].tsv" using 1:2  with lines title "Random"  lw 3 lc rgb "forest-green",\

@@ -1,4 +1,4 @@
-set xrange [0:100]
+set xrange [90:1000]
 set xlabel 'Content Size(MB)'
 set yrange [0:]
 set ylabel 'Number of Contents'

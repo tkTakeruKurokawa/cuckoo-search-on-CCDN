@@ -4,6 +4,7 @@ import java.io.*;
 import java.math.BigDecimal;
 
 public class ExtractStatistics {
+    private static final int AVERAGE_CYCLE = 10;
     private static List<Statistics> failedRequests;
     private static List<Statistics> numOfHops;
     private static List<Statistics> storageCosts;
@@ -163,28 +164,59 @@ public class ExtractStatistics {
             PrintWriter writer = new PrintWriter(
                     new BufferedWriter(new FileWriter(directoryPath + "/" + fileName, false)));
 
-            for (int cycle = 0; cycle < 500; cycle++) {
-                double average = result.total[cycle] / ((double) totalTry);
-                double standardDeviation = calculateStandardDeviation(result, average, cycle, totalTry);
-                String text = cycle + "\t" + BigDecimal.valueOf(average).toPlainString() + "\t"
-                        + BigDecimal.valueOf(result.max[cycle]).toPlainString() + "\t"
-                        + BigDecimal.valueOf(result.min[cycle]).toPlainString() + "\t"
-                        + BigDecimal.valueOf(standardDeviation).toPlainString();
+            if (fileName.contains("Transmission")) {
+                writeTransmissionCostResult(result, totalTry, fileName, writer);
+            } else {
+                for (int cycle = 0; cycle < 500; cycle++) {
+                    double average = result.total[cycle] / ((double) totalTry);
+                    double standardDeviation = calculateStandardDeviation(result, average, cycle, totalTry);
+                    String text = cycle + "\t" + BigDecimal.valueOf(average).toPlainString() + "\t"
+                            + BigDecimal.valueOf(result.max[cycle]).toPlainString() + "\t"
+                            + BigDecimal.valueOf(result.min[cycle]).toPlainString() + "\t"
+                            + BigDecimal.valueOf(standardDeviation).toPlainString();
 
-                if (fileName.contains("Failed_Hops_Distribution")) {
-                    if (average > 0.0) {
+                    if (fileName.contains("Failed_Hops_Distribution")) {
+                        if (average > 0.0) {
+                            writer.println(text);
+                        }
+                    } else {
                         writer.println(text);
                     }
-                } else {
-                    writer.println(text);
                 }
-            }
 
-            writer.close();
+                writer.close();
+            }
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
         }
+    }
+
+    private static void writeTransmissionCostResult(Statistics result, int totalTry, String fileName,
+            PrintWriter writer) {
+        int adjustCycle = 0;
+
+        for (int cycle = 0; cycle <= 500; cycle += AVERAGE_CYCLE) {
+            if (cycle != 0) {
+                adjustCycle = cycle - 1;
+            }
+            double average = result.total[adjustCycle] / ((double) totalTry);
+            double standardDeviation = calculateStandardDeviation(result, average, adjustCycle, totalTry);
+            String text = adjustCycle + "\t" + BigDecimal.valueOf(average).toPlainString() + "\t"
+                    + BigDecimal.valueOf(result.max[adjustCycle]).toPlainString() + "\t"
+                    + BigDecimal.valueOf(result.min[adjustCycle]).toPlainString() + "\t"
+                    + BigDecimal.valueOf(standardDeviation).toPlainString();
+
+            if (fileName.contains("Failed_Hops_Distribution")) {
+                if (average > 0.0) {
+                    writer.println(text);
+                }
+            } else {
+                writer.println(text);
+            }
+        }
+
+        writer.close();
     }
 
     private static Statistics calculateStatistics(Statistics result, String directoryPath, String fileName,
@@ -201,9 +233,14 @@ public class ExtractStatistics {
                         int cycle = Integer.valueOf(words[0]);
                         double value = Double.valueOf(words[1]);
 
-                        result.value[tryCount][cycle] = value;
-                        result.total[cycle] += value;
-                        result = calculateMaxAndMin(result, tryCount, cycle, value);
+                        if (fileName.contains("Transmission")) {
+                            result.value[tryCount][cycle] = value;
+                            result = calcTransmissionCost(result, cycle, value);
+                        } else {
+                            result.value[tryCount][cycle] = value;
+                            result.total[cycle] += value;
+                            result = calculateMaxAndMin(result, tryCount, cycle, value);
+                        }
                     }
                 }
 
@@ -212,6 +249,16 @@ public class ExtractStatistics {
         } catch (Exception e) {
             System.out.println(e);
             System.exit(0);
+        }
+
+        return result;
+    }
+
+    private static Statistics calcTransmissionCost(Statistics result, int cycle, double value) {
+        if (cycle == 0 || (cycle + 1 % AVERAGE_CYCLE == 0)) {
+            result.total[cycle] = value;
+        } else {
+            result.total[cycle] += value;
         }
 
         return result;

@@ -1,5 +1,5 @@
 ==========================================================================================
-Content ID: 17, Popularity: 0.007539765578812011, Size: 1, Cycle: 11
+Content ID: 17, Popularity: 0.007539765578812011, Size: 141, Cycle: 11
 
 Placement Nodes:
 [19, 21, 94, 5, 15, 42]
@@ -15,16 +15,16 @@ Average Hops: 1.9285714285714286
 Availability: 0.8021309733303293
 
 Objective Function Result:
-Access : 143.95566708688932
-Cost : 6.0
-Availability : 93.05672229602277
-Total : 99.05672229602277
+Access : 20297.749059251393
+Cost : 846.0
+Availability : 13120.99784373921
+Total : 13966.99784373921
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 45, Popularity: 0.0022265216310933607, Size: 12, Cycle: 29
+Content ID: 45, Popularity: 0.0022265216310933607, Size: 543, Cycle: 29
 
 Placement Nodes:
 [19, 21, 94]
@@ -40,1746 +40,46 @@ Average Hops: 2.8229166666666665
 Availability: 0.7675906851348197
 
 Objective Function Result:
-Access : 746.6918605075471
-Cost : 36.0
-Availability : 344.59872285635225
-Total : 380.59872285635225
+Access : 33787.806687966506
+Cost : 1629.0
+Availability : 15593.092209249937
+Total : 17222.09220924994
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 20, Popularity: 0.006170594628470162, Size: 97, Cycle: 33
+Content ID: 20, Popularity: 0.006170594628470162, Size: 995, Cycle: 33
 
 Placement Nodes:
-[19, 5, 90, 59, 15]
+[19, 56, 58, 7, 16]
 Number of Replicas
 5
 Number of Available Nodes
-92
+89
 
 Flooding Result
 Number of Searched Nodes: 95
-Total Hops: 197
-Average Hops: 2.0736842105263156
-Availability: 0.8186120274327517
-
-Objective Function Result:
-Access : 12287.868823987572
-Cost : 485.0
-Availability : 7238.620766791361
-Total : 7723.620766791361
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 35, Popularity: 0.0030620963296771574, Size: 39, Cycle: 43
-
-Placement Nodes:
-[19, 21, 94]
-Number of Replicas
-3
-Number of Available Nodes
-88
-
-Flooding Result
-Number of Searched Nodes: 93
-Total Hops: 271
-Average Hops: 2.913978494623656
-Availability: 0.7693343423400139
-
-Objective Function Result:
-Access : 3445.1250695993863
-Cost : 117.0
-Availability : 1536.7510948391196
-Total : 1653.7510948391196
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 60, Popularity: 0.0015427065179170543, Size: 1, Cycle: 46
-
-Placement Nodes:
-[19, 21]
-Number of Replicas
-2
-Number of Available Nodes
-90
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 266
-Average Hops: 2.923076923076923
-Availability: 0.7397070193901654
-
-Objective Function Result:
-Access : 44.6435532338766
-Cost : 2.0
-Availability : 20.64708611251269
-Total : 22.64708611251269
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 32, Popularity: 0.0034288144037837986, Size: 1, Cycle: 50
-
-Placement Nodes:
-[19, 5, 90, 73, 42]
-Number of Replicas
-5
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 194
-Average Hops: 2.2045454545454546
-Availability: 0.8224130205856823
-
-Objective Function Result:
-Access : 74.83387436258141
-Cost : 5.0
-Availability : 41.27520083921514
-Total : 46.27520083921514
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 56, Popularity: 0.0016849025499484803, Size: 1, Cycle: 50
-
-Placement Nodes:
-[19, 5, 90]
-Number of Replicas
-3
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 197
-Average Hops: 2.2386363636363638
-Availability: 0.7764074837843716
-
-Objective Function Result:
-Access : 37.3416527632332
-Cost : 3.0
-Availability : 21.484253556116638
-Total : 24.484253556116638
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 52, Popularity: 0.0018520532506114556, Size: 4, Cycle: 55
-
-Placement Nodes:
-[19, 89, 61]
-Number of Replicas
-3
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 208
-Average Hops: 2.311111111111111
-Availability: 0.7641724753301843
-
-Objective Function Result:
-Access : 169.49991349596039
-Cost : 12.0
-Availability : 95.97481078145907
-Total : 107.97481078145907
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 93, Popularity: 8.793178518217053E-4, Size: 27, Cycle: 57
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 292
-Average Hops: 3.2444444444444445
-Availability: 0.6643382998055257
-
-Objective Function Result:
-Access : 762.5796138138558
-Cost : 27.0
-Availability : 353.7981505217244
-Total : 380.7981505217244
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 99, Popularity: 8.113572102320679E-4, Size: 1, Cycle: 64
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 284
-Average Hops: 3.264367816091954
-Availability: 0.6637731871712461
-
-Objective Function Result:
-Access : 26.22082680791359
-Cost : 1.0
-Availability : 12.10117633031958
-Total : 13.10117633031958
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 81, Popularity: 0.0010501566620736197, Size: 69, Cycle: 65
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-81
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 284
-Average Hops: 3.264367816091954
-Availability: 0.6637731871712461
-
-Objective Function Result:
-Access : 2341.733477068357
-Cost : 69.0
-Availability : 1080.7336447554007
-Total : 1149.7336447554007
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 18, Popularity: 0.007028010775458082, Size: 8, Cycle: 69
-
-Placement Nodes:
-[19, 95, 16, 73, 94]
-Number of Replicas
-5
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 205
-Average Hops: 2.3295454545454546
-Availability: 0.7903921145221194
-
-Objective Function Result:
-Access : 1296.6679880720162
-Cost : 40.0
-Availability : 704.230777596786
-Total : 744.230777596786
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 61, Popularity: 0.0015104380013726646, Size: 5, Cycle: 70
-
-Placement Nodes:
-[19, 95, 16]
-Number of Replicas
-3
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 212
-Average Hops: 2.409090909090909
-Availability: 0.7609682387879676
-
-Objective Function Result:
-Access : 180.11973166369023
-Cost : 15.0
-Availability : 98.25203899052548
-Total : 113.25203899052548
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 63, Popularity: 0.0014493662154561975, Size: 10, Cycle: 79
-
-Placement Nodes:
-[19, 95, 16]
-Number of Replicas
-3
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 209
-Average Hops: 2.4022988505747125
-Availability: 0.7619980094676784
-
-Objective Function Result:
-Access : 344.6992685517722
-Cost : 30.0
-Availability : 188.3039765817785
-Total : 218.3039765817785
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 58, Popularity: 0.001611033179186402, Size: 1, Cycle: 81
-
-Placement Nodes:
-[19, 95, 16]
-Number of Replicas
-3
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 212
-Average Hops: 2.409090909090909
-Availability: 0.7612158810098509
-
-Objective Function Result:
-Access : 38.423141323595694
-Cost : 3.0
-Availability : 20.952306529373345
-Total : 23.952306529373345
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 46, Popularity: 0.002165134521649491, Size: 13, Cycle: 83
-
-Placement Nodes:
-[19, 95, 16]
-Number of Replicas
-3
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 217
-Average Hops: 2.4942528735632186
-Availability: 0.7535130195078908
-
-Objective Function Result:
-Access : 695.030579392814
-Cost : 39.0
-Availability : 369.80490810666265
-Total : 408.80490810666265
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 79, Popularity: 0.0010844140026655645, Size: 3, Cycle: 86
-
-Placement Nodes:
-[19, 39]
-Number of Replicas
-2
-Number of Available Nodes
-81
-
-Flooding Result
-Number of Searched Nodes: 84
-Total Hops: 245
-Average Hops: 2.9166666666666665
-Availability: 0.7975504974074529
-
-Objective Function Result:
-Access : 93.93736298090451
-Cost : 6.0
-Availability : 40.38251619660553
-Total : 46.38251619660553
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 53, Popularity: 0.00180759117417917, Size: 27, Cycle: 91
-
-Placement Nodes:
-[19, 39]
-Number of Replicas
-2
-Number of Available Nodes
-82
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 250
-Average Hops: 2.9069767441860463
-Availability: 0.7980759953960364
-
-Objective Function Result:
-Access : 1404.561397843291
-Cost : 54.0
-Availability : 605.4174334842947
-Total : 659.4174334842947
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 38, Popularity: 0.002759485464626927, Size: 1, Cycle: 95
-
-Placement Nodes:
-[19, 39]
-Number of Replicas
-2
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 84
-Total Hops: 243
-Average Hops: 2.892857142857143
-Availability: 0.7975659622481559
-
-Objective Function Result:
-Access : 79.02969264586903
-Cost : 2.0
-Availability : 34.25284853280453
-Total : 36.25284853280453
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 44, Popularity: 0.002291056671531126, Size: 28, Cycle: 99
-
-Placement Nodes:
-[19, 49, 61]
-Number of Replicas
-3
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 203
-Average Hops: 2.3068181818181817
-Availability: 0.7671601974488574
-
-Objective Function Result:
-Access : 1465.0161886105784
-Cost : 84.0
-Availability : 827.8334974368448
-Total : 911.8334974368448
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 73, Popularity: 0.0012000818409894293, Size: 1, Cycle: 99
-
-Placement Nodes:
-[19, 49, 61]
-Number of Replicas
-3
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 203
-Average Hops: 2.3068181818181817
-Availability: 0.7671601974488574
-
-Objective Function Result:
-Access : 27.406869043596092
-Cost : 3.0
-Availability : 15.486739621404018
-Total : 18.48673962140402
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 88, Popularity: 9.440719437004966E-4, Size: 3, Cycle: 102
-
-Placement Nodes:
-[19, 49]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 205
-Average Hops: 2.3295454545454546
-Availability: 0.7119514538822966
-
-Objective Function Result:
-Access : 65.31797760477812
-Cost : 6.0
-Availability : 39.38321436806883
-Total : 45.38321436806883
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 19, Popularity: 0.006574657075184188, Size: 28, Cycle: 113
-
-Placement Nodes:
-[19, 49, 61, 42, 16]
-Number of Replicas
-5
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 187
-Average Hops: 2.125
-Availability: 0.8038703052908962
-
-Objective Function Result:
-Access : 3872.801750137246
-Cost : 140.0
-Availability : 2267.1504709724927
-Total : 2407.1504709724927
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 76, Popularity: 0.0011396569864469057, Size: 1, Cycle: 113
-
-Placement Nodes:
-[19, 49, 61]
-Number of Replicas
-3
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 197
-Average Hops: 2.2386363636363638
-Availability: 0.7709357187178485
-
-Objective Function Result:
-Access : 25.257647962129546
-Cost : 3.0
-Availability : 14.634948014328076
-Total : 17.634948014328074
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 26, Popularity: 0.004450811551404525, Size: 93, Cycle: 116
-
-Placement Nodes:
-[19, 20, 65, 81]
-Number of Replicas
-4
-Number of Available Nodes
-74
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 194
-Average Hops: 2.255813953488372
-Availability: 0.7750706453014898
-
-Objective Function Result:
-Access : 9244.014719806517
-Cost : 372.0
-Availability : 5287.08217788863
-Total : 5659.08217788863
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 71, Popularity: 0.0012435975408269522, Size: 3, Cycle: 125
-
-Placement Nodes:
-[19, 49, 61]
-Number of Replicas
-3
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 195
-Average Hops: 2.2413793103448274
-Availability: 0.771013508532851
-
-Objective Function Result:
-Access : 82.78500181263556
-Cost : 9.0
-Availability : 47.90427995592866
-Total : 56.90427995592866
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 12, Popularity: 0.011510276116984335, Size: 1, Cycle: 128
-
-Placement Nodes:
-[19, 49, 61, 16, 52, 94]
-Number of Replicas
-6
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 185
-Average Hops: 2.1511627906976742
-Availability: 0.8239613996335812
-
-Objective Function Result:
-Access : 245.12872916577686
-Cost : 6.0
-Availability : 138.29741734117604
-Total : 144.29741734117604
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 28, Popularity: 0.004055969706607726, Size: 24, Cycle: 131
-
-Placement Nodes:
-[19, 49, 61, 16]
-Number of Replicas
-4
-Number of Available Nodes
-80
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 189
-Average Hops: 2.197674418604651
-Availability: 0.7911519781192802
-
-Objective Function Result:
-Access : 2117.895325962897
-Cost : 96.0
-Availability : 1218.095168744811
-Total : 1314.095168744811
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 98, Popularity: 8.22027500642078E-4, Size: 1, Cycle: 131
-
-Placement Nodes:
-[19, 49]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 195
-Average Hops: 2.2674418604651163
-Availability: 0.717728347947884
-
-Objective Function Result:
-Access : 18.45260569755269
-Cost : 2.0
-Availability : 11.338652401879905
-Total : 13.338652401879905
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 50, Popularity: 0.0019470220548192874, Size: 22, Cycle: 132
-
-Placement Nodes:
-[19, 5, 29]
-Number of Replicas
-3
-Number of Available Nodes
-78
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 186
-Average Hops: 2.1379310344827585
-Availability: 0.7776384384181106
-
-Objective Function Result:
-Access : 906.6140351537148
-Cost : 66.0
-Availability : 545.3194988692636
-Total : 611.3194988692636
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 65, Popularity: 0.0013925313580670834, Size: 18, Cycle: 133
-
-Placement Nodes:
-[19, 5, 29]
-Number of Replicas
-3
-Number of Available Nodes
-78
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 186
-Average Hops: 2.1379310344827585
-Availability: 0.7776384384181106
-
-Objective Function Result:
-Access : 530.5256364299436
-Cost : 54.0
-Availability : 319.1059954705231
-Total : 373.1059954705231
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 78, Popularity: 0.0011022925730187034, Size: 2, Cycle: 140
-
-Placement Nodes:
-[19, 21]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 239
-Average Hops: 2.7790697674418605
-Availability: 0.7417087298258254
-
-Objective Function Result:
-Access : 60.65428969812917
-Cost : 4.0
-Availability : 29.425827239347125
-Total : 33.42582723934713
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 59, Popularity: 0.0015762150663880588, Size: 6, Cycle: 145
-
-Placement Nodes:
-[19, 21]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 243
-Average Hops: 2.793103448275862
-Availability: 0.7413360773934439
-
-Objective Function Result:
-Access : 261.51038518687955
-Cost : 12.0
-Availability : 126.29518216980101
-Total : 138.29518216980102
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 8, Popularity: 0.018565080540569413, Size: 3, Cycle: 148
-
-Placement Nodes:
-[19, 21, 94, 5, 42, 29, 98, 18]
-Number of Replicas
-8
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 161
-Average Hops: 1.8295454545454546
-Availability: 0.8334246704900581
-
-Objective Function Result:
-Access : 1008.7800638731906
-Cost : 24.0
-Availability : 661.5869574999449
-Total : 685.5869574999449
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 68, Popularity: 0.0013143416849683807, Size: 14, Cycle: 153
-
-Placement Nodes:
-[19, 21]
-Number of Replicas
-2
-Number of Available Nodes
-79
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 245
-Average Hops: 2.8160919540229883
-Availability: 0.7452697899064343
-
-Objective Function Result:
-Access : 513.0011562812793
-Cost : 28.0
-Availability : 244.431962765441
-Total : 272.43196276544097
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 86, Popularity: 9.723823596061171E-4, Size: 1, Cycle: 158
-
-Placement Nodes:
-[19, 21]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 240
-Average Hops: 2.7906976744186047
-Availability: 0.7461396053795439
-
-Objective Function Result:
-Access : 26.864889377024816
-Cost : 2.0
-Availability : 12.9018554848107
-Total : 14.9018554848107
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 27, Popularity: 0.004245283123209621, Size: 29, Cycle: 167
-
-Placement Nodes:
-[19, 83, 9]
-Number of Replicas
-3
-Number of Available Nodes
-79
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 214
-Average Hops: 2.4597701149425286
-Availability: 0.7599888546301562
-
-Objective Function Result:
-Access : 2998.0189416106346
-Cost : 87.0
-Availability : 1603.735077492174
-Total : 1690.735077492174
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 47, Popularity: 0.0021066796075119004, Size: 2, Cycle: 174
-
-Placement Nodes:
-[19, 95, 16]
-Number of Replicas
-3
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 200
-Average Hops: 2.3255813953488373
-Availability: 0.766246605764668
-
-Objective Function Result:
-Access : 97.00524704357123
-Cost : 6.0
-Availability : 54.43711713033861
-Total : 60.43711713033861
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 39, Popularity: 0.002670140482269417, Size: 19, Cycle: 176
-
-Placement Nodes:
-[19, 95, 94]
-Number of Replicas
-3
-Number of Available Nodes
-79
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 203
-Average Hops: 2.36046511627907
-Availability: 0.7579389127586653
-
-Objective Function Result:
-Access : 1185.5516885711643
-Cost : 57.0
-Availability : 662.6568662200347
-Total : 719.6568662200347
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 15, Popularity: 0.00878731353482975, Size: 38, Cycle: 177
-
-Placement Nodes:
-[19, 95, 21, 13, 85]
-Number of Replicas
-5
-Number of Available Nodes
-79
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 185
-Average Hops: 2.1264367816091956
-Availability: 0.7767122141295811
-
-Objective Function Result:
-Access : 7029.547817052254
-Cost : 190.0
-Availability : 4256.128964712582
-Total : 4446.128964712582
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 34, Popularity: 0.0031763155612394944, Size: 43, Cycle: 178
-
-Placement Nodes:
-[19, 5, 42, 15]
-Number of Replicas
-4
-Number of Available Nodes
-77
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 191
-Average Hops: 2.1954022988505746
-Availability: 0.8024562860097658
-
-Objective Function Result:
-Access : 2968.5297594730305
-Cost : 172.0
-Availability : 1685.0232940952963
-Total : 1857.0232940952963
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 74, Popularity: 0.0011793221554192497, Size: 75, Cycle: 179
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-69
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 265
-Average Hops: 3.045977011494253
-Availability: 0.6775710427561534
-
-Objective Function Result:
-Access : 2667.1997196055186
-Cost : 75.0
-Availability : 1292.3319403334117
-Total : 1367.3319403334117
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 72, Popularity: 0.0012214969355654292, Size: 31, Cycle: 181
-
-Placement Nodes:
-[19, 21]
-Number of Replicas
-2
-Number of Available Nodes
-75
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 256
-Average Hops: 2.9767441860465116
-Availability: 0.7066737151367015
-
-Objective Function Result:
-Access : 1115.914149283811
-Cost : 62.0
-Availability : 530.4816091150534
-Total : 592.4816091150534
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 40, Popularity: 0.002585789015297764, Size: 2, Cycle: 188
-
-Placement Nodes:
-[19, 5, 15]
-Number of Replicas
-3
-Number of Available Nodes
-87
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 196
-Average Hops: 2.227272727272727
-Availability: 0.7649164731924633
-
-Objective Function Result:
-Access : 114.0332955746314
-Cost : 6.0
-Availability : 66.93361209651118
-Total : 72.93361209651118
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 16, Popularity: 0.008121355138160898, Size: 98, Cycle: 189
-
-Placement Nodes:
-[19, 69, 62, 96, 0]
-Number of Replicas
-5
-Number of Available Nodes
-68
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 186
-Average Hops: 2.1136363636363638
-Availability: 0.7812742923341819
-
-Objective Function Result:
-Access : 16654.056914069646
-Cost : 490.0
-Availability : 10085.24001410941
-Total : 10575.24001410941
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 90, Popularity: 9.171878434978309E-4, Size: 2, Cycle: 199
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-86
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 288
-Average Hops: 3.310344827586207
-Availability: 0.6553481032582225
-
-Objective Function Result:
-Access : 60.11691906623024
-Cost : 2.0
-Availability : 27.71095118909875
-Total : 29.71095118909875
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 2, Popularity: 0.07743806078895102, Size: 1, Cycle: 214
-
-Placement Nodes:
-[19, 16, 49, 18, 81, 75, 53]
-Number of Replicas
-7
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 85
 Total Hops: 190
-Average Hops: 2.235294117647059
-Availability: 0.8446612610859533
+Average Hops: 2.0
+Availability: 0.8002253965628213
 
 Objective Function Result:
-Access : 1713.658733459022
-Cost : 7.0
-Availability : 907.6263315603883
-Total : 914.6263315603883
+Access : 121566.88477549066
+Cost : 4975.0
+Availability : 75957.90217209578
+Total : 80932.90217209578
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 89, Popularity: 9.304581358195488E-4, Size: 1, Cycle: 222
+Content ID: 35, Popularity: 0.0030620963296771574, Size: 809, Cycle: 43
 
 Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 294
-Average Hops: 3.4186046511627906
-Availability: 0.7289572464978316
-
-Objective Function Result:
-Access : 31.490598257167193
-Cost : 2.0
-Availability : 12.636592322621125
-Total : 14.636592322621125
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 25, Popularity: 0.004674624679371236, Size: 5, Cycle: 225
-
-Placement Nodes:
-[19, 83, 16]
-Number of Replicas
-3
-Number of Available Nodes
-81
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 285
-Average Hops: 3.313953488372093
-Availability: 0.7560579877118655
-
-Objective Function Result:
-Access : 766.8286937701129
-Cost : 15.0
-Availability : 306.0531406184424
-Total : 321.0531406184424
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 31, Popularity: 0.0035687582380995236, Size: 1, Cycle: 228
-
-Placement Nodes:
-[19, 83, 16]
-Number of Replicas
-3
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 281
-Average Hops: 3.3058823529411763
-Availability: 0.7558821925520789
-
-Objective Function Result:
-Access : 116.79915932434191
-Cost : 3.0
-Availability : 46.74102248380598
-Total : 49.74102248380598
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 95, Popularity: 8.555777797781773E-4, Size: 45, Cycle: 228
-
-Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-73
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 290
-Average Hops: 3.411764705882353
-Availability: 0.7286940722006597
-
-Objective Function Result:
-Access : 1300.4278971581366
-Cost : 90.0
-Availability : 523.0725971738361
-Total : 613.0725971738361
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 75, Popularity: 0.0011591894769017602, Size: 1, Cycle: 230
-
-Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 254
-Average Hops: 2.988235294117647
-Availability: 0.7438408226297736
-
-Objective Function Result:
-Access : 34.29291598373137
-Cost : 2.0
-Availability : 15.427999475419055
-Total : 17.427999475419057
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 41, Popularity: 0.0025060401369589014, Size: 7, Cycle: 238
-
-Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-77
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 254
-Average Hops: 2.988235294117647
-Availability: 0.743686043450721
-
-Objective Function Result:
-Access : 518.9625846915056
-Cost : 14.0
-Availability : 233.52405631471248
-Total : 247.52405631471248
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 33, Popularity: 0.003298295086315608, Size: 1, Cycle: 239
-
-Placement Nodes:
-[19, 83, 16]
-Number of Replicas
-3
-Number of Available Nodes
-84
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 245
-Average Hops: 2.8823529411764706
-Availability: 0.7661726198690014
-
-Objective Function Result:
-Access : 94.11782037480596
-Cost : 3.0
-Availability : 42.61849158758437
-Total : 45.61849158758437
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 42, Popularity: 0.002430541874359573, Size: 12, Cycle: 241
-
-Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-75
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 254
-Average Hops: 2.988235294117647
-Availability: 0.743686043450721
-
-Objective Function Result:
-Access : 862.8480843197058
-Cost : 24.0
-Availability : 388.2664966174677
-Total : 412.2664966174677
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 97, Popularity: 8.329485979905657E-4, Size: 1, Cycle: 243
-
-Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 254
-Average Hops: 2.988235294117647
-Availability: 0.743686043450721
-
-Objective Function Result:
-Access : 24.64155934714208
-Cost : 2.0
-Availability : 11.088269294182366
-Total : 13.088269294182366
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 23, Popularity: 0.005187253658991873, Size: 1, Cycle: 252
-
-Placement Nodes:
-[19, 83]
-Number of Replicas
-2
-Number of Available Nodes
-86
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 260
-Average Hops: 2.9545454545454546
-Availability: 0.7463438159185738
-
-Objective Function Result:
-Access : 151.72716952551232
-Cost : 2.0
-Availability : 68.80717724017728
-Total : 70.80717724017728
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 9, Popularity: 0.016188704655543285, Size: 1, Cycle: 265
-
-Placement Nodes:
-[19, 49, 61, 52, 94]
-Number of Replicas
-5
-Number of Available Nodes
-88
-
-Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 199
-Average Hops: 2.2111111111111112
-Availability: 0.8152134711969248
-
-Objective Function Result:
-Access : 354.37074490984253
-Cost : 5.0
-Availability : 196.59657470400631
-Total : 201.59657470400631
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 10, Popularity: 0.014302159242132587, Size: 16, Cycle: 267
-
-Placement Nodes:
-[19, 7, 37, 20, 90, 42, 18]
-Number of Replicas
-7
-Number of Available Nodes
-80
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 167
-Average Hops: 1.835164835164835
-Availability: 0.7998362704402782
-
-Objective Function Result:
-Access : 4157.496241761372
-Cost : 112.0
-Availability : 2832.407215925273
-Total : 2944.407215925273
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 30, Popularity: 0.003719134614187634, Size: 28, Cycle: 267
-
-Placement Nodes:
-[19, 7, 37, 20, 90]
-Number of Replicas
-5
-Number of Available Nodes
-78
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 176
-Average Hops: 1.934065934065934
-Availability: 0.7806425714041927
-
-Objective Function Result:
-Access : 1993.9138928493949
-Cost : 140.0
-Availability : 1320.6352725529505
-Total : 1460.6352725529505
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 83, Popularity: 0.0010177685533048883, Size: 19, Cycle: 270
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-81
-
-Flooding Result
-Number of Searched Nodes: 93
-Total Hops: 293
-Average Hops: 3.150537634408602
-Availability: 0.6659479283671356
-
-Objective Function Result:
-Access : 603.1460603103043
-Cost : 19.0
-Availability : 287.4733244475352
-Total : 306.4733244475352
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 0, Popularity: 0.3230071232736677, Size: 10, Cycle: 274
-
-Placement Nodes:
-[19, 5, 15, 95, 22, 37, 54, 27, 18, 86, 98, 32, 72, 23, 85, 66, 99, 47, 70]
-Number of Replicas
-19
-Number of Available Nodes
-79
-
-Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 140
-Average Hops: 1.5555555555555556
-Availability: 0.8465102522151021
-
-Objective Function Result:
-Access : 49743.09698414483
-Cost : 190.0
-Availability : 37775.92193410012
-Total : 37965.92193410012
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 57, Popularity: 0.0016472355568702116, Size: 1, Cycle: 274
-
-Placement Nodes:
-[19, 5, 15]
-Number of Replicas
-3
-Number of Available Nodes
-88
-
-Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 213
-Average Hops: 2.3666666666666667
-Availability: 0.7597451374039578
-
-Objective Function Result:
-Access : 38.594729097469056
-Cost : 3.0
-Availability : 21.46460860379854
-Total : 24.46460860379854
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 67, Popularity: 0.0013395240438749244, Size: 3, Cycle: 276
-
-Placement Nodes:
-[19, 49, 61]
-Number of Replicas
-3
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 211
-Average Hops: 2.318681318681319
-Availability: 0.7624537061149873
-
-Objective Function Result:
-Access : 92.24610248078011
-Cost : 9.0
-Availability : 52.17872742176082
-Total : 61.17872742176082
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 62, Popularity: 0.0014793447187807006, Size: 6, Cycle: 280
-
-Placement Nodes:
-[19, 86, 90]
-Number of Replicas
-3
-Number of Available Nodes
-82
-
-Flooding Result
-Number of Searched Nodes: 89
-Total Hops: 206
-Average Hops: 2.3146067415730336
-Availability: 0.772012221734124
-
-Objective Function Result:
-Access : 203.39161479649624
-Cost : 18.0
-Availability : 113.82342639367765
-Total : 131.82342639367766
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 21, Popularity: 0.005808481558745336, Size: 8, Cycle: 304
-
-Placement Nodes:
-[19, 86, 90, 37]
+[19, 5, 90, 59]
 Number of Replicas
 4
-Number of Available Nodes
-76
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 193
-Average Hops: 2.2705882352941176
-Availability: 0.7967599768221213
-
-Objective Function Result:
-Access : 1044.542655463032
-Cost : 32.0
-Availability : 577.3780722363441
-Total : 609.3780722363441
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 82, Popularity: 0.0010337382349240734, Size: 1, Cycle: 305
-
-Placement Nodes:
-[19, 5, 90]
-Number of Replicas
-3
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 193
-Average Hops: 2.2705882352941176
-Availability: 0.7747100058895123
-
-Objective Function Result:
-Access : 23.237219358463847
-Cost : 3.0
-Availability : 13.210115330829845
-Total : 16.210115330829844
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 85, Popularity: 9.871067309463696E-4, Size: 1, Cycle: 309
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-82
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 258
-Average Hops: 3.0352941176470587
-Availability: 0.6777954004610207
-
-Objective Function Result:
-Access : 29.661976613920203
-Cost : 1.0
-Availability : 14.4178562287707
-Total : 15.4178562287707
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 96, Popularity: 8.441290480035994E-4, Size: 1, Cycle: 316
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 273
-Average Hops: 3.1744186046511627
-Availability: 0.6669436645283455
-
-Objective Function Result:
-Access : 26.528227651620092
-Cost : 1.0
-Availability : 12.530110142279433
-Total : 13.530110142279433
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 55, Popularity: 0.0017241206950188493, Size: 3, Cycle: 319
-
-Placement Nodes:
-[19, 95, 59]
-Number of Replicas
-3
-Number of Available Nodes
-80
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 212
-Average Hops: 2.4651162790697674
-Availability: 0.7649659879153764
-
-Objective Function Result:
-Access : 126.22969237344978
-Cost : 9.0
-Availability : 66.93942665556062
-Total : 75.93942665556062
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 69, Popularity: 0.0012899849631001902, Size: 1, Cycle: 323
-
-Placement Nodes:
-[19, 95]
-Number of Replicas
-2
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 213
-Average Hops: 2.4482758620689653
-Availability: 0.7144135838449481
-
-Objective Function Result:
-Access : 31.266566571142192
-Cost : 2.0
-Availability : 17.875991475357484
-Total : 19.875991475357484
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 4, Popularity: 0.039861266591925903, Size: 3, Cycle: 326
-
-Placement Nodes:
-[19, 95, 83, 53, 6, 94, 52, 17]
-Number of Replicas
-8
 Number of Available Nodes
 82
 
@@ -1787,94 +87,119 @@ Flooding Result
 Number of Searched Nodes: 89
 Total Hops: 185
 Average Hops: 2.0786516853932584
-Availability: 0.8100297186641742
+Availability: 0.8068484229139778
 
 Objective Function Result:
-Access : 2460.873362801538
-Cost : 24.0
-Availability : 1461.5261520682766
-Total : 1485.5261520682766
+Access : 50978.1753605978
+Cost : 3236.0
+Availability : 30395.59230399836
+Total : 33631.59230399836
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 43, Popularity: 0.002358976532640951, Size: 1, Cycle: 332
+Content ID: 60, Popularity: 0.0015427065179170543, Size: 104, Cycle: 46
 
 Placement Nodes:
-[19, 95, 94]
+[19, 21]
 Number of Replicas
-3
+2
 Number of Available Nodes
-88
+83
 
 Flooding Result
-Number of Searched Nodes: 92
-Total Hops: 217
-Average Hops: 2.358695652173913
-Availability: 0.7557762312515298
+Number of Searched Nodes: 89
+Total Hops: 255
+Average Hops: 2.865168539325843
+Availability: 0.7323572981815982
 
 Objective Function Result:
-Access : 55.08466614209299
-Cost : 3.0
-Availability : 30.900505609276056
-Total : 33.90050560927605
+Access : 4550.94956029311
+Cost : 208.0
+Availability : 2168.8465927645343
+Total : 2376.8465927645343
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 54, Popularity: 0.0017649833124819508, Size: 58, Cycle: 333
+Content ID: 32, Popularity: 0.0034288144037837986, Size: 115, Cycle: 50
 
 Placement Nodes:
-[19, 95, 94]
-Number of Replicas
-3
-Number of Available Nodes
-74
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 216
-Average Hops: 2.3736263736263736
-Availability: 0.7549734884913814
-
-Objective Function Result:
-Access : 2405.559761471004
-Cost : 174.0
-Availability : 1342.3695447270072
-Total : 1516.3695447270072
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 48, Popularity: 0.0020509600260391315, Size: 2, Cycle: 341
-
-Placement Nodes:
-[19, 95, 73]
+[19, 21, 94]
 Number of Replicas
 3
 Number of Available Nodes
 82
 
 Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 205
-Average Hops: 2.383720930232558
-Availability: 0.7706758864821358
+Number of Searched Nodes: 88
+Total Hops: 250
+Average Hops: 2.840909090909091
+Availability: 0.7645948783490811
 
 Objective Function Result:
-Access : 96.80054355456782
-Cost : 6.0
-Availability : 52.692719764388414
-Total : 58.692719764388414
+Access : 11090.071587238224
+Cost : 345.0
+Availability : 5105.586382080879
+Total : 5450.586382080879
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 77, Popularity: 0.0011206993406767108, Size: 12, Cycle: 344
+Content ID: 56, Popularity: 0.0016849025499484803, Size: 148, Cycle: 50
+
+Placement Nodes:
+[19, 49, 23]
+Number of Replicas
+3
+Number of Available Nodes
+81
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 195
+Average Hops: 2.215909090909091
+Availability: 0.7696438204465089
+
+Objective Function Result:
+Access : 5470.457354045228
+Cost : 444.0
+Availability : 3207.612600270455
+Total : 3651.612600270455
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 52, Popularity: 0.0018520532506114556, Size: 305, Cycle: 55
+
+Placement Nodes:
+[19, 49, 23]
+Number of Replicas
+3
+Number of Available Nodes
+79
+
+Flooding Result
+Number of Searched Nodes: 89
+Total Hops: 198
+Average Hops: 2.2247191011235956
+Availability: 0.769135933272093
+
+Objective Function Result:
+Access : 12441.240544537251
+Cost : 915.0
+Availability : 7270.853627174043
+Total : 8185.853627174043
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 93, Popularity: 8.793178518217053E-4, Size: 729, Cycle: 57
 
 Placement Nodes:
 [19]
@@ -1882,618 +207,2293 @@ Number of Replicas
 1
 Number of Available Nodes
 77
+
+Flooding Result
+Number of Searched Nodes: 89
+Total Hops: 273
+Average Hops: 3.067415730337079
+Availability: 0.6775964179023789
+
+Objective Function Result:
+Access : 19466.203247959587
+Cost : 729.0
+Availability : 9365.641111309289
+Total : 10094.641111309289
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 99, Popularity: 8.113572102320679E-4, Size: 143, Cycle: 64
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+79
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 263
+Average Hops: 3.0941176470588236
+Availability: 0.6755636242232468
+
+Objective Function Result:
+Access : 3554.022351343725
+Cost : 143.0
+Availability : 1700.2668014374312
+Total : 1843.2668014374312
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 81, Popularity: 0.0010501566620736197, Size: 928, Cycle: 65
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+73
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 263
+Average Hops: 3.0941176470588236
+Availability: 0.6755636242232468
+
+Objective Function Result:
+Access : 29852.044849013244
+Cost : 928.0
+Availability : 14281.407316588262
+Total : 15209.407316588262
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 18, Popularity: 0.007028010775458082, Size: 450, Cycle: 69
+
+Placement Nodes:
+[19, 95, 83, 53, 9, 50]
+Number of Replicas
+6
+Number of Available Nodes
+78
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 183
+Average Hops: 2.127906976744186
+Availability: 0.8101437380184748
+
+Objective Function Result:
+Access : 66624.31633550968
+Cost : 2700.0
+Availability : 38647.20115129959
+Total : 41347.20115129959
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 61, Popularity: 0.0015104380013726646, Size: 362, Cycle: 70
+
+Placement Nodes:
+[19, 95]
+Number of Replicas
+2
+Number of Available Nodes
+78
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 202
+Average Hops: 2.3488372093023258
+Availability: 0.7206514270930384
+
+Objective Function Result:
+Access : 12714.50880561058
+Cost : 724.0
+Availability : 7511.409130423474
+Total : 8235.409130423475
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 63, Popularity: 0.0014493662154561975, Size: 509, Cycle: 79
+
+Placement Nodes:
+[19, 49, 62]
+Number of Replicas
+3
+Number of Available Nodes
+75
+
+Flooding Result
+Number of Searched Nodes: 83
+Total Hops: 183
+Average Hops: 2.2048192771084336
+Availability: 0.7537777261153101
+
+Objective Function Result:
+Access : 16102.900448480414
+Cost : 1527.0
+Availability : 9689.197548917839
+Total : 11216.197548917839
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 58, Popularity: 0.001611033179186402, Size: 132, Cycle: 81
+
+Placement Nodes:
+[19, 95, 85]
+Number of Replicas
+3
+Number of Available Nodes
+76
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 188
+Average Hops: 2.292682926829268
+Availability: 0.7607774259363008
+
+Objective Function Result:
+Access : 4826.781144017421
+Cost : 396.0
+Availability : 2767.298406586876
+Total : 3163.298406586876
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 46, Popularity: 0.002165134521649491, Size: 564, Cycle: 83
+
+Placement Nodes:
+[19, 20, 42]
+Number of Replicas
+3
+Number of Available Nodes
+68
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 172
+Average Hops: 2.097560975609756
+Availability: 0.7599167894643012
+
+Objective Function Result:
+Access : 25357.928777977082
+Cost : 1692.0
+Availability : 15908.643265540086
+Total : 17600.643265540086
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 79, Popularity: 0.0010844140026655645, Size: 259, Cycle: 86
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+74
+
+Flooding Result
+Number of Searched Nodes: 83
+Total Hops: 255
+Average Hops: 3.072289156626506
+Availability: 0.674989752199883
+
+Objective Function Result:
+Access : 8542.641153974306
+Cost : 259.0
+Availability : 4119.3898650647625
+Total : 4378.3898650647625
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 53, Popularity: 0.00180759117417917, Size: 726, Cycle: 91
+
+Placement Nodes:
+[19, 40, 15]
+Number of Replicas
+3
+Number of Available Nodes
+68
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 199
+Average Hops: 2.369047619047619
+Availability: 0.7612795030150558
+
+Objective Function Result:
+Access : 30778.38428873545
+Cost : 2178.0
+Availability : 17065.848684800894
+Total : 19243.848684800894
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 38, Popularity: 0.002759485464626927, Size: 116, Cycle: 95
+
+Placement Nodes:
+[19, 83, 53]
+Number of Replicas
+3
+Number of Available Nodes
+78
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 259
+Average Hops: 3.0833333333333335
+Availability: 0.7999855044105567
+
+Objective Function Result:
+Access : 9771.062081697486
+Cost : 348.0
+Availability : 3961.3131614335093
+Total : 4309.313161433509
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 44, Popularity: 0.002291056671531126, Size: 734, Cycle: 99
+
+Placement Nodes:
+[19, 70, 18]
+Number of Replicas
+3
+Number of Available Nodes
+65
+
+Flooding Result
+Number of Searched Nodes: 83
+Total Hops: 189
+Average Hops: 2.2771084337349397
+Availability: 0.7458444873760328
+
+Objective Function Result:
+Access : 37909.73934176852
+Cost : 2202.0
+Availability : 22321.26494347146
+Total : 24523.26494347146
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 73, Popularity: 0.0012000818409894293, Size: 159, Cycle: 99
+
+Placement Nodes:
+[19, 83, 53]
+Number of Replicas
+3
+Number of Available Nodes
+76
+
+Flooding Result
+Number of Searched Nodes: 83
+Total Hops: 256
+Average Hops: 3.0843373493975905
+Availability: 0.7999658219461415
+
+Objective Function Result:
+Access : 5826.463848563542
+Cost : 477.0
+Availability : 2361.4119179564686
+Total : 2838.4119179564686
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 88, Popularity: 9.440719437004966E-4, Size: 243, Cycle: 102
+
+Placement Nodes:
+[19, 83]
+Number of Replicas
+2
+Number of Available Nodes
+76
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 265
+Average Hops: 3.1176470588235294
+Availability: 0.7423527482219622
+
+Objective Function Result:
+Access : 7080.656198405594
+Cost : 486.0
+Availability : 3059.399834377947
+Total : 3545.399834377947
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 19, Popularity: 0.006574657075184188, Size: 737, Cycle: 113
+
+Placement Nodes:
+[19, 72, 13, 52]
+Number of Replicas
+4
+Number of Available Nodes
+67
+
+Flooding Result
+Number of Searched Nodes: 87
+Total Hops: 196
+Average Hops: 2.2528735632183907
+Availability: 0.7767816152712246
+
+Objective Function Result:
+Access : 108071.85519382314
+Cost : 2948.0
+Availability : 61755.671703065134
+Total : 64703.671703065134
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 76, Popularity: 0.0011396569864469057, Size: 108, Cycle: 113
+
+Placement Nodes:
+[19, 50]
+Number of Replicas
+2
+Number of Available Nodes
+80
+
+Flooding Result
+Number of Searched Nodes: 87
+Total Hops: 271
+Average Hops: 3.1149425287356323
+Availability: 0.7332705812699041
+
+Objective Function Result:
+Access : 3795.623663509741
+Cost : 216.0
+Availability : 1661.7620848756171
+Total : 1877.7620848756171
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 26, Popularity: 0.004450811551404525, Size: 986, Cycle: 116
+
+Placement Nodes:
+[19, 98, 94]
+Number of Replicas
+3
+Number of Available Nodes
+64
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 238
+Average Hops: 2.7045454545454546
+Availability: 0.7474262063966327
+
+Objective Function Result:
+Access : 117502.09257881218
+Cost : 2958.0
+Availability : 58127.68070755174
+Total : 61085.68070755174
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 71, Popularity: 0.0012435975408269522, Size: 262, Cycle: 125
+
+Placement Nodes:
+[19, 53]
+Number of Replicas
+2
+Number of Available Nodes
+72
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 261
+Average Hops: 3.107142857142857
+Availability: 0.7325284053039937
+
+Objective Function Result:
+Access : 10022.534543626234
+Cost : 524.0
+Availability : 4403.437843558205
+Total : 4927.437843558205
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 12, Popularity: 0.011510276116984335, Size: 110, Cycle: 128
+
+Placement Nodes:
+[19, 56, 6, 13, 52, 42]
+Number of Replicas
+6
+Number of Available Nodes
+74
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 170
+Average Hops: 2.0238095238095237
+Availability: 0.8205606087508733
+
+Objective Function Result:
+Access : 25367.82639925369
+Cost : 660.0
+Availability : 15275.764590354034
+Total : 15935.764590354034
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 28, Popularity: 0.004055969706607726, Size: 698, Cycle: 131
+
+Placement Nodes:
+[19, 56, 6]
+Number of Replicas
+3
+Number of Available Nodes
+61
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 183
+Average Hops: 2.152941176470588
+Availability: 0.7697267988185089
+
+Objective Function Result:
+Access : 60341.69201868152
+Cost : 2094.0
+Availability : 36412.35034251318
+Total : 38506.35034251318
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 98, Popularity: 8.22027500642078E-4, Size: 171, Cycle: 131
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+72
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 269
+Average Hops: 3.164705882352941
+Availability: 0.6658928155251846
+
+Objective Function Result:
+Access : 4404.03747906054
+Cost : 171.0
+Availability : 2089.841372953425
+Total : 2260.841372953425
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 50, Popularity: 0.0019470220548192874, Size: 683, Cycle: 132
+
+Placement Nodes:
+[19, 89, 71]
+Number of Replicas
+3
+Number of Available Nodes
+59
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 200
+Average Hops: 2.3529411764705883
+Availability: 0.744480349799328
+
+Objective Function Result:
+Access : 30976.891830756653
+Cost : 2049.0
+Availability : 17683.715939071062
+Total : 19732.715939071062
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 65, Popularity: 0.0013925313580670834, Size: 638, Cycle: 133
+
+Placement Nodes:
+[19, 91, 73]
+Number of Replicas
+3
+Number of Available Nodes
+57
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 203
+Average Hops: 2.388235294117647
+Availability: 0.7470583326064247
+
+Objective Function Result:
+Access : 21005.739205366262
+Cost : 1914.0
+Availability : 11773.52046009114
+Total : 13687.52046009114
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 78, Popularity: 0.0011022925730187034, Size: 206, Cycle: 140
+
+Placement Nodes:
+[19, 69]
+Number of Replicas
+2
+Number of Available Nodes
+70
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 213
+Average Hops: 2.4204545454545454
+Availability: 0.7125543292153002
+
+Objective Function Result:
+Access : 5441.2192708779
+Cost : 412.0
+Availability : 3154.868872791734
+Total : 3566.868872791734
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 59, Popularity: 0.0015762150663880588, Size: 398, Cycle: 145
+
+Placement Nodes:
+[19, 20, 62]
+Number of Replicas
+3
+Number of Available Nodes
+62
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 191
+Average Hops: 2.1704545454545454
+Availability: 0.7622350488987735
+
+Objective Function Result:
+Access : 13479.83065312734
+Cost : 1194.0
+Availability : 8147.883797202577
+Total : 9341.883797202576
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 8, Popularity: 0.018565080540569413, Size: 246, Cycle: 148
+
+Placement Nodes:
+[19, 69, 21, 81, 89, 71, 38, 18, 12, 65]
+Number of Replicas
+10
+Number of Available Nodes
+68
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 148
+Average Hops: 1.6818181818181819
+Availability: 0.813371391542352
+
+Objective Function Result:
+Access : 76040.71338611827
+Cost : 2460.0
+Availability : 55587.64128987502
+Total : 58047.64128987502
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 68, Popularity: 0.0013143416849683807, Size: 571, Cycle: 153
+
+Placement Nodes:
+[19, 66]
+Number of Replicas
+2
+Number of Available Nodes
+56
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 218
+Average Hops: 2.5348837209302326
+Availability: 0.695868071508928
+
+Objective Function Result:
+Access : 18833.785816148742
+Cost : 1142.0
+Availability : 10677.084371534402
+Total : 11819.084371534402
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 86, Popularity: 9.723823596061171E-4, Size: 101, Cycle: 158
+
+Placement Nodes:
+[19, 56]
+Number of Replicas
+2
+Number of Available Nodes
+71
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 198
+Average Hops: 2.302325581395349
+Availability: 0.7070817948628605
+
+Objective Function Result:
+Access : 2238.516907340593
+Cost : 202.0
+Availability : 1375.0673945137175
+Total : 1577.0673945137175
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 27, Popularity: 0.004245283123209621, Size: 745, Cycle: 167
+
+Placement Nodes:
+[19, 26, 21, 38, 51]
+Number of Replicas
+5
+Number of Available Nodes
+55
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 178
+Average Hops: 2.119047619047619
+Availability: 0.7812811469498693
+
+Objective Function Result:
+Access : 66349.68154989756
+Cost : 3725.0
+Availability : 40076.591886891685
+Total : 43801.591886891685
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 47, Popularity: 0.0021066796075119004, Size: 221, Cycle: 174
+
+Placement Nodes:
+[19, 72]
+Number of Replicas
+2
+Number of Available Nodes
+64
+
+Flooding Result
+Number of Searched Nodes: 87
+Total Hops: 229
+Average Hops: 2.632183908045977
+Availability: 0.7111097490795831
+
+Objective Function Result:
+Access : 12132.273422299319
+Cost : 442.0
+Availability : 6481.705980323232
+Total : 6923.705980323232
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 39, Popularity: 0.002670140482269417, Size: 650, Cycle: 176
+
+Placement Nodes:
+[19, 7, 14, 17]
+Number of Replicas
+4
+Number of Available Nodes
+55
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 189
+Average Hops: 2.147727272727273
+Availability: 0.7478295722544319
+
+Objective Function Result:
+Access : 36903.01030276477
+Cost : 2600.0
+Availability : 22976.296526500286
+Total : 25576.296526500286
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 15, Popularity: 0.00878731353482975, Size: 804, Cycle: 177
+
+Placement Nodes:
+[19, 80, 3, 96, 61, 84, 64]
+Number of Replicas
+7
+Number of Available Nodes
+48
+
+Flooding Result
+Number of Searched Nodes: 87
+Total Hops: 168
+Average Hops: 1.9310344827586208
+Availability: 0.7961185841086966
+
+Objective Function Result:
+Access : 135063.311912501
+Cost : 5628.0
+Availability : 87855.63131921722
+Total : 93483.63131921722
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 34, Popularity: 0.0031763155612394944, Size: 830, Cycle: 178
+
+Placement Nodes:
+[19, 86, 74, 27, 37]
+Number of Replicas
+5
+Number of Available Nodes
+43
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 176
+Average Hops: 2.0
+Availability: 0.7837778806530598
+
+Objective Function Result:
+Access : 52199.56993340985
+Cost : 4150.0
+Availability : 33299.976448631154
+Total : 37449.976448631154
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 74, Popularity: 0.0011793221554192497, Size: 946, Cycle: 179
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+39
+
+Flooding Result
+Number of Searched Nodes: 89
+Total Hops: 278
+Average Hops: 3.1235955056179776
+Availability: 0.671895801681214
+
+Objective Function Result:
+Access : 34499.56171452851
+Cost : 946.0
+Availability : 16438.298448549827
+Total : 17384.298448549827
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 72, Popularity: 0.0012214969355654292, Size: 757, Cycle: 181
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+41
+
+Flooding Result
+Number of Searched Nodes: 89
+Total Hops: 278
+Average Hops: 3.1235955056179776
+Availability: 0.6724964539761439
+
+Objective Function Result:
+Access : 28594.21940011037
+Cost : 757.0
+Availability : 13612.36097243828
+Total : 14369.36097243828
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 40, Popularity: 0.002585789015297764, Size: 184, Cycle: 188
+
+Placement Nodes:
+[19, 40, 64, 7]
+Number of Replicas
+4
+Number of Available Nodes
+62
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 197
+Average Hops: 2.2906976744186047
+Availability: 0.7740639597361553
+
+Objective Function Result:
+Access : 10789.812026075375
+Cost : 736.0
+Availability : 6085.121534235923
+Total : 6821.121534235923
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 16, Popularity: 0.008121355138160898, Size: 996, Cycle: 189
+
+Placement Nodes:
+[19, 41, 10, 8, 46, 29, 44]
+Number of Replicas
+7
+Number of Available Nodes
+36
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 172
+Average Hops: 2.0476190476190474
+Availability: 0.7779146299774521
+
+Objective Function Result:
+Access : 163972.9447040873
+Cost : 6972.0
+Availability : 102941.64310374629
+Total : 109913.64310374629
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 90, Popularity: 9.171878434978309E-4, Size: 219, Cycle: 199
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+44
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 269
+Average Hops: 3.127906976744186
+Availability: 0.6713711965449171
+
+Objective Function Result:
+Access : 6220.014943932291
+Cost : 219.0
+Availability : 2961.930707962098
+Total : 3180.930707962098
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 2, Popularity: 0.07743806078895102, Size: 147, Cycle: 214
+
+Placement Nodes:
+[19, 49, 61, 84, 9, 52, 7, 32, 99, 80, 42, 17]
+Number of Replicas
+12
+Number of Available Nodes
+58
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 134
+Average Hops: 1.6341463414634145
+Availability: 0.8297416958444156
+
+Objective Function Result:
+Access : 184161.11856177435
+Cost : 1764.0
+Availability : 135820.11176559207
+Total : 137584.11176559207
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 89, Popularity: 9.304581358195488E-4, Size: 144, Cycle: 222
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+52
+
+Flooding Result
+Number of Searched Nodes: 80
+Total Hops: 246
+Average Hops: 3.075
+Availability: 0.6780307763722473
+
+Objective Function Result:
+Access : 4078.8679391548726
+Cost : 144.0
+Availability : 1956.3435239938208
+Total : 2100.343523993821
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 25, Popularity: 0.004674624679371236, Size: 367, Cycle: 225
+
+Placement Nodes:
+[19, 20, 85, 9]
+Number of Replicas
+4
+Number of Available Nodes
+35
+
+Flooding Result
+Number of Searched Nodes: 79
+Total Hops: 154
+Average Hops: 1.9493670886075949
+Availability: 0.7590002206549071
+
+Objective Function Result:
+Access : 33108.66243701474
+Cost : 1468.0
+Availability : 22377.21859014021
+Total : 23845.21859014021
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 31, Popularity: 0.0035687582380995236, Size: 126, Cycle: 228
+
+Placement Nodes:
+[19, 70, 22]
+Number of Replicas
+3
+Number of Available Nodes
+52
+
+Flooding Result
+Number of Searched Nodes: 79
+Total Hops: 176
+Average Hops: 2.2278481012658227
+Availability: 0.7606752058461886
+
+Objective Function Result:
+Access : 9917.642387495453
+Cost : 378.0
+Availability : 5852.25992906293
+Total : 6230.25992906293
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 95, Popularity: 8.555777797781773E-4, Size: 841, Cycle: 228
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+31
+
+Flooding Result
+Number of Searched Nodes: 79
+Total Hops: 247
+Average Hops: 3.1265822784810124
+Availability: 0.6733307142231282
+
+Objective Function Result:
+Access : 22272.068279162228
+Cost : 841.0
+Availability : 10579.429819823365
+Total : 11420.429819823365
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 75, Popularity: 0.0011591894769017602, Size: 110, Cycle: 230
+
+Placement Nodes:
+[19, 70]
+Number of Replicas
+2
+Number of Available Nodes
+53
+
+Flooding Result
+Number of Searched Nodes: 80
+Total Hops: 180
+Average Hops: 2.25
+Availability: 0.7162467455120424
+
+Objective Function Result:
+Access : 2840.3040157785376
+Cost : 220.0
+Availability : 1762.4615375300057
+Total : 1982.4615375300057
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 41, Popularity: 0.0025060401369589014, Size: 422, Cycle: 238
+
+Placement Nodes:
+[19, 49, 85, 75]
+Number of Replicas
+4
+Number of Available Nodes
+40
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 170
+Average Hops: 2.073170731707317
+Availability: 0.7731630591307611
+
+Objective Function Result:
+Access : 21705.547101363085
+Cost : 1688.0
+Availability : 13541.43134561762
+Total : 15229.43134561762
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 33, Popularity: 0.003298295086315608, Size: 118, Cycle: 239
+
+Placement Nodes:
+[19, 49, 32, 99]
+Number of Replicas
+4
+Number of Available Nodes
+55
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 169
+Average Hops: 2.011904761904762
+Availability: 0.78258016682774
+
+Objective Function Result:
+Access : 7752.006500618189
+Cost : 472.0
+Availability : 4923.544555764372
+Total : 5395.544555764372
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 42, Popularity: 0.002430541874359573, Size: 543, Cycle: 241
+
+Placement Nodes:
+[19, 69, 20, 65]
+Number of Replicas
+4
+Number of Available Nodes
+38
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 164
+Average Hops: 1.9523809523809523
+Availability: 0.7720017275552624
+
+Objective Function Result:
+Access : 25509.543910180244
+Cost : 2172.0
+Availability : 16924.656367507236
+Total : 19096.656367507236
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 97, Popularity: 8.329485979905657E-4, Size: 113, Cycle: 243
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+54
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 267
+Average Hops: 3.1785714285714284
+Availability: 0.6687109016133661
+
+Objective Function Result:
+Access : 2961.8551462468604
+Cost : 113.0
+Availability : 1393.4565659448506
+Total : 1506.4565659448506
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 23, Popularity: 0.005187253658991873, Size: 131, Cycle: 252
+
+Placement Nodes:
+[19, 49, 32, 15, 75]
+Number of Replicas
+5
+Number of Available Nodes
+55
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 174
+Average Hops: 2.0470588235294116
+Availability: 0.7919331840349331
+
+Objective Function Result:
+Access : 13771.279682827078
+Cost : 655.0
+Availability : 8494.844522198744
+Total : 9149.844522198744
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 9, Popularity: 0.016188704655543285, Size: 129, Cycle: 265
+
+Placement Nodes:
+[19, 2]
+Number of Replicas
+2
+Number of Available Nodes
+53
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 233
+Average Hops: 2.7738095238095237
+Availability: 0.8078933716602545
+
+Objective Function Result:
+Access : 57347.3877230176
+Cost : 258.0
+Availability : 25590.746800047604
+Total : 25848.746800047604
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 10, Popularity: 0.014302159242132587, Size: 601, Cycle: 267
+
+Placement Nodes:
+[19, 2]
+Number of Replicas
+2
+Number of Available Nodes
+36
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 241
+Average Hops: 2.802325581395349
+Availability: 0.8070425384951594
+
+Objective Function Result:
+Access : 238467.8670141661
+Cost : 1202.0
+Availability : 105442.29481811271
+Total : 106644.29481811271
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 30, Popularity: 0.003719134614187634, Size: 733, Cycle: 267
+
+Placement Nodes:
+[19, 55, 83]
+Number of Replicas
+3
+Number of Available Nodes
+34
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 197
+Average Hops: 2.2906976744186047
+Availability: 0.7333872368955164
+
+Objective Function Result:
+Access : 61822.82440105529
+Cost : 2199.0
+Availability : 36799.991596554595
+Total : 38998.991596554595
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 83, Popularity: 0.0010177685533048883, Size: 642, Cycle: 270
+
+Placement Nodes:
+[19, 35]
+Number of Replicas
+2
+Number of Available Nodes
+33
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 219
+Average Hops: 2.546511627906977
+Availability: 0.6827199324431721
+
+Objective Function Result:
+Access : 16472.704747323845
+Cost : 1284.0
+Availability : 9474.944356679744
+Total : 10758.944356679744
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 0, Popularity: 0.3230071232736677, Size: 503, Cycle: 274
+
+Placement Nodes:
+[19, 45, 88, 34, 32, 63, 12, 97, 33, 10, 81, 31, 82, 23, 22, 11, 1, 87, 99, 79, 4, 68, 43, 30, 67, 77, 59, 57, 54]
+Number of Replicas
+29
+Number of Available Nodes
+33
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 81
+Average Hops: 0.9529411764705882
+Availability: 0.8269810325329197
+
+Objective Function Result:
+Access : 1532785.4625063122
+Cost : 14587.0
+Availability : 1945000.5604594739
+Total : 1959587.5604594739
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 57, Popularity: 0.0016472355568702116, Size: 102, Cycle: 274
+
+Placement Nodes:
+[19, 2]
+Number of Replicas
+2
+Number of Available Nodes
+53
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 236
+Average Hops: 2.776470588235294
+Availability: 0.8078324314648877
+
+Objective Function Result:
+Access : 4618.321386085875
+Cost : 204.0
+Availability : 2059.0637371555417
+Total : 2263.0637371555417
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 67, Popularity: 0.0013395240438749244, Size: 276, Cycle: 276
+
+Placement Nodes:
+[19, 69, 81]
+Number of Replicas
+3
+Number of Available Nodes
+38
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 210
+Average Hops: 2.4705882352941178
+Availability: 0.7358616440689709
+
+Objective Function Result:
+Access : 9042.63828790126
+Cost : 828.0
+Availability : 4973.918027912307
+Total : 5801.918027912307
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 62, Popularity: 0.0014793447187807006, Size: 405, Cycle: 280
+
+Placement Nodes:
+[19, 86]
+Number of Replicas
+2
+Number of Available Nodes
+33
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 219
+Average Hops: 2.546511627906977
+Availability: 0.6888093377004931
+
+Objective Function Result:
+Access : 15104.462213247873
+Cost : 810.0
+Availability : 8611.138562308972
+Total : 9421.138562308972
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 21, Popularity: 0.005808481558745336, Size: 440, Cycle: 304
+
+Placement Nodes:
+[19, 50]
+Number of Replicas
+2
+Number of Available Nodes
+36
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 266
+Average Hops: 3.0930232558139537
+Availability: 0.7970510129062374
+
+Objective Function Result:
+Access : 78258.88776967426
+Cost : 880.0
+Availability : 31744.19862743604
+Total : 32624.19862743604
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 82, Popularity: 0.0010337382349240734, Size: 104, Cycle: 305
+
+Placement Nodes:
+[19, 50]
+Number of Replicas
+2
+Number of Available Nodes
+56
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 266
+Average Hops: 3.0930232558139537
+Availability: 0.7970510129062374
+
+Objective Function Result:
+Access : 3292.018742515136
+Cost : 208.0
+Availability : 1335.3434967694236
+Total : 1543.3434967694236
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 85, Popularity: 9.871067309463696E-4, Size: 160, Cycle: 309
+
+Placement Nodes:
+[19, 49]
+Number of Replicas
+2
+Number of Available Nodes
+57
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 203
+Average Hops: 2.3068181818181817
+Availability: 0.7099576102364944
+
+Objective Function Result:
+Access : 3606.887994878034
+Cost : 320.0
+Availability : 2202.35270285814
+Total : 2522.35270285814
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 96, Popularity: 8.441290480035994E-4, Size: 124, Cycle: 316
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+59
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 294
+Average Hops: 3.340909090909091
+Availability: 0.6505383051366163
+
+Objective Function Result:
+Access : 3462.026464577162
+Cost : 124.0
+Availability : 1592.9159146310385
+Total : 1716.9159146310385
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 55, Popularity: 0.0017241206950188493, Size: 270, Cycle: 319
+
+Placement Nodes:
+[19, 91, 92]
+Number of Replicas
+3
+Number of Available Nodes
+46
+
+Flooding Result
+Number of Searched Nodes: 89
+Total Hops: 214
+Average Hops: 2.404494382022472
+Availability: 0.7366522335155459
+
+Objective Function Result:
+Access : 11081.291777596318
+Cost : 810.0
+Availability : 6256.1062168939
+Total : 7066.1062168939
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 69, Popularity: 0.0012899849631001902, Size: 111, Cycle: 323
+
+Placement Nodes:
+[19, 69]
+Number of Replicas
+2
+Number of Available Nodes
+59
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 220
+Average Hops: 2.5
+Availability: 0.7012922529637402
+
+Objective Function Result:
+Access : 3543.9111898769975
+Cost : 222.0
+Availability : 2021.3605240326149
+Total : 2243.360524032615
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 4, Popularity: 0.039861266591925903, Size: 248, Cycle: 326
+
+Placement Nodes:
+[19, 6, 22, 82, 23, 9, 66, 75, 73, 12, 51, 8, 10, 65, 11, 60]
+Number of Replicas
+16
+Number of Available Nodes
+48
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 112
+Average Hops: 1.3176470588235294
+Availability: 0.8188656360332417
+
+Objective Function Result:
+Access : 128954.66769985417
+Cost : 3968.0
+Availability : 119515.8001874236
+Total : 123483.8001874236
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 43, Popularity: 0.002358976532640951, Size: 159, Cycle: 332
+
+Placement Nodes:
+[19, 66, 6, 27]
+Number of Replicas
+4
+Number of Available Nodes
+51
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 184
+Average Hops: 2.1904761904761907
+Availability: 0.7444956668818306
+
+Objective Function Result:
+Access : 8133.818483875504
+Cost : 636.0
+Availability : 4987.624676960687
+Total : 5623.624676960687
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 54, Popularity: 0.0017649833124819508, Size: 895, Cycle: 333
+
+Placement Nodes:
+[19, 3]
+Number of Replicas
+2
+Number of Available Nodes
+13
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 219
+Average Hops: 2.607142857142857
+Availability: 0.6825006012773517
+
+Objective Function Result:
+Access : 40772.154597785055
+Cost : 1790.0
+Availability : 22913.73020181584
+Total : 24703.73020181584
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 48, Popularity: 0.0020509600260391315, Size: 240, Cycle: 341
+
+Placement Nodes:
+[19, 57, 76, 92]
+Number of Replicas
+4
+Number of Available Nodes
+41
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 189
+Average Hops: 2.197674418604651
+Availability: 0.7639185272681688
+
+Objective Function Result:
+Access : 10709.44550154926
+Cost : 960.0
+Availability : 6379.058561775543
+Total : 7339.058561775543
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 77, Popularity: 0.0011206993406767108, Size: 541, Cycle: 344
+
+Placement Nodes:
+[19, 57]
+Number of Replicas
+2
+Number of Available Nodes
+16
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 216
+Average Hops: 2.5714285714285716
+Availability: 0.6980660532917567
+
+Objective Function Result:
+Access : 15434.623539592445
+Cost : 1082.0
+Availability : 8598.54675703835
+Total : 9680.54675703835
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 1, Popularity: 0.13118165495958528, Size: 242, Cycle: 356
+
+Placement Nodes:
+[19, 83, 6, 32, 45, 88, 0, 64, 76, 25, 97, 10, 47, 28, 33, 65, 11, 82, 60, 1, 35, 43, 30, 14, 54, 77, 59, 34, 26, 87]
+Number of Replicas
+30
+Number of Available Nodes
+41
+
+Flooding Result
+Number of Searched Nodes: 81
+Total Hops: 68
+Average Hops: 0.8395061728395061
+Availability: 0.8463606084765926
+
+Objective Function Result:
+Access : 263844.2050462698
+Cost : 7260.0
+Availability : 371336.9996246304
+Total : 378596.9996246304
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 92, Popularity: 8.916291672358687E-4, Size: 199, Cycle: 361
+
+Placement Nodes:
+[19, 39]
+Number of Replicas
+2
+Number of Available Nodes
+39
+
+Flooding Result
+Number of Searched Nodes: 80
+Total Hops: 262
+Average Hops: 3.275
+Availability: 0.7358106557129787
+
+Objective Function Result:
+Access : 5752.860488266285
+Cost : 398.0
+Availability : 2387.2970698817794
+Total : 2785.2970698817794
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 51, Popularity: 0.0018984875489426428, Size: 287, Cycle: 363
+
+Placement Nodes:
+[19, 39]
+Number of Replicas
+2
+Number of Available Nodes
+25
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 269
+Average Hops: 3.2804878048780486
+Availability: 0.7356104507963495
+
+Objective Function Result:
+Access : 17695.517670562032
+Cost : 574.0
+Availability : 7332.920116851473
+Total : 7906.920116851473
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 37, Popularity: 0.002854259296991636, Size: 233, Cycle: 364
+
+Placement Nodes:
+[19, 39]
+Number of Replicas
+2
+Number of Available Nodes
+38
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 269
+Average Hops: 3.2804878048780486
+Availability: 0.7356104507963495
+
+Objective Function Result:
+Access : 21598.46900706943
+Cost : 466.0
+Availability : 8950.280563908595
+Total : 9416.280563908595
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 11, Popularity: 0.012772516725741642, Size: 314, Cycle: 375
+
+Placement Nodes:
+[19, 83, 6, 86, 76, 62, 28]
+Number of Replicas
+7
+Number of Available Nodes
+29
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 163
+Average Hops: 1.9404761904761905
+Availability: 0.7861545828433083
+
+Objective Function Result:
+Access : 77045.9192317071
+Cost : 2198.0
+Availability : 50504.883339914544
+Total : 52702.883339914544
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 6, Popularity: 0.025738583837503305, Size: 105, Cycle: 381
+
+Placement Nodes:
+[19, 83, 9, 50]
+Number of Replicas
+4
+Number of Available Nodes
+54
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 226
+Average Hops: 2.627906976744186
+Availability: 0.7697818872929223
+
+Objective Function Result:
+Access : 70310.32889759463
+Cost : 420.0
+Availability : 34756.933542791456
+Total : 35176.933542791456
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 24, Popularity: 0.004919150259625622, Size: 108, Cycle: 390
+
+Placement Nodes:
+[19, 83]
+Number of Replicas
+2
+Number of Available Nodes
+53
+
+Flooding Result
+Number of Searched Nodes: 82
+Total Hops: 255
+Average Hops: 3.1097560975609757
+Availability: 0.7530579182747319
+
+Objective Function Result:
+Access : 16355.934654705945
+Cost : 216.0
+Availability : 6984.264197953649
+Total : 7200.264197953649
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 7, Popularity: 0.021636903933431633, Size: 380, Cycle: 394
+
+Placement Nodes:
+[19, 56, 86, 62, 48, 35, 32, 31, 65, 8]
+Number of Replicas
+10
+Number of Available Nodes
+30
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 128
+Average Hops: 1.5238095238095237
+Availability: 0.7961201711437856
+
+Objective Function Result:
+Access : 124035.09729153493
+Cost : 3800.0
+Availability : 102243.39936095987
+Total : 106043.39936095987
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 91, Popularity: 9.042487651972883E-4, Size: 112, Cycle: 401
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+59
+
+Flooding Result
+Number of Searched Nodes: 88
+Total Hops: 273
+Average Hops: 3.102272727272727
+Availability: 0.6703867157988714
+
+Objective Function Result:
+Access : 3110.434902525632
+Cost : 112.0
+Availability : 1495.6009825701278
+Total : 1607.6009825701278
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 87, Popularity: 9.580421707928679E-4, Size: 962, Cycle: 407
+
+Placement Nodes:
+[19]
+Number of Replicas
+1
+Number of Available Nodes
+16
 
 Flooding Result
 Number of Searched Nodes: 87
 Total Hops: 272
 Average Hops: 3.1264367816091956
-Availability: 0.6739567664517244
+Availability: 0.6668483553138439
 
 Objective Function Result:
-Access : 416.2509220102409
-Cost : 12.0
-Availability : 197.54840117319307
-Total : 209.54840117319307
+Access : 28526.24081753581
+Cost : 962.0
+Availability : 13682.574086732093
+Total : 14644.574086732093
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 1, Popularity: 0.13118165495958528, Size: 2, Cycle: 356
+Content ID: 66, Popularity: 0.001365572795814675, Size: 265, Cycle: 411
 
 Placement Nodes:
-[19, 95, 73, 94, 42, 52, 11, 98, 13, 9, 53, 61, 83, 50, 76, 62, 80]
-Number of Replicas
-17
-Number of Available Nodes
-82
-
-Flooding Result
-Number of Searched Nodes: 86
-Total Hops: 138
-Average Hops: 1.6046511627906976
-Availability: 0.8382852379821151
-
-Objective Function Result:
-Access : 4167.91574432059
-Cost : 34.0
-Availability : 3098.4641629287576
-Total : 3132.4641629287576
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 92, Popularity: 8.916291672358687E-4, Size: 2, Cycle: 361
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-80
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 259
-Average Hops: 3.0470588235294116
-Availability: 0.6802579814331097
-
-Objective Function Result:
-Access : 53.79356112257625
-Cost : 2.0
-Availability : 25.952297500541942
-Total : 27.952297500541942
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 51, Popularity: 0.0018984875489426428, Size: 3, Cycle: 363
-
-Placement Nodes:
-[19, 95, 73]
+[19, 86, 17]
 Number of Replicas
 3
 Number of Available Nodes
-78
+36
+
+Flooding Result
+Number of Searched Nodes: 87
+Total Hops: 202
+Average Hops: 2.32183908045977
+Availability: 0.7433184552781905
+
+Objective Function Result:
+Access : 8318.174786478156
+Cost : 795.0
+Availability : 4819.71112701487
+Total : 5614.71112701487
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 3, Popularity: 0.053276306799449995, Size: 222, Cycle: 414
+
+Placement Nodes:
+[19, 91, 83, 53, 27, 62, 75, 28, 32, 80, 77]
+Number of Replicas
+11
+Number of Available Nodes
+48
 
 Flooding Result
 Number of Searched Nodes: 85
-Total Hops: 196
-Average Hops: 2.3058823529411763
-Availability: 0.7612970525052059
+Total Hops: 144
+Average Hops: 1.6941176470588235
+Availability: 0.8033049591113378
 
 Objective Function Result:
-Access : 130.01736141064603
-Cost : 9.0
-Availability : 74.06449298345461
-Total : 83.06449298345461
+Access : 198365.36541260817
+Cost : 2442.0
+Availability : 145761.16548983296
+Total : 148203.16548983296
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 37, Popularity: 0.002854259296991636, Size: 2, Cycle: 364
+Content ID: 49, Popularity: 0.0019977957932086547, Size: 755, Cycle: 422
 
 Placement Nodes:
-[19, 95, 73]
+[19, 53]
 Number of Replicas
-3
+2
 Number of Available Nodes
-79
+20
 
 Flooding Result
 Number of Searched Nodes: 84
-Total Hops: 193
-Average Hops: 2.2976190476190474
-Availability: 0.7622520752484041
+Total Hops: 263
+Average Hops: 3.130952380952381
+Availability: 0.7297830947304838
 
 Objective Function Result:
-Access : 129.84841044671236
-Cost : 6.0
-Availability : 74.14126627601165
-Total : 80.14126627601165
+Access : 46753.02362639188
+Cost : 1510.0
+Availability : 20461.5929913433
+Total : 21971.5929913433
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 11, Popularity: 0.012772516725741642, Size: 4, Cycle: 375
+Content ID: 14, Popularity: 0.009556381154030673, Size: 521, Cycle: 428
 
 Placement Nodes:
-[19, 21, 51, 93]
+[19, 5, 80, 64, 23]
 Number of Replicas
-4
+5
 Number of Available Nodes
-77
-
-Flooding Result
-Number of Searched Nodes: 84
-Total Hops: 218
-Average Hops: 2.5952380952380953
-Availability: 0.7978601936071712
-
-Objective Function Result:
-Access : 1312.6497903569339
-Cost : 16.0
-Availability : 633.9352011693379
-Total : 649.9352011693379
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 6, Popularity: 0.025738583837503305, Size: 1, Cycle: 381
-
-Placement Nodes:
-[19, 21, 51, 93]
-Number of Replicas
-4
-Number of Available Nodes
-78
-
-Flooding Result
-Number of Searched Nodes: 83
-Total Hops: 219
-Average Hops: 2.63855421686747
-Availability: 0.7953628518717069
-
-Objective Function Result:
-Access : 672.3352243143484
-Cost : 4.0
-Availability : 320.3719904589965
-Total : 324.3719904589965
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 24, Popularity: 0.004919150259625622, Size: 1, Cycle: 390
-
-Placement Nodes:
-[19, 95, 94, 52]
-Number of Replicas
-4
-Number of Available Nodes
-82
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 192
-Average Hops: 2.1818181818181817
-Availability: 0.7728307778844444
-
-Objective Function Result:
-Access : 106.25364560791343
-Cost : 4.0
-Availability : 63.01455501501176
-Total : 67.01455501501175
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 7, Popularity: 0.021636903933431633, Size: 6, Cycle: 394
-
-Placement Nodes:
-[19, 95, 94, 52, 53, 83, 9, 98, 6, 13, 76, 88]
-Number of Replicas
-12
-Number of Available Nodes
-81
-
-Flooding Result
-Number of Searched Nodes: 89
-Total Hops: 157
-Average Hops: 1.7640449438202248
-Availability: 0.8326210337649883
-
-Objective Function Result:
-Access : 2267.2071764314237
-Cost : 72.0
-Availability : 1543.5979173312626
-Total : 1615.5979173312626
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 91, Popularity: 9.042487651972883E-4, Size: 1, Cycle: 401
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 274
-Average Hops: 3.010989010989011
-Availability: 0.6808872802091511
-
-Objective Function Result:
-Access : 26.954562642573233
-Cost : 1.0
-Availability : 13.147642841416143
-Total : 14.147642841416143
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 87, Popularity: 9.580421707928679E-4, Size: 82, Cycle: 407
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-68
-
-Flooding Result
-Number of Searched Nodes: 89
-Total Hops: 267
-Average Hops: 3.0
-Availability: 0.6823122151901392
-
-Objective Function Result:
-Access : 2333.2159027489506
-Cost : 82.0
-Availability : 1139.8574097532735
-Total : 1221.8574097532735
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 66, Popularity: 0.001365572795814675, Size: 3, Cycle: 411
-
-Placement Nodes:
-[19, 49, 79]
-Number of Replicas
-3
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 193
-Average Hops: 2.1444444444444444
-Availability: 0.7677577721666746
-
-Objective Function Result:
-Access : 86.97333136543664
-Cost : 9.0
-Availability : 52.82592180244462
-Total : 61.82592180244462
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 3, Popularity: 0.053276306799449995, Size: 2, Cycle: 414
-
-Placement Nodes:
-[19, 95, 37, 83, 53, 9, 7, 58, 72, 93]
-Number of Replicas
-10
-Number of Available Nodes
-83
-
-Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 156
-Average Hops: 1.7727272727272727
-Availability: 0.8205107084262242
-
-Objective Function Result:
-Access : 1869.998368660695
-Cost : 20.0
-Availability : 1285.6271877942934
-Total : 1305.6271877942934
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 49, Popularity: 0.0019977957932086547, Size: 31, Cycle: 422
-
-Placement Nodes:
-[19, 49, 53]
-Number of Replicas
-3
-Number of Available Nodes
-76
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 186
-Average Hops: 2.1379310344827585
-Availability: 0.7590308544324849
-
-Objective Function Result:
-Access : 1310.8158204832978
-Cost : 93.0
-Availability : 807.7715488840815
-Total : 900.7715488840815
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 14, Popularity: 0.009556381154030673, Size: 11, Cycle: 428
-
-Placement Nodes:
-[19, 49, 53, 83, 9, 52]
-Number of Replicas
-6
-Number of Available Nodes
-77
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 170
-Average Hops: 1.9540229885057472
-Availability: 0.8165568114033966
-
-Objective Function Result:
-Access : 2033.5320035008028
-Cost : 66.0
-Availability : 1274.485612195594
-Total : 1340.485612195594
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 84, Popularity: 0.0010022302262840833, Size: 2, Cycle: 432
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-81
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 262
-Average Hops: 3.0114942528735633
-Availability: 0.6784008614431478
-
-Objective Function Result:
-Access : 59.76056921691161
-Cost : 2.0
-Availability : 29.25137571053608
-Total : 31.25137571053608
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 94, Popularity: 8.6730412720375E-4, Size: 2, Cycle: 435
-
-Placement Nodes:
-[19]
-Number of Replicas
-1
-Number of Available Nodes
-79
+25
 
 Flooding Result
 Number of Searched Nodes: 85
-Total Hops: 255
-Average Hops: 3.0
-Availability: 0.6788534067260604
+Total Hops: 160
+Average Hops: 1.8823529411764706
+Availability: 0.7821754962203673
 
 Objective Function Result:
-Access : 51.51786515590274
-Cost : 2.0
-Availability : 25.29650959763683
-Total : 27.29650959763683
+Access : 92782.79219647023
+Cost : 2605.0
+Availability : 63017.6457745843
+Total : 65622.64577458429
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 70, Popularity: 0.0012664155853260514, Size: 31, Cycle: 441
+Content ID: 84, Popularity: 0.0010022302262840833, Size: 194, Cycle: 432
 
 Placement Nodes:
-[19]
+[19, 5]
 Number of Replicas
-1
+2
 Number of Available Nodes
-75
+47
+
+Flooding Result
+Number of Searched Nodes: 85
+Total Hops: 177
+Average Hops: 2.0823529411764707
+Availability: 0.7290182250115059
+
+Objective Function Result:
+Access : 4008.286552357815
+Cost : 388.0
+Availability : 2640.3775743340716
+Total : 3028.3775743340716
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 94, Popularity: 8.6730412720375E-4, Size: 240, Cycle: 435
+
+Placement Nodes:
+[19, 21]
+Number of Replicas
+2
+Number of Available Nodes
+44
 
 Flooding Result
 Number of Searched Nodes: 86
 Total Hops: 255
 Average Hops: 2.9651162790697674
-Availability: 0.6832705699691979
+Availability: 0.7309265010582724
 
 Objective Function Result:
-Access : 1152.4308197653966
-Cost : 31.0
-Availability : 568.8272848544995
-Total : 599.8272848544995
+Access : 6110.258425467534
+Cost : 480.0
+Availability : 2819.3184995379193
+Total : 3299.3184995379193
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 22, Popularity: 0.005482339334624404, Size: 17, Cycle: 448
-
-Placement Nodes:
-[19, 7, 53, 86, 23]
-Number of Replicas
-5
-Number of Available Nodes
-76
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 189
-Average Hops: 2.1724137931034484
-Availability: 0.7793169506969684
-
-Objective Function Result:
-Access : 2004.4377838306582
-Cost : 85.0
-Availability : 1183.9569371513176
-Total : 1268.9569371513176
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 64, Popularity: 0.0014204460266873434, Size: 15, Cycle: 449
-
-Placement Nodes:
-[19, 7]
-Number of Replicas
-2
-Number of Available Nodes
-76
-
-Flooding Result
-Number of Searched Nodes: 87
-Total Hops: 219
-Average Hops: 2.5172413793103448
-Availability: 0.7176654839966478
-
-Objective Function Result:
-Access : 530.9774190449705
-Cost : 30.0
-Availability : 293.91999429647336
-Total : 323.91999429647336
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 80, Popularity: 0.0010670421506024004, Size: 1, Cycle: 452
+Content ID: 70, Popularity: 0.0012664155853260514, Size: 754, Cycle: 441
 
 Placement Nodes:
 [19]
 Number of Replicas
 1
 Number of Available Nodes
-80
-
-Flooding Result
-Number of Searched Nodes: 85
-Total Hops: 252
-Average Hops: 2.9647058823529413
-Availability: 0.6823697866857061
-
-Objective Function Result:
-Access : 31.31831479203375
-Cost : 1.0
-Availability : 15.480927639355352
-Total : 16.48092763935535
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 29, Popularity: 0.0038810967464274907, Size: 3, Cycle: 459
-
-Placement Nodes:
-[19, 95, 37]
-Number of Replicas
-3
-Number of Available Nodes
-80
+20
 
 Flooding Result
 Number of Searched Nodes: 87
+Total Hops: 268
+Average Hops: 3.0804597701149423
+Availability: 0.676054853844529
+
+Objective Function Result:
+Access : 29120.466535221352
+Cost : 754.0
+Availability : 13983.015911307688
+Total : 14737.015911307688
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 22, Popularity: 0.005482339334624404, Size: 616, Cycle: 448
+
+Placement Nodes:
+[19, 94]
+Number of Replicas
+2
+Number of Available Nodes
+26
+
+Flooding Result
+Number of Searched Nodes: 86
+Total Hops: 263
+Average Hops: 3.058139534883721
+Availability: 0.773779446626436
+
+Objective Function Result:
+Access : 102244.30262960373
+Cost : 1232.0
+Availability : 43208.046354860635
+Total : 44440.046354860635
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 64, Popularity: 0.0014204460266873434, Size: 597, Cycle: 449
+
+Placement Nodes:
+[19, 56, 42]
+Number of Replicas
+3
+Number of Available Nodes
+25
+
+Flooding Result
+Number of Searched Nodes: 84
+Total Hops: 181
+Average Hops: 2.1547619047619047
+Availability: 0.7822350396519216
+
+Objective Function Result:
+Access : 18089.791064606754
+Cost : 1791.0
+Availability : 10732.403594789006
+Total : 12523.403594789006
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 80, Popularity: 0.0010670421506024004, Size: 144, Cycle: 452
+
+Placement Nodes:
+[19, 94]
+Number of Replicas
+2
+Number of Available Nodes
+53
+
+Flooding Result
+Number of Searched Nodes: 81
+Total Hops: 249
+Average Hops: 3.074074074074074
+Availability: 0.7734571750599744
+
+Objective Function Result:
+Access : 4676.205520799959
+Cost : 288.0
+Availability : 1966.7220616071331
+Total : 2254.722061607133
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 29, Popularity: 0.0038810967464274907, Size: 265, Cycle: 459
+
+Placement Nodes:
+[19, 5, 42]
+Number of Replicas
+3
+Number of Available Nodes
+34
+
+Flooding Result
+Number of Searched Nodes: 81
+Total Hops: 180
+Average Hops: 2.2222222222222223
+Availability: 0.7812852060202999
+
+Objective Function Result:
+Access : 22626.794031672274
+Cost : 795.0
+Availability : 13032.446071925193
+Total : 13827.446071925193
+==========================================================================================
+
+
+
+==========================================================================================
+Content ID: 36, Popularity: 0.0029549481081816366, Size: 947, Cycle: 462
+
+Placement Nodes:
+[19, 13, 51, 71]
+Number of Replicas
+4
+Number of Available Nodes
+16
+
+Flooding Result
+Number of Searched Nodes: 84
 Total Hops: 198
-Average Hops: 2.2758620689655173
-Availability: 0.754386188886209
+Average Hops: 2.357142857142857
+Availability: 0.7559176027035183
 
 Objective Function Result:
-Access : 262.3353738740403
-Cost : 9.0
-Availability : 152.79783096119687
-Total : 161.79783096119687
+Access : 65301.16606821178
+Cost : 3788.0
+Availability : 36648.868738542944
+Total : 40436.868738542944
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 36, Popularity: 0.0029549481081816366, Size: 76, Cycle: 462
+Content ID: 5, Popularity: 0.03144962522250265, Size: 108, Cycle: 467
 
 Placement Nodes:
-[19, 94]
+[19, 21, 94, 52, 80, 42, 91, 76, 27, 54]
 Number of Replicas
-2
+10
 Number of Available Nodes
-66
+55
 
 Flooding Result
-Number of Searched Nodes: 88
-Total Hops: 259
-Average Hops: 2.9431818181818183
-Availability: 0.7562764159164874
+Number of Searched Nodes: 85
+Total Hops: 159
+Average Hops: 1.8705882352941177
+Availability: 0.8049712742266453
 
 Objective Function Result:
-Access : 6543.584838162826
-Cost : 152.0
-Availability : 2939.802048304748
-Total : 3091.802048304748
+Access : 62900.28643265968
+Cost : 1080.0
+Availability : 41772.84378278599
+Total : 42852.84378278599
 ==========================================================================================
 
 
 
 ==========================================================================================
-Content ID: 5, Popularity: 0.03144962522250265, Size: 1, Cycle: 467
+Content ID: 13, Popularity: 0.010453113200413965, Size: 133, Cycle: 474
 
 Placement Nodes:
-[19, 94, 95, 52, 17, 23, 53, 83]
+[19, 69, 81, 21, 52]
 Number of Replicas
-8
+5
 Number of Available Nodes
-85
+53
 
 Flooding Result
-Number of Searched Nodes: 90
-Total Hops: 187
-Average Hops: 2.077777777777778
-Availability: 0.825983549994607
+Number of Searched Nodes: 87
+Total Hops: 190
+Average Hops: 2.1839080459770117
+Availability: 0.7645596026306647
 
 Objective Function Result:
-Access : 646.9187908268796
-Cost : 8.0
-Availability : 376.9461143685115
-Total : 384.9461143685115
-==========================================================================================
-
-
-
-==========================================================================================
-Content ID: 13, Popularity: 0.010453113200413965, Size: 1, Cycle: 474
-
-Placement Nodes:
-[19, 94]
-Number of Replicas
-2
-Number of Available Nodes
-85
-
-Flooding Result
-Number of Searched Nodes: 91
-Total Hops: 267
-Average Hops: 2.934065934065934
-Availability: 0.7569872842695109
-
-Objective Function Result:
-Access : 303.6342211280685
-Cost : 2.0
-Availability : 136.70747558720433
-Total : 138.70747558720433
+Access : 30058.467686059346
+Cost : 665.0
+Availability : 18002.015936531043
+Total : 18667.015936531043
 ==========================================================================================
 
 

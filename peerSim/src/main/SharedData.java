@@ -24,6 +24,12 @@ public class SharedData implements Control {
 	private static int totalCycles;
 	private static final String PAR_TOTAL_CONTENTS = "totalContents";
 	private static int totalContents;
+	private static final String PAR_MAX_STORAGE_CAPACITY = "maxStorageCapacity";
+	private static int maxStorageCapacity;
+	private static final String PAR_MAX_PROCESSING_CAPACITY = "maxProcessingCapacity";
+	private static int maxProcessingCapacity;
+	private static final String PAR_MAX_TRANSMISSION_CAPACITY = "maxTransmissionCapacity";
+	private static int maxTransmissionCapacity;
 	private static final String PAR_DIRECTORY_NAME = "directoryName";
 	private static String directoryName;
 
@@ -45,6 +51,9 @@ public class SharedData implements Control {
 		totalNodes = Configuration.getInt(prefix + "." + PAR_TOTAL_NODES);
 		totalCycles = Configuration.getInt(prefix + "." + PAR_TOTAL_CYCLES);
 		totalContents = Configuration.getInt(prefix + "." + PAR_TOTAL_CONTENTS);
+		maxStorageCapacity = Configuration.getInt(prefix + "." + PAR_MAX_STORAGE_CAPACITY);
+		maxProcessingCapacity = Configuration.getInt(prefix + "." + PAR_MAX_PROCESSING_CAPACITY);
+		maxTransmissionCapacity = Configuration.getInt(prefix + "." + PAR_MAX_TRANSMISSION_CAPACITY);
 		directoryName = Configuration.getString(prefix + "." + PAR_DIRECTORY_NAME);
 
 		failedCounters = new ArrayList<>();
@@ -145,6 +154,18 @@ public class SharedData implements Control {
 		return totalContents;
 	}
 
+	public static int getMaxStorageCapacity() {
+		return maxStorageCapacity;
+	}
+
+	public static int getMaxProcessingCapacity() {
+		return maxProcessingCapacity;
+	}
+
+	public static int getMaxTransmissionCapacity() {
+		return maxTransmissionCapacity;
+	}
+
 	public static int getTotalAlgorithms() {
 		return algorithmNames.size();
 	}
@@ -199,9 +220,9 @@ public class SharedData implements Control {
 
 	/*
 	 * 複製配置の際に使用
-	 * 
+	 *
 	 * オリジンサーバから到達可能なノードの集合
-	 * 
+	 *
 	 * かつ，該当コンテンツ分のストレージを持つノードの集合
 	 */
 	public static ArrayList<Integer> getAvailableNodes(int algorithmId, Content content) {

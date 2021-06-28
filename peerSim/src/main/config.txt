@@ -6,9 +6,9 @@ totalContents 100.0
 totalCycles 500
 users 100.0
 repairDuration 50
-maxStorageCapacity 100.0
-maxProcessingCapacity 100.0
-maxTransmissionCapacity 100.0
+maxStorageCapacity 1000.0
+maxProcessingCapacity 1000.0
+maxTransmissionCapacity 1000.0
 totalTrials 500.0
 failureMagnification 0.1
 
@@ -44,6 +44,9 @@ init.sd.link link
 init.sd.totalNodes totalNodes
 init.sd.totalContents totalContents
 init.sd.totalCycles totalCycles
+init.sd.maxStorageCapacity maxStorageCapacity
+init.sd.maxProcessingCapacity maxProcessingCapacity
+init.sd.maxTransmissionCapacity maxTransmissionCapacity
 init.sd.directoryName Nodes1000/9
 
 init.p Parameters
@@ -56,9 +59,9 @@ init.p.normalMax 30
 init.p.magnificationCoefficient failureMagnification;
 init.p.users users
 init.p.zipfShape 1.3
-init.p.paretoShape 0.5
-init.p.paretoMin 1
-init.p.paretoMax 100
+init.p.paretoShape 0.3
+init.p.paretoMin 100
+init.p.paretoMax 1000
 init.p.poissonAverage 10
 init.p.repairDuration repairDuration
 
