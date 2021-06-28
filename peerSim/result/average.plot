@@ -39,7 +39,7 @@ replot
 
 
 set xrange [0:500]
-# set yrange
+set yrange [0.0:0.3]
 set xlabel 'Number of Cycles'
 set ylabel 'Average Transmission Ratio'
 set key left top
@@ -50,7 +50,7 @@ filePath."/Cumulative_Transmission[Greedy].tsv" with lines title "Greedy" lw 3 l
 filePath."/Cumulative_Transmission[Cuckoo_Search].tsv" with lines title "Proposed" lw 3 lc rgb "red",\
 
 unset table
-set output filePath.'/eps/Cumulative_Transmission.eps'
+set output filePath.'/eps/Average_Transmission.eps'
 set terminal postscript eps color
 replot
 
